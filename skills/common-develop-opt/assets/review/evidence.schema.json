@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/evidence.schema.json",
+  "title": "Common Develop Compact Evidence Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "target_id",
+    "version",
+    "evidences"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 4
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "type",
+          "ref",
+          "source_ref",
+          "capture_mode",
+          "digest",
+          "revision",
+          "phase",
+          "generated_by_agent",
+          "used_by_agents",
+          "used_as_types",
+          "generated_at",
+          "command_result_ref",
+          "command_result_digest",
+          "scope_refs",
+          "status",
+          "superseded_by",
+          "metadata"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^EVD-[0-9]{6}$"
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_ref": {
+            "type": "string"
+          },
+          "capture_mode": {
+            "enum": [
+              "DIRECT",
+              "SNAPSHOT",
+              "BUNDLE",
+              "GIT_REF",
+              "REVIEW_REF"
+            ]
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "revision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "phase": {
+            "type": "string",
+            "minLength": 1
+          },
+          "generated_by_agent": {
+            "type": "string",
+            "minLength": 1
+          },
+          "used_by_agents": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "command_result_ref": {
+            "type": "string"
+          },
+          "command_result_digest": {
+            "type": "string",
+            "pattern": "^$|^[a-f0-9]{64}$"
+          },
+          "scope_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "SUPERSEDED",
+              "REVOKED"
+            ]
+          },
+          "superseded_by": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "used_as_types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}

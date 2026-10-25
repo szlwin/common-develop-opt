@@ -1,0 +1,4 @@
+interface:
+  display_name: "Common Develop Opt"
+  short_description: "基于需求、设计、TDD、测试、Git checkpoint 和独立 Review 的多 Agent 软件研发流程"
+  default_prompt: "使用 $common-develop-opt 完成功能开发或缺陷修复；先读取 SKILL.md，根据任务状态选择 wk start、wk begin 或维护诊断入口，消费返回的 actionPlan、Owner、输入和停止条件，再按需读取 ai/source-map.json 对应的需求、设计、编码、TDD 或 Review 规则；执行验证并遵守项目范围和 Git 授权边界。"

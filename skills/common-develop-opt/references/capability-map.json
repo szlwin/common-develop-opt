@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "authority": "MAINTENANCE_MAP",
+  "capabilities": {
+    "artifact-consistency": {"implementation": ["scripts/artifact_identity.py", "scripts/reference_resolver.py"], "tests": ["tests/test_artifact_consistency.py"], "docs": ["references/diagnostics/artifact-consistency.md"]},
+    "dependency-discovery": {"implementation": ["scripts/discover_dependencies.py", "scripts/dependency_graph.py"], "tests": ["tests/test_protocol_and_discovery.py"], "docs": ["references/diagnostics/dependency-discovery.md"]},
+    "candidate-review": {"implementation": ["scripts/publish_candidate.py", "scripts/review_submit.py"], "tests": ["tests/test_publish_candidate.py", "tests/test_review_submit.py"], "docs": ["SKILL.md"]}
+  }
+}

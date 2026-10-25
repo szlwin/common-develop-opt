@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/git-connector-receipt.schema.json",
+  "title": "common-develop GitHub Connector checkpoint receipt",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "provider",
+    "resultMode",
+    "requestDigest",
+    "repository",
+    "branch",
+    "checkpointId",
+    "resolvedParent",
+    "blobResults",
+    "tree",
+    "commit",
+    "refUpdate",
+    "remoteVerification",
+    "pullRequestVerification"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "provider": {
+      "const": "GITHUB_CONNECTOR"
+    },
+    "requestDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "checkpointId": {
+      "type": "string"
+    },
+    "resolvedParent": {
+      "type": "object",
+      "required": [
+        "sha",
+        "treeSha",
+        "normalizedMessageSha256"
+      ],
+      "properties": {
+        "sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "treeSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "normalizedMessageSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "blobResults": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40,64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tree": {
+      "type": "object",
+      "required": [
+        "sha"
+      ],
+      "properties": {
+        "sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "commit": {
+      "type": "object",
+      "required": [
+        "sha",
+        "parentSha",
+        "treeSha",
+        "normalizedMessageSha256"
+      ],
+      "properties": {
+        "sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "parentSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "treeSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "normalizedMessageSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "refUpdate": {
+      "type": "object",
+      "required": [
+        "operation",
+        "branch",
+        "force",
+        "afterSha"
+      ],
+      "properties": {
+        "operation": {
+          "enum": [
+            "UPDATE_REF_NON_FORCE",
+            "CREATE_CURRENT_BRANCH",
+            "NO_CHANGE"
+          ]
+        },
+        "branch": {
+          "type": "string"
+        },
+        "force": {
+          "const": false
+        },
+        "beforeSha": {
+          "type": "string"
+        },
+        "afterSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "remoteVerification": {
+      "type": "object",
+      "required": [
+        "branchHeadSha"
+      ],
+      "properties": {
+        "branchHeadSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pullRequestVerification": {
+      "type": "object",
+      "required": [
+        "status",
+        "refs"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "NO_ASSOCIATED_PR",
+            "NOT_DISCOVERABLE"
+          ]
+        },
+        "refs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "headSha"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "headSha": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40,64}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "verifiedAt": {
+      "type": "string"
+    },
+    "resultMode": {
+      "enum": [
+        "PUBLISHED",
+        "ALREADY_PRESENT"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

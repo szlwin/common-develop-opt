@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/api.schema.json",
+  "title": "API current-state validation projection",
+  "description": "Internal schema used to replay and validate version API deltas in memory. It is not a project-level full API document output.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifact", "module", "revision", "endpoints"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "artifact": {"const": "api"},
+    "module": {
+      "type": "object",
+      "required": ["code", "name"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1}
+      }
+    },
+    "revision": {"type": "string", "minLength": 1},
+    "baseRevision": {"type": "string"},
+    "endpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "featureCode", "method", "path", "auth", "request", "response", "errors", "traceIds"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^API-[A-Z0-9_-]+$"},
+          "featureCode": {"type": "string", "minLength": 1},
+          "method": {"enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]},
+          "path": {"type": "string", "minLength": 1},
+          "status": {"enum": ["active", "deprecated"]},
+          "auth": {"type": "object"},
+          "idempotency": {"type": "object"},
+          "request": {"type": "object"},
+          "response": {"type": "object"},
+          "errors": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "traceIds": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+        }
+      }
+    }
+  }
+}

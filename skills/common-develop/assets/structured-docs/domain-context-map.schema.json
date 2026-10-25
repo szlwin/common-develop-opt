@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://common-develop.local/schema/domain-context-map.schema.json",
+  "title": "Domain and Bounded Context Governance Map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifact",
+    "system",
+    "domains",
+    "boundedContexts",
+    "relationships",
+    "translations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "artifact": {
+      "const": "domain_context_map"
+    },
+    "system": {
+      "$ref": "#/$defs/system"
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domain"
+      },
+      "uniqueItems": true
+    },
+    "boundedContexts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/boundedContext"
+      },
+      "uniqueItems": true
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/contextRelationship"
+      }
+    },
+    "translations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/translation"
+      }
+    }
+  },
+  "$defs": {
+    "stringArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SYSTEM-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DOMAIN-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "boundedContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "domainRef"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domainRef": {
+          "type": "string",
+          "pattern": "^DOMAIN-[A-Z0-9_-]+$"
+        },
+        "description": {
+          "type": "string"
+        },
+        "moduleRefs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "publicContractRefs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "sourceRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "contextRelationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "fromContext",
+        "toContext",
+        "type",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CTXREL-[A-Z0-9_-]+$"
+        },
+        "fromContext": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        },
+        "toContext": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        },
+        "type": {
+          "enum": [
+            "PROVIDES_TO",
+            "DEPENDS_ON",
+            "CONSUMES_FROM",
+            "COLLABORATES_WITH",
+            "UPSTREAM_OF",
+            "DOWNSTREAM_OF"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contractRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "translation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "fromContext",
+        "fromTerm",
+        "toContext",
+        "toTerm",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CTXMAP-[A-Z0-9_-]+$"
+        },
+        "fromContext": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        },
+        "fromTerm": {
+          "type": "string",
+          "pattern": "^TERM-[A-Z0-9_-]+$"
+        },
+        "toContext": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        },
+        "toTerm": {
+          "type": "string",
+          "pattern": "^TERM-[A-Z0-9_-]+$"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

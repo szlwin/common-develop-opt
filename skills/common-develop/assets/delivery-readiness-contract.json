@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "kind": "CAPABILITY_DRIVEN_DELIVERY_READINESS",
+  "projectAgnostic": true,
+  "lifecyclePlacement": {"parentPhase": "completion_verification", "gateKind": "CAPABILITY_SUBGATE", "createsCanonicalPhase": false},
+  "capabilityDeclarationField": "deliveryGate",
+  "gateProtocol": {
+    "fields": ["gateId", "requiredForCompletion", "evidencePolicy", "failureSeverity"],
+    "defaultFailureSeverity": "P1",
+    "notApplicablePolicy": "APPLICABILITY_DECISION_ONLY",
+    "reviewResultRequired": false,
+    "verificationRule": "Applicable required gates require an explicit PASSED verification result with Evidence refs before completion; optional/undeclared capabilities do not create fake N/A ReviewResults."
+  },
+  "authorityRule": "The project declares capabilities and adapters; common-develop only plans/evaluates generic gates and never infers project type, technology, deployment model or provider."
+}

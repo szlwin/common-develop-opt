@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "common-develop advisory ReviewSession",
+  "type": "object",
+  "required": ["schemaVersion", "kind", "advisory", "reviewSessionId", "plannerAgent", "mode", "phase", "revision", "sharedFreeze", "axes", "applicabilityDecisions", "deltaPolicy", "status", "lifecycleGate"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "kind": {"const": "review_session"},
+    "advisory": {"const": true},
+    "reviewSessionId": {"type": "string", "pattern": "^RS-[A-F0-9]{12}$"},
+    "plannerAgent": {"type": "string", "minLength": 1},
+    "mode": {"enum": ["standard", "minimal", "lightweight"]},
+    "phase": {"type": "string", "minLength": 1},
+    "revision": {"type": "string", "minLength": 1},
+    "sharedFreeze": {
+      "type": "object",
+      "required": ["phase", "revision", "inputDigest", "evidenceSnapshot", "riskDetection", "impactPlan"],
+      "properties": {
+        "phase": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "minLength": 1},
+        "inputDigest": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+        "evidenceSnapshot": {"$ref": "#/$defs/revisionSnapshot"},
+        "riskDetection": {"$ref": "#/$defs/revisionSnapshot"},
+        "impactPlan": {"$ref": "#/$defs/revisionSnapshot"}
+      },
+      "additionalProperties": false
+    },
+    "axes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["axisId", "origin", "profileId", "reviewerAgent", "reviewerIdentity", "criterionIds", "affectedCriterionIds", "unaffectedCriterionIds", "independentReviewResultRequired", "reviewResult"],
+        "properties": {
+          "axisId": {"type": "string", "minLength": 1},
+          "origin": {"enum": ["CORE", "RISK"]},
+          "riskType": {"type": "string"},
+          "profileId": {"type": "string", "pattern": "^[^:]+:[^:]+$"},
+          "reviewerAgent": {"type": "string", "minLength": 1},
+          "reviewerIdentity": {"$ref": "#/$defs/reviewerIdentity"},
+          "criterionIds": {"type": "array", "items": {"type": "string"}},
+          "affectedCriterionIds": {"type": "array", "items": {"type": "string"}},
+          "unaffectedCriterionIds": {"type": "array", "items": {"type": "string"}},
+          "independentReviewResultRequired": {"const": true},
+          "reviewResult": {"$ref": "#/$defs/reviewResult"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "applicabilityDecisions": {"type": "array", "items": {"type": "object"}},
+    "deltaPolicy": {"type": "object"},
+    "status": {"enum": ["PLANNED", "IN_REVIEW", "COMPLETE"]},
+    "lifecycleGate": {"enum": ["NOT_REQUIRED", "ADVISORY_ONLY"]}
+  },
+  "$defs": {
+    "revisionSnapshot": {
+      "type": "object",
+      "required": ["revision"],
+      "properties": {
+        "revision": {"type": "string", "minLength": 1},
+        "inputDigest": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+        "detectedRiskTypes": {"type": "array", "items": {"type": "string"}},
+        "present": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "reviewerIdentity": {
+      "type": "object",
+      "required": ["agent", "role"],
+      "properties": {"agent": {"type": "string", "minLength": 1}, "role": {"const": "REVIEWER"}},
+      "additionalProperties": false
+    },
+    "reviewResult": {
+      "type": "object",
+      "required": ["status", "revision", "resultRef"],
+      "properties": {
+        "status": {"enum": ["PENDING", "PASSED", "FAILED", "BLOCKED", "NOT_APPLICABLE"]},
+        "revision": {"type": "string", "minLength": 1},
+        "resultRef": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

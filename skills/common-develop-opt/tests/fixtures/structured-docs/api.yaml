@@ -1,0 +1,8 @@
+schemaVersion: 1
+artifact: api
+module:
+  code: MOD
+  name: 示例模块
+revision: API-R01@example
+baseRevision: ""
+endpoints: []

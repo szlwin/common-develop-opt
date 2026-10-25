@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/version-delta.schema.json",
+  "title": "Version-local API/DB delta projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifact",
+    "version",
+    "module",
+    "authority",
+    "currentImplementationAuthority",
+    "changes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "artifact": {
+      "enum": [
+        "api_delta",
+        "db_delta"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority": {
+      "const": "VERSION_CHANGESET"
+    },
+    "currentImplementationAuthority": {
+      "const": "CODE_OPENAPI_DDL_MIGRATION"
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "changeSetId",
+          "sourceRef",
+          "sourceDigest",
+          "baseRevision",
+          "resultRevision",
+          "operations"
+        ],
+        "properties": {
+          "changeSetId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "baseRevision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resultRevision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "artifact",
+                "operation",
+                "targetId",
+                "reason"
+              ],
+              "properties": {
+                "artifact": {
+                  "enum": [
+                    "api",
+                    "db"
+                  ]
+                },
+                "operation": {
+                  "enum": [
+                    "add",
+                    "update",
+                    "deprecate"
+                  ]
+                },
+                "targetId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

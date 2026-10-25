@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/artifact-relation.schema.json",
+  "title": "统一研发 Artifact 关系投影",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifact",
+    "authority",
+    "revision",
+    "nodes",
+    "relationships"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "artifact": {
+      "const": "artifact_relations"
+    },
+    "authority": {
+      "const": "DERIVED"
+    },
+    "revision": {
+      "type": "string",
+      "pattern": "^AR-R[0-9]+@[a-f0-9]{12}$"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    }
+  },
+  "$defs": {
+    "stringArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "name",
+        "status",
+        "documentRef",
+        "sourceRefs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_.@#/-]+$"
+        },
+        "kind": {
+          "enum": [
+            "requirement",
+            "feature",
+            "page",
+            "page_action",
+            "design",
+            "business_flow",
+            "flow_step",
+            "business_model",
+            "cross_module",
+            "validation",
+            "module"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "ACTIVE",
+            "DEPRECATED",
+            "SUPERSEDED"
+          ]
+        },
+        "revision": {
+          "type": "string"
+        },
+        "documentRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "from",
+        "to",
+        "type",
+        "sourceRefs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ARREL-[A-F0-9]{16}$"
+        },
+        "from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "CONTAINS",
+            "EXPOSED_BY",
+            "HAS_ACTION",
+            "PARTICIPATES_IN",
+            "MODELED_BY",
+            "IMPLEMENTED_BY",
+            "DESIGNED_BY",
+            "VERIFIED_BY",
+            "DEPENDS_ON",
+            "AFFECTS",
+            "REFERENCES"
+          ]
+        },
+        "sourceRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    }
+  }
+}

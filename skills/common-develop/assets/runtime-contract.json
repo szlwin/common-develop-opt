@@ -1,0 +1,2401 @@
+{
+  "schemaVersion": 2,
+  "skill": "common-develop",
+  "longTaskSchemaVersion": 2,
+  "canonicalPhases": [
+    {
+      "id": "requirement_confirmation",
+      "artifact": "requirement_confirmation",
+      "ownerAgent": "RequirementConfirmationAgent",
+      "requiredReviewerAgents": [
+        "RequirementAnalysisAgent"
+      ],
+      "requiredPredecessors": [],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "requirement_analysis",
+      "artifact": "requirement_analysis",
+      "ownerAgent": "RequirementAnalysisAgent",
+      "requiredReviewerAgents": [
+        "BusinessModelAgent",
+        "TestDesignAgent"
+      ],
+      "conditionalReviewerAgents": {
+        "ImpactAnalysisReviewAgent": "impact_required",
+        "CrossModuleIntegrationReviewAgent": "cross_module_implementation_required"
+      },
+      "requiredPredecessors": [
+        "requirement_confirmation"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "business_model",
+      "artifact": "business_model",
+      "ownerAgent": "BusinessModelAgent",
+      "requiredReviewerAgents": [
+        "BusinessModelReviewAgent",
+        "TestDesignAgent"
+      ],
+      "conditionalReviewerAgents": {
+        "ImpactAnalysisReviewAgent": "impact_required",
+        "CrossModuleIntegrationReviewAgent": "cross_module_implementation_required"
+      },
+      "requiredPredecessors": [
+        "requirement_analysis"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "design",
+      "artifact": "design",
+      "ownerAgent": "DesignAgent",
+      "requiredReviewerAgents": [
+        "RequirementReviewAgent",
+        "ArchitectureReviewAgent",
+        "TestDesignAgent"
+      ],
+      "conditionalReviewerAgents": {
+        "ImpactAnalysisReviewAgent": "impact_required",
+        "CrossModuleIntegrationReviewAgent": "cross_module_implementation_required"
+      },
+      "requiredPredecessors": [
+        "business_model"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "test_design",
+      "artifact": "test_case",
+      "ownerAgent": "TestDesignAgent",
+      "requiredReviewerAgents": [
+        "RequirementReviewAgent",
+        "TestEvidenceReviewAgent"
+      ],
+      "skipWhen": "workMode.minimal",
+      "requiredPredecessors": [
+        "design"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "implementation_plan",
+      "artifact": "implementation_plan",
+      "ownerAgent": "ImplementationPlanAgent",
+      "requiredReviewerAgents": [
+        "PlanReviewAgent",
+        "DevelopAgent"
+      ],
+      "requiredPredecessors": [
+        "design",
+        "test_design"
+      ],
+      "minimalModePredecessors": [
+        "design"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "tdd",
+      "artifact": "tdd_evidence",
+      "ownerAgent": "TddAgent",
+      "requiredReviewerAgents": [],
+      "requiredPredecessors": [
+        "implementation_plan",
+        "test_design"
+      ],
+      "minimalModePredecessors": [],
+      "phaseKind": "DEVELOPMENT_SUBGATE",
+      "embeddedIn": "development",
+      "newTaskSelectable": false,
+      "embeddedGateReviewers": [
+        "TDDReviewAgent"
+      ],
+      "description": "TDD evidence is an embedded development gate; new work uses development PRE_IMPLEMENTATION / POST_IMPLEMENTATION gates."
+    },
+    {
+      "id": "development",
+      "artifact": "implementation",
+      "ownerAgent": "DevelopAgent",
+      "requiredReviewerAgents": [
+        "TDDReviewAgent",
+        "SpecComplianceReviewAgent"
+      ],
+      "requiredPredecessors": [
+        "implementation_plan",
+        "test_design"
+      ],
+      "minimalModePredecessors": [
+        "implementation_plan"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "code_review",
+      "artifact": "code_review",
+      "ownerAgent": "ProjectManagerAgent",
+      "requiredReviewerAgents": [
+        "SpecComplianceReviewAgent",
+        "EngineeringStandardsReviewAgent"
+      ],
+      "requiredPredecessors": [
+        "development"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "testing",
+      "artifact": "test_result",
+      "ownerAgent": "TestAgent",
+      "requiredReviewerAgents": [
+        "TestEvidenceReviewAgent"
+      ],
+      "skipWhen": "workMode.minimal",
+      "requiredPredecessors": [
+        "code_review"
+      ],
+      "phaseKind": "CANONICAL"
+    },
+    {
+      "id": "completion_verification",
+      "artifact": "completion_verification",
+      "ownerAgent": "CompletionVerificationAgent",
+      "requiredReviewerAgents": [],
+      "requiredPredecessors": [
+        "testing"
+      ],
+      "minimalModePredecessors": [
+        "code_review"
+      ],
+      "phaseKind": "CANONICAL"
+    }
+  ],
+  "archiveGateMap": {
+    "requirement_confirmation": "requirementConfirmation",
+    "requirement_analysis": "requirementAnalysis",
+    "business_model": "businessModel",
+    "design": "design",
+    "test_design": "testDesign",
+    "implementation_plan": "implementationPlan",
+    "development": "development",
+    "code_review": "codeReview",
+    "testing": "testing",
+    "completion_verification": "completionVerification"
+  },
+  "auxiliaryActions": [
+    {
+      "id": "development_task_plan",
+      "command": "wk -tp",
+      "description": "Generate, serially Review, revise, and freeze concrete development tasks for a large requirement without creating a new lifecycle phase.",
+      "ownerAgent": "ImplementationPlanAgent",
+      "reference": "references/implementation-plan.md"
+    },
+    {
+      "id": "html_document",
+      "command": "wk -l",
+      "description": "Generate read-only HTML copies from Markdown facts without changing lifecycle state.",
+      "ownerAgent": "DocumentRenderAgent",
+      "reference": "references/html-core.md"
+    },
+    {
+      "id": "incremental_archive",
+      "command": "wk -d",
+      "description": "Merge confirmed version increments into project-level full facts without Git/Release/deployment actions.",
+      "ownerAgent": "IncrementalArchiveAgent",
+      "reference": "references/archive-core.md"
+    },
+    {
+      "id": "lightweight_document_archive",
+      "command": "wk -wd",
+      "description": "In lightweight mode, finalize requirement/design completeness from the current session, existing documents, and implementation code, then archive the confirmed facts.",
+      "ownerAgent": "ProjectManagerAgent",
+      "reference": "references/work-mode-core.md"
+    },
+    {
+      "id": "git_checkpoint",
+      "command": "wk -gc",
+      "description": "Create a local, sequential Git phase checkpoint after the current gate passes; never push, merge, release, or deploy.",
+      "ownerAgent": "ProjectManagerAgent",
+      "reference": "references/git-checkpoint-core.md"
+    }
+  ],
+  "agents": [
+    "ProjectManagerAgent",
+    "RequirementConfirmationAgent",
+    "RequirementAnalysisAgent",
+    "BusinessModelAgent",
+    "DesignAgent",
+    "TestDesignAgent",
+    "ImplementationPlanAgent",
+    "TddAgent",
+    "DevelopAgent",
+    "DebugAgent",
+    "TestAgent",
+    "DocumentRenderAgent",
+    "IncrementalArchiveAgent",
+    "CompletionVerificationAgent",
+    "RequirementReviewAgent",
+    "BusinessModelReviewAgent",
+    "DesignReviewAgent",
+    "ArchitectureReviewAgent",
+    "PlanReviewAgent",
+    "SpecComplianceReviewAgent",
+    "EngineeringStandardsReviewAgent",
+    "TDDReviewAgent",
+    "TestEvidenceReviewAgent",
+    "SecurityReviewAgent",
+    "PerformanceReviewAgent",
+    "DataMigrationReviewAgent",
+    "ApiContractReviewAgent",
+    "ConcurrencyReviewAgent",
+    "ImpactAnalysisReviewAgent",
+    "CrossModuleIntegrationReviewAgent",
+    "MaintainabilityReviewAgent"
+  ],
+  "riskReviewerCatalog": {
+    "security": {
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "signals": [
+        "authentication",
+        "authorization",
+        "sensitive data",
+        "token or secret handling",
+        "injection surface"
+      ],
+      "reviewerAgent": "SecurityReviewAgent"
+    },
+    "performance": {
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "signals": [
+        "hot path",
+        "large query",
+        "batch processing",
+        "cache behavior",
+        "resource-intensive loop"
+      ],
+      "reviewerAgent": "PerformanceReviewAgent"
+    },
+    "data_migration": {
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "signals": [
+        "schema change",
+        "historical data migration",
+        "backfill",
+        "compatibility window",
+        "rollback data risk"
+      ],
+      "reviewerAgent": "DataMigrationReviewAgent"
+    },
+    "api_contract": {
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "signals": [
+        "request or response change",
+        "version compatibility",
+        "error contract",
+        "idempotency contract"
+      ],
+      "reviewerAgent": "ApiContractReviewAgent"
+    },
+    "concurrency": {
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "signals": [
+        "lock",
+        "race condition",
+        "async processing",
+        "queue ordering",
+        "shared mutable state"
+      ],
+      "reviewerAgent": "ConcurrencyReviewAgent"
+    },
+    "impact_analysis": {
+      "allowedPhases": [
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "code_review"
+      ],
+      "signals": [
+        "delete",
+        "cancel",
+        "migration",
+        "state linkage",
+        "requirement or feature dependency"
+      ],
+      "reviewerAgent": "ImpactAnalysisReviewAgent"
+    },
+    "cross_module_integration": {
+      "allowedPhases": [
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "code_review"
+      ],
+      "signals": [
+        "two or more business modules",
+        "external system",
+        "compensation flow",
+        "partial success"
+      ],
+      "reviewerAgent": "CrossModuleIntegrationReviewAgent"
+    },
+    "architecture_change": {
+      "allowedPhases": [
+        "implementation_plan",
+        "development",
+        "code_review"
+      ],
+      "signals": [
+        "module boundary changes",
+        "dependency direction changes",
+        "large structural refactor"
+      ],
+      "reviewerAgent": "ArchitectureReviewAgent"
+    }
+  },
+  "statuses": {
+    "task": [
+      "READY",
+      "RUNNING",
+      "WAITING_USER",
+      "WAITING_AGENT",
+      "REWORK",
+      "BLOCKED",
+      "PARTIAL",
+      "COMPLETED",
+      "CANCELLED"
+    ],
+    "artifact": [
+      "PENDING",
+      "IN_PROGRESS",
+      "PASSED",
+      "FAILED",
+      "STALE",
+      "BLOCKED",
+      "NOT_APPLICABLE"
+    ],
+    "planTask": [
+      "PENDING",
+      "READY",
+      "RUNNING",
+      "WAITING",
+      "REWORK",
+      "PASSED",
+      "FAILED",
+      "BLOCKED",
+      "CANCELLED",
+      "NOT_APPLICABLE"
+    ],
+    "issue": [
+      "OPEN",
+      "ASSIGNED",
+      "FIXED_PENDING_VERIFY",
+      "CLOSED",
+      "DEFERRED",
+      "REJECTED"
+    ],
+    "review": [
+      "PENDING",
+      "IN_REVIEW",
+      "REWORK",
+      "PASSED",
+      "BLOCKED"
+    ],
+    "reviewConclusion": [
+      "PASSED",
+      "NEEDS_CHANGES",
+      "BLOCKED"
+    ],
+    "stageOutcome": [
+      "RUNNING",
+      "PASSED",
+      "FAILED",
+      "BLOCKED",
+      "PARTIAL",
+      "SKIPPED",
+      "CANCELLED"
+    ],
+    "trace": [
+      "PENDING",
+      "COVERED",
+      "GAP",
+      "STALE",
+      "NOT_APPLICABLE"
+    ],
+    "final": [
+      "DONE",
+      "PARTIAL",
+      "BLOCKED"
+    ],
+    "auxiliaryAction": [
+      "RUNNING",
+      "PASSED",
+      "PARTIAL",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "reviewCriterion": [
+      "PASSED",
+      "FAILED",
+      "BLOCKED",
+      "NOT_APPLICABLE"
+    ],
+    "taskAttempt": [
+      "RUNNING",
+      "PASSED",
+      "FAILED",
+      "BLOCKED",
+      "PARTIAL",
+      "CANCELLED"
+    ],
+    "workEvent": [
+      "RUNNING",
+      "PASSED",
+      "FAILED",
+      "BLOCKED",
+      "PARTIAL",
+      "SKIPPED",
+      "CANCELLED"
+    ]
+  },
+  "standardUserSkipPolicy": {
+    "allowedPhases": [
+      "code_review",
+      "testing"
+    ],
+    "artifactStatus": "NOT_APPLICABLE",
+    "stageOutcomeStatus": "SKIPPED",
+    "requiresReason": true,
+    "requiresProjectManagerAgent": true,
+    "requiresConfirmationEvent": true,
+    "requiresExplicitReopen": true,
+    "neverCountsAsPassed": true,
+    "reference": "references/work-mode-core.md"
+  },
+  "commandInterface": {
+    "entry": "$Common-develop",
+    "currentAgent": {
+      "flags": [
+        "-g",
+        "--agent"
+      ],
+      "default": "ProjectManagerAgent",
+      "acceptedValuesRef": "#/agents",
+      "requiredForDirectAgentExecution": true,
+      "enforcePhaseOwnerOrReviewer": true,
+      "positionRule": "current Agent selector may appear anywhere accepted by the concrete CLI; conceptual $Common-develop syntax places it before target selectors -f/-b",
+      "requiredForScripts": true,
+      "authorizationRef": "#/scriptPermissions",
+      "recordFields": {
+        "taskState": "current_agent",
+        "stageResult": "produced_by_agent",
+        "handoff": "from_agent"
+      },
+      "reference": "references/wk-cli.md"
+    },
+    "workModes": {
+      "modelCode": {
+        "flags": [
+          "-mc"
+        ],
+        "default": false,
+        "workColumns": [
+          "前端伪代码",
+          "后端伪代码"
+        ],
+        "disabledValue": "无",
+        "enabledValue": "AIW",
+        "description": "Only when enabled are frontend and backend pseudocode required.",
+        "reference": "references/model-code-core.md"
+      },
+      "pageDesign": {
+        "flags": [
+          "-v"
+        ],
+        "default": false,
+        "workColumns": [
+          "页面设计"
+        ],
+        "disabledValue": "无",
+        "enabledValue": "AIW",
+        "description": "Only when enabled is page business behavior and interaction design included; visual design remains excluded.",
+        "reference": "references/page-design.md#0-页面设计快速规则"
+      },
+      "minimal": {
+        "flags": [
+          "-min"
+        ],
+        "default": false,
+        "workColumns": [
+          "测试用例",
+          "测试"
+        ],
+        "disabledValue": "无",
+        "skippedPhases": [
+          "test_design",
+          "testing"
+        ],
+        "description": "Skip test_design/testing and suppress Development TDD verification; require non-test evidence.",
+        "phaseOutcome": "SKIPPED",
+        "archiveGateStatus": "NOT_APPLICABLE",
+        "suppressedReviewerAssignments": {
+          "requirement_confirmation": [
+            "TestDesignAgent"
+          ],
+          "requirement_analysis": [
+            "TestDesignAgent"
+          ],
+          "business_model": [
+            "TestDesignAgent"
+          ],
+          "design": [
+            "TestDesignAgent"
+          ],
+          "implementation_plan": [
+            "TestDesignAgent"
+          ],
+          "development": [
+            "TDDReviewAgent"
+          ]
+        },
+        "requiredNonTestEvidence": [
+          "compile",
+          "type_check",
+          "static_analysis",
+          "build",
+          "spec_compliance_review",
+          "engineering_standards_review",
+          "untested_risk_statement"
+        ],
+        "skipReason": "当前版本使用 wk -min，按已声明范围跳过全部测试阶段。",
+        "reference": "references/work-mode-core.md"
+      },
+      "lightweight": {
+        "flags": [
+          "-ws"
+        ],
+        "closeFlags": [
+          "-wc"
+        ],
+        "default": false,
+        "workColumns": [
+          "测试用例",
+          "Review",
+          "测试"
+        ],
+        "disabledValue": "无",
+        "skippedPhases": [
+          "test_design",
+          "tdd",
+          "code_review",
+          "testing"
+        ],
+        "description": "Conversational pair-programming mode. Confirm requirement, design, and implementation incrementally; lightweight mode always skips TDD, test-design, review, test-code, test-case, and test execution artifacts.",
+        "interactionPolicy": {
+          "mode": "CONVERSATIONAL_PAIR_PROGRAMMING",
+          "userConfirmationRequired": true,
+          "autoAdvance": false,
+          "allowInterleavedRequirementDesignDevelopment": true,
+          "sessionIsInput": true,
+          "userExplicitTestingRequestOverrides": false,
+          "designReviewQuestionResponse": {
+            "requiredSections": [
+              "precise_question",
+              "concept_and_identity_separation",
+              "valid_and_invalid_composition",
+              "failure_before_side_effect",
+              "recommended_binding_boundary",
+              "executable_invariants",
+              "verification_scenarios",
+              "unresolved_assumptions_and_confirmation"
+            ],
+            "candidateUntilUserConfirmation": true,
+            "mustBindConfirmedDecisionToRevisionAndEvidence": true
+          }
+        },
+        "phaseOutcome": "SKIPPED",
+        "archiveGateStatus": "NOT_APPLICABLE",
+        "suppressedReviewerAssignments": {
+          "requirement_confirmation": [
+            "RequirementAnalysisAgent"
+          ],
+          "requirement_analysis": [
+            "BusinessModelAgent",
+            "TestDesignAgent",
+            "ImpactAnalysisReviewAgent",
+            "CrossModuleIntegrationReviewAgent"
+          ],
+          "business_model": [
+            "BusinessModelReviewAgent",
+            "TestDesignAgent",
+            "ImpactAnalysisReviewAgent",
+            "CrossModuleIntegrationReviewAgent"
+          ],
+          "design": [
+            "RequirementReviewAgent",
+            "ArchitectureReviewAgent",
+            "TestDesignAgent",
+            "ImpactAnalysisReviewAgent",
+            "CrossModuleIntegrationReviewAgent"
+          ],
+          "implementation_plan": [
+            "PlanReviewAgent",
+            "DevelopAgent"
+          ],
+          "development": [
+            "TDDReviewAgent",
+            "SpecComplianceReviewAgent"
+          ],
+          "code_review": [
+            "SpecComplianceReviewAgent",
+            "EngineeringStandardsReviewAgent"
+          ],
+          "testing": [
+            "TestEvidenceReviewAgent"
+          ]
+        },
+        "requiredNonTestEvidence": [
+          "user_confirmed_scope",
+          "session_decisions",
+          "requirement_completeness",
+          "design_completeness",
+          "implementation_revision",
+          "compile_or_type_check_when_available",
+          "untested_risk_statement"
+        ],
+        "skipReason": "当前版本使用 wk -ws：采用对话式结对开发；轻量模式强制跳过 TDD、测试设计、Review、测试代码、测试用例和测试执行，不允许在模式保持开启时恢复。",
+        "archivePolicy": {
+          "enabled": true,
+          "flags": [
+            "-wd"
+          ],
+          "closeFlags": [
+            "-wc"
+          ],
+          "sourceOrder": [
+            "current_session",
+            "existing_requirement_documents",
+            "existing_design_documents",
+            "implementation_code"
+          ],
+          "requiredChecks": [
+            "requirement_complete",
+            "design_complete",
+            "implementation_traceable",
+            "unresolved_decision_explicit",
+            "untested_risk_recorded"
+          ],
+          "archiveCommand": "wk -wd",
+          "doesNotMean": [
+            "release",
+            "deployment",
+            "git_merge",
+            "test_pass"
+          ]
+        },
+        "reference": "references/work-mode-core.md"
+      },
+      "auto": {
+        "flags": [
+          "-auto"
+        ],
+        "default": false,
+        "description": "Automatically continue through the Skill workflow without user confirmation; when CI/P0/P1/authority-stale/safety-block stops batch-forward, enter the machine-governed remediation loop and resume only after the current gate is clean.",
+        "confirmationPolicy": {
+          "mode": "AUTOMATED",
+          "userConfirmationRequired": false,
+          "autoAdvance": true,
+          "decisionAgent": "ProjectManagerAgent",
+          "continueOnlyWhen": [
+            "current_phase_outcome_passed",
+            "required_reviews_passed",
+            "required_evidence_present",
+            "no_open_p0_or_p1",
+            "no_blocked_or_failed_gate"
+          ],
+          "stopWhen": [
+            "scope_or_authorization_violation",
+            "missing_required_fact_or_evidence",
+            "failed_or_blocked_review",
+            "open_p0_or_p1",
+            "ci_failure",
+            "authority_stale",
+            "safety_block",
+            "unsafe_or_irreversible_external_action"
+          ],
+          "stopScope": "BATCH_FORWARD_ONLY",
+          "remediationContinueWhen": [
+            "ci_failure",
+            "p0_failure",
+            "open_p0_or_p1",
+            "deterministic_authority_stale",
+            "safety_block_with_compliant_repair",
+            "test_oracle_defect",
+            "test_fixture_defect",
+            "configuration_semantic_defect"
+          ],
+          "remediationStopWhen": [
+            "authority_conflict",
+            "ambiguous_business_decision",
+            "ambiguous_architecture_decision",
+            "safety_bypass_required",
+            "unauthorized_external_action",
+            "non_converging_remediation"
+          ]
+        },
+        "reference": "references/auto-mode-core.md",
+        "remediationPolicy": {
+          "enabled": true,
+          "batchForwardStopDoesNotStopRemediation": true,
+          "enterOn": [
+            "ci_failure",
+            "p0_failure",
+            "open_p0_or_p1",
+            "deterministic_authority_stale",
+            "safety_block_with_compliant_repair"
+          ],
+          "repairClasses": {
+            "AUTO_FIX": [
+              "build_or_compiler_defect",
+              "test_oracle_defect",
+              "test_fixture_defect",
+              "configuration_semantic_defect",
+              "runtime_integration_defect",
+              "database_test_defect",
+              "deterministic_authority_projection_stale",
+              "safety_compliant_implementation_defect"
+            ],
+            "RERUN_SAME_REVISION": [
+              "transient_ci_or_infrastructure_failure"
+            ],
+            "STOP": [
+              "authority_conflict",
+              "ambiguous_business_decision",
+              "ambiguous_architecture_decision",
+              "safety_bypass_required",
+              "unauthorized_external_action",
+              "non_converging_remediation"
+            ]
+          },
+          "productionMutationPrecheckOrder": [
+            "authority_current",
+            "test_oracle_authoritative",
+            "fixture_representative",
+            "configuration_semantically_valid",
+            "environment_stable"
+          ],
+          "revisionPolicy": {
+            "codeConfigOrTestChangeRequiresNewExactRevision": true,
+            "transientInfrastructureRerunKeepsExactRevision": true,
+            "newRevisionRequiresP0": true,
+            "p1TriggeredFixRequiresRelatedP1Rereview": true,
+            "closureMetadataDoesNotReplaceCodeRevision": true
+          },
+          "p1Policy": {
+            "batchForward": "FROZEN",
+            "autoRemediation": "ACTIVE",
+            "currentDevelopmentTaskRemainsActive": true,
+            "advanceOnlyWhenOpenP1IsZero": true
+          },
+          "authorityPolicy": {
+            "autoReconcileWhenUniqueAndDeterministic": true,
+            "stopWhenCurrentAuthoritiesConflict": true,
+            "projectionStaleIsNotAuthorityConflict": true
+          },
+          "safetyPolicy": {
+            "allowCompliantRootCauseRepair": true,
+            "forbidGateBypass": true,
+            "forbidFailOpen": true,
+            "forbidPermissionWeakening": true,
+            "forbidProvenanceWeakening": true
+          },
+          "convergencePolicy": {
+            "continueWhen": [
+              "previous_failure_eliminated",
+              "failure_moved_deeper",
+              "new_deterministic_evidence_obtained"
+            ],
+            "stopWhenSameFailureSignatureRepeatsWithoutProgress": 2
+          },
+          "evidencePolicy": {
+            "recordClassification": true,
+            "recordRootCause": true,
+            "recordSelectedFix": true,
+            "recordRejectedUnsafeOrWrongLayerFixes": true,
+            "bindInputAndOutputExactRevisions": true
+          }
+        },
+        "semanticPreflightPolicy": {
+          "enabled": true,
+          "runBeforeExpensiveP0WhenApplicable": true,
+          "checks": [
+            "authority_consistency",
+            "task_dependency_and_scope",
+            "configuration_semantics",
+            "test_oracle_against_authority",
+            "fixture_shape_against_declared_contract",
+            "compile_time_policy_and_binding_completeness",
+            "required_rule_resource_and_environment_presence"
+          ],
+          "failClosedOnSilentDeclarationDrop": true
+        },
+        "architectureBoundaryPolicy": {
+          "mode": "DETECT_BEFORE_AR",
+          "runArOnlyWhen": [
+            "new_module_dependency_direction",
+            "public_api_ownership_change",
+            "trust_boundary_change",
+            "transaction_boundary_change",
+            "persistence_boundary_change",
+            "runtime_composition_owner_change",
+            "security_enforcement_boundary_change",
+            "authority_owner_change",
+            "existing_architecture_invariant_change"
+          ],
+          "skipArWhen": [
+            "test_fixture_correction",
+            "test_oracle_correction",
+            "configuration_data_correction",
+            "existing_wiring_repair",
+            "implementation_inside_frozen_ownership",
+            "docs_only_closure",
+            "ci_remediation_without_boundary_change"
+          ],
+          "ordinaryDevelopmentRepeatsSkeletonGate": false
+        },
+        "finalHeadGatePolicy": {
+          "enabled": true,
+          "afterLastDevelopmentTask": true,
+          "requiredGate": "P0",
+          "bindToTrueFinalPrHead": true,
+          "rerunWhenClosureOrMetadataCommitChangesHead": true,
+          "taskP0CannotSubstituteFinalHeadP0": true
+        }
+      },
+      "combinationAllowed": true,
+      "stateSource": "version/{VERSION}/work.md",
+      "gitCheckpoint": {
+        "flags": [
+          "-gc",
+          "--git-checkpoint"
+        ],
+        "default": false,
+        "description": "Create one local Git checkpoint commit after each passed phase gate; sequential single-repository mode only.",
+        "policy": {
+          "executorAgent": "ProjectManagerAgent",
+          "trigger": "PHASE_GATE_PASSED_BEFORE_ADVANCE",
+          "autoPush": false,
+          "autoMerge": false,
+          "protectedBranchPatterns": [
+            "main",
+            "master",
+            "develop",
+            "release",
+            "release/*",
+            "production",
+            "production/*"
+          ],
+          "recordFile": "task/{TARGET_ID}/git_checkpoints.yaml",
+          "commitTrailers": [
+            "WK-Checkpoint",
+            "WK-Revision"
+          ],
+          "executionPolicyRef": "assets/runtime-contract.json#/executionPolicy"
+        },
+        "reference": "references/git-checkpoint-core.md"
+      },
+      "gitPush": {
+        "flags": [
+          "-gp",
+          "--git-push"
+        ],
+        "default": false,
+        "dependsOn": [
+          "gitCheckpoint"
+        ],
+        "description": "Push each successful -gc checkpoint; native Git first, GitHub Connector fallback only for github.com network/auth transport failure. Phase advance requires remote verification.",
+        "policy": {
+          "executorAgent": "ProjectManagerAgent",
+          "trigger": "LOCAL_CHECKPOINT_COMMITTED_BEFORE_PHASE_ADVANCE",
+          "requiresGitCheckpoint": true,
+          "remoteResolution": [
+            "branch.<name>.remote",
+            "origin"
+          ],
+          "refspec": "HEAD:refs/heads/{CURRENT_BRANCH}",
+          "forceAllowed": false,
+          "pushTags": false,
+          "autoMerge": false,
+          "verifyRemoteHead": true,
+          "verifyPullRequestHead": "WHEN_DISCOVERABLE",
+          "githubPullRequestRefPattern": "refs/pull/*/head",
+          "failureBlocksPhaseAdvance": true,
+          "executionPolicyRef": "assets/runtime-contract.json#/executionPolicy",
+          "transportOrder": [
+            "NATIVE_GIT",
+            "GITHUB_CONNECTOR"
+          ],
+          "nativeTransport": {
+            "identityMode": "EXACT_COMMIT_SHA",
+            "remoteHeadMustEqualLocalCommitSha": true,
+            "fallbackOn": [
+              "native_transport_unavailable",
+              "native_auth_unavailable"
+            ],
+            "neverFallbackOn": [
+              "git_divergence",
+              "remote_checkpoint_verification_failed"
+            ],
+            "timeoutSeconds": 20
+          },
+          "connectorFallback": {
+            "enabled": true,
+            "provider": "GITHUB_CONNECTOR",
+            "supportedRemoteHost": "github.com",
+            "requestSchema": "assets/git-connector-request.schema.json",
+            "receiptSchema": "assets/git-connector-receipt.schema.json",
+            "adapterScript": "scripts/git_connector_transport.py",
+            "identityMode": "EXACT_TREE_MESSAGE_EQUIVALENT",
+            "requireExactTreeSha": true,
+            "requireEquivalentParentTreeAndMessage": true,
+            "remoteCommitShaMayDifferFromLocal": true,
+            "rewriteLocalHistory": false,
+            "forbiddenConnectorActions": [
+              "force_update_ref",
+              "create_other_branch",
+              "create_pull_request",
+              "merge",
+              "push_tag",
+              "release",
+              "deploy"
+            ],
+            "receiptRequiredBeforeRemoteCheckpointed": true,
+            "phaseAdvanceWhileConnectorPending": false,
+            "verifiedReceiptTtlSeconds": 900
+          },
+          "remoteCheckpointState": {
+            "remoteCheckpointedRequiresVerifiedTransportReceipt": true
+          }
+        },
+        "reference": "references/git-checkpoint-core.md"
+      },
+      "architectureReview": {
+        "flags": [
+          "-ar"
+        ],
+        "default": false,
+        "workColumns": [
+          "架构代码"
+        ],
+        "disabledValue": "无",
+        "enabledValue": "AIW",
+        "description": "Split development into a reviewed architecture-code skeleton iteration and a concrete implementation iteration.",
+        "policy": {
+          "lifecyclePhase": "development",
+          "stateSource": "task/{TARGET_ID}/task_events.jsonl#TASK_STATE_PATCHED(architecture_review)",
+          "firstStep": {
+            "id": "ARCHITECTURE_SKELETON",
+            "requiredContent": [
+              "method_and_function_signatures",
+              "parameter_and_return_contracts",
+              "call_orchestration",
+              "main_decisions_and_branches",
+              "error_transaction_and_idempotency_boundaries"
+            ],
+            "forbiddenContent": [
+              "concrete_business_method_implementation",
+              "real_persistence_or_external_side_effects",
+              "placeholder_logic_that_hides_missing_branches"
+            ],
+            "requiredReviewers": [
+              "ArchitectureReviewAgent",
+              "SpecComplianceReviewAgent"
+            ],
+            "reviewProfiles": [
+              "development:ArchitectureReviewAgent",
+              "development:SpecComplianceReviewAgent"
+            ],
+            "passedStatus": "SKELETON_REVIEW_PASSED"
+          },
+          "transitionCommand": "python3 scripts/long_task.py advance-development-step -g ProjectManagerAgent --task-dir {TASK_DIR}",
+          "secondStep": {
+            "id": "CONCRETE_IMPLEMENTATION",
+            "requiredPredecessorStatus": "SKELETON_REVIEW_PASSED",
+            "readyForFinalReviewStatus": "IMPLEMENTATION_READY_FOR_REVIEW",
+            "developmentGateReviewers": [
+              "TDDReviewAgent",
+              "SpecComplianceReviewAgent"
+            ]
+          },
+          "autoAdvanceAcrossReviewBoundary": false,
+          "finalCodeReview": {
+            "requiredReviewers": [
+              "SpecComplianceReviewAgent",
+              "EngineeringStandardsReviewAgent",
+              "ArchitectureReviewAgent"
+            ],
+            "passedStatus": "IMPLEMENTATION_REVIEW_PASSED",
+            "requiresSameSkeletonBoundary": true
+          }
+        },
+        "reference": "references/architecture-review-development.md"
+      },
+      "reviewOnly": {
+        "flags": [
+          "-review-only"
+        ],
+        "default": false,
+        "description": "Machine-enforced review-only mutation boundary: task facts and project documentation may change; tests, configuration, and production code may not change.",
+        "policy": {
+          "mode": "REVIEW_ONLY",
+          "taskFacts": "ALLOW",
+          "projectDocs": "ALLOW",
+          "tests": "DENY",
+          "config": "DENY",
+          "productionCode": "DENY",
+          "failClosed": true,
+          "reference": "references/work-mode-core.md"
+        },
+        "reference": "references/work-mode-core.md"
+      },
+      "applicationPolicy": {
+        "syncExistingTasksByDefault": true,
+        "skipSyncFlag": "--no-sync-existing-tasks",
+        "description": "Applying or initializing a work mode synchronizes existing task runtimes unless explicitly disabled.",
+        "reference": "references/work-mode-core.md"
+      }
+    },
+    "taskPlanning": {
+      "flags": [
+        "-tp",
+        "--task-plan"
+      ],
+      "default": false,
+      "description": "For large requirements, generate, review, and revise a task plan before implementation_plan passes.",
+      "triggerPolicy": {
+        "explicit": true,
+        "recommendedWhen": [
+          "large_requirement",
+          "multiple_modules",
+          "more_than_one_independently_reviewable_increment",
+          "cross_module_implementation"
+        ],
+        "ownerAgent": "ImplementationPlanAgent",
+        "finalizerAgent": "ProjectManagerAgent"
+      },
+      "files": {
+        "canonical": "version/{VERSION}/task/{TARGET_ID}/development_task_plan.json",
+        "rendered": "version/{VERSION}/task/{TARGET_ID}/cache/current_manifest.json",
+        "reviewHistory": "version/{VERSION}/task/{TARGET_ID}/evidence/reviews.jsonl"
+      },
+      "requiredTaskFields": [
+        "task_id",
+        "title",
+        "goal",
+        "implementation",
+        "acceptance_criteria",
+        "depends_on",
+        "owner_agent",
+        "reviewer_agents",
+        "validation_commands",
+        "expected_results",
+        "deliverables",
+        "stop_conditions",
+        "trace_ids",
+        "git_checkpoint_required"
+      ],
+      "reviewPolicy": {
+        "executionMode": "SEQUENTIAL",
+        "standardReviewers": [
+          "PlanReviewAgent",
+          "ArchitectureReviewAgent",
+          "TestDesignAgent",
+          "DevelopAgent"
+        ],
+        "minimalReviewers": [
+          "PlanReviewAgent",
+          "ArchitectureReviewAgent",
+          "DevelopAgent"
+        ],
+        "additionalTaskReviewersAllowed": true,
+        "onFinding": "stop remaining Review, set the plan to REWORK, modify task content, create a new TP revision, and restart Review from the first required Reviewer",
+        "finalizeWhen": [
+          "all_current_revision_reviews_passed",
+          "all_assigned_tasks_covered",
+          "no_open_current_revision_findings",
+          "plan_validation_passed"
+        ],
+        "statusDomainRef": "#/statuses/review",
+        "resultDomainRef": "#/statuses/reviewConclusion",
+        "findingSeverityDomain": [
+          "P0",
+          "P1",
+          "P2"
+        ]
+      },
+      "commands": {
+        "init": "python3 scripts/task_plan.py init",
+        "validate": "python3 scripts/task_plan.py validate",
+        "seal": "python3 scripts/task_plan.py seal",
+        "submitReview": "python3 scripts/task_plan.py submit-review",
+        "revise": "python3 scripts/task_plan.py revise",
+        "finalize": "python3 scripts/task_plan.py finalize",
+        "status": "python3 scripts/task_plan.py status",
+        "query": "python3 scripts/task_plan.py query"
+      },
+      "reference": "references/implementation-plan.md"
+    },
+    "requestIntake": {
+      "flags": {
+        "bug": [
+          "-b",
+          "--bug"
+        ],
+        "feature": [
+          "-f",
+          "--feature"
+        ]
+      },
+      "source": "task/{TARGET_ID}/request_intake.json",
+      "schemaRef": "assets/request-intake.schema.json",
+      "classificationAgent": "ProjectManagerAgent",
+      "descriptionInputPolicy": "wk -b descriptions are BUG; wk -f descriptions require explicit project-fact classification.",
+      "listCommandPolicy": "wk -l -b/-f accept resolved IDs only and never create or classify requests.",
+      "help": {
+        "bug": {
+          "description": "Select an existing BUG ID or classify the full text as a BUG request.",
+          "reference": "references/request-intake.md"
+        },
+        "feature": {
+          "description": "Select an existing FEATURE ID or classify the text as a new requirement, requirement change, simple optimization, or needs-confirmation request.",
+          "reference": "references/request-intake.md"
+        }
+      }
+    },
+    "orchestration": {
+      "start": {
+        "command": "start",
+        "description": "Classify and preview or initialize one request transactionally.",
+        "reference": "references/wk-cli.md"
+      },
+      "status": {
+        "command": "status",
+        "description": "Show the current task, request, gate, and validation status.",
+        "summaryFlag": "--summary",
+        "reference": "references/wk-cli.md"
+      },
+      "doctor": {
+        "command": "doctor",
+        "description": "Inspect project health and optionally preview or apply registered idempotent safe repairs.",
+        "reference": "references/wk-cli.md",
+        "safeRepairPolicy": {
+          "previewFlag": "--fix",
+          "applyFlag": "--apply",
+          "requiresAgent": "ProjectManagerAgent",
+          "forbiddenSideEffects": [
+            "phase_transition",
+            "retry_policy_change",
+            "archive",
+            "git_push"
+          ],
+          "safeRepairs": {
+            "sync-work-mode": {
+              "command": "long_task.sync-work-mode",
+              "idempotent": true
+            },
+            "task-layout-sync": {
+              "command": "task_layout.sync",
+              "idempotent": true
+            }
+          }
+        }
+      },
+      "next": {
+        "command": "next",
+        "description": "Return the next legal command, required Agent, and reason codes.",
+        "reference": "references/wk-cli.md"
+      },
+      "context": {
+        "command": "context",
+        "description": "Show reducer-derived current task context without treating cache projections as authority.",
+        "reference": "references/wk-cli.md"
+      },
+      "help": {
+        "command": "help",
+        "description": "Discover wk flags and commands from the Runtime Contract without loading it wholesale.",
+        "reference": "references/wk-cli.md"
+      },
+      "packs": {
+        "command": "packs",
+        "description": "Resolve capability packs while preserving one Skill authority.",
+        "reference": "references/orchestration-core.md"
+      },
+      "reconcile": {
+        "command": "reconcile",
+        "description": "Explain lifecycle fact convergence and optionally apply deterministic process-only reconciliation.",
+        "reference": "references/wk-cli.md"
+      },
+      "close": {
+        "command": "close",
+        "description": "Preview or apply the current phase closure using the existing fail-closed finalize gate.",
+        "reference": "references/wk-cli.md"
+      },
+      "document-archive": {
+        "command": "document-archive",
+        "description": "Finalize lightweight-mode knowledge archives; --apply consumes the completed plan and --audit-bundle exports revision-bound audit data.",
+        "reference": "references/work-mode-core.md"
+      },
+      "env": {
+        "command": "env",
+        "description": "Project the capabilities declared by project_env.md and harness_env.md without assuming a technology stack.",
+        "reference": "references/test-environment.md"
+      },
+      "impact": {
+        "command": "impact",
+        "description": "Derive change impact and minimum safe revalidation; adapters may narrow scope but never bypass lifecycle gates.",
+        "reference": "references/wk-cli.md"
+      },
+      "delivery": {
+        "command": "delivery",
+        "description": "Plan/evaluate generic capability-driven Delivery Readiness under completion_verification without creating a project-specific release phase.",
+        "reference": "references/delivery-readiness.md"
+      },
+      "confirm": {
+        "command": "confirm",
+        "description": "Preview or apply a bounded batch authorization without bypassing lifecycle gates.",
+        "reference": "references/wk-cli.md"
+      },
+      "step": {
+        "description": "Preview/apply lifecycle plan.",
+        "command": "step"
+      },
+      "begin": {
+        "command": "begin",
+        "description": "AI begin execution package",
+        "reference": "references/wk-cli.md"
+      },
+      "progress": {
+        "command": "progress",
+        "description": "ProjectManagerAgent previews or applies one existing phase action using the current planDigest.",
+        "reference": "references/wk-cli.md"
+      },
+      "finish": {
+        "command": "finish",
+        "description": "Validate in the task project root (parent of DOC_ROOT); --cwd selects an existing directory within that project.",
+        "reference": "references/wk-cli.md"
+      },
+      "record-result": {
+        "command": "record-result",
+        "description": "Atomically register command result Evidence",
+        "reference": "references/wk-cli.md"
+      }
+    }
+  },
+  "scopeExclusions": [
+    "visual_design",
+    "business_plan",
+    "market_and_sales",
+    "release_and_deployment",
+    "generic_qa",
+    "release_readiness"
+  ],
+  "projectManagement": {
+    "taskStateField": "project_manager_agent",
+    "defaultAgent": "ProjectManagerAgent",
+    "allowedAgents": [
+      "ProjectManagerAgent"
+    ],
+    "capabilities": [
+      "TASK_DECOMPOSITION",
+      "AGENT_ORCHESTRATION",
+      "GATE_ENFORCEMENT",
+      "DEPENDENCY_MANAGEMENT",
+      "LONG_TASK_RECOVERY",
+      "ISSUE_ESCALATION",
+      "CONTEXT_BUDGET_MANAGEMENT",
+      "REVISION_CONSISTENCY_CHECK",
+      "CHANGE_CONTROL",
+      "RISK_MANAGEMENT",
+      "DECISION_MANAGEMENT",
+      "COMPLETION_COORDINATION"
+    ]
+  },
+  "reviewContract": {
+    "path": "assets/review-contract.json",
+    "schemaVersion": 2,
+    "profileKeyFormat": "<phase>:<reviewerAgent>",
+    "resultRecord": "independentConclusion",
+    "orchestrationModel": "PHASE_GATE_CORE_BUNDLE_RISK_TEMPLATE_DELTA",
+    "riskTemplatePath": "assets/review-contract.json#/riskReviewTemplates",
+    "reviewSessionPolicyPath": "assets/review-contract.json#/reviewSessionPolicy"
+  },
+  "packageVersion": "1.0",
+  "testExecution": {
+    "independentDatabase": {
+      "description": "Run independent test-database tests only when all required environment groups resolve to non-empty values.",
+      "requiredEnvironmentGroups": {
+        "url": [
+          "TEST_DB_URL"
+        ],
+        "username": [
+          "TEST_DB_USER"
+        ],
+        "password": [
+          "TEST_DB_PASSWORD"
+        ]
+      },
+      "preferredUsernameVariable": "TEST_DB_USER",
+      "readyStatus": "READY",
+      "missingStatus": "SKIPPED",
+      "missingReason": "独立测试库环境变量未完整设置，跳过独立测试库测试；不得回退到 local/dev/生产业务库。",
+      "neverFallbackToBusinessDatabase": true,
+      "secretOutputPolicy": "VARIABLE_NAMES_ONLY",
+      "minimalModeBehavior": "SKIPPED_WITH_ALL_TESTS"
+    }
+  },
+  "processGatePolicy": {
+    "predecessorStatuses": [
+      "PASSED"
+    ],
+    "minimalSkippedStatus": "NOT_APPLICABLE",
+    "blockOnOpenIssueSeverities": [
+      "P0",
+      "P1"
+    ],
+    "requireDependencyCompletion": true,
+    "requireCurrentInputRevisions": true,
+    "requireRealEvidenceFiles": true,
+    "requireCommandResultFiles": true,
+    "iterationModel": {
+      "levels": [
+        "logical_task",
+        "iteration",
+        "attempt"
+      ],
+      "maxAttemptsScope": "ITERATION"
+    }
+  },
+  "executionPolicy": {
+    "mode": "SEQUENTIAL",
+    "allowParallelTasks": false,
+    "oneActiveTargetAtATime": true,
+    "multiTargetOrder": "DECLARED_ORDER",
+    "multiTargetOrderSource": "version/{VERSION}/project_process.md",
+    "description": "All targets and plan tasks execute sequentially. A, B, and C may be grouped by lifecycle stage, but only one target or task may be active at a time in the declared order."
+  },
+  "taskContextOptimization": {
+    "schemaVersion": 1,
+    "verification": {
+      "script": "scripts/task_verify.py",
+      "levels": [
+        "summary",
+        "failures",
+        "full"
+      ],
+      "profiles": [
+        "task-health",
+        "start-phase",
+        "complete-phase",
+        "advance-phase",
+        "review-gate",
+        "archive-gate",
+        "next-phase"
+      ],
+      "defaultLevel": "summary",
+      "cachePath": "task/{TARGET_ID}/cache/verification/{PROFILE}/{INPUT_DIGEST}.json",
+      "cacheIsEvidence": false,
+      "inputDigestExcludes": [
+        "cache/"
+      ]
+    },
+    "projection": {
+      "script": "scripts/task_layout.py",
+      "schema": "assets/current-manifest.schema.json",
+      "path": "task/{TARGET_ID}/cache/current_manifest.json",
+      "kind": "CURRENT_MANIFEST",
+      "authority": "DERIVED",
+      "canonical": false,
+      "registerAsBusinessEvidence": false,
+      "physicalFileBudget": 1
+    },
+    "context": {
+      "script": "scripts/ai_context.py",
+      "minimumTokenBudget": 500,
+      "defaultLazyObjectKinds": [
+        "evidence",
+        "review",
+        "snapshot"
+      ],
+      "checkpointPath": "task/{TARGET_ID}/cache/context/{PHASE}/{AGENT}.json",
+      "referenceReader": {
+        "script": "scripts/reference_reader.py",
+        "indexCommand": "python3 scripts/reference_reader.py index -g {CURRENT_AGENT} --resource {RESOURCE_ID} --json",
+        "readSectionCommand": "python3 scripts/reference_reader.py read -g {CURRENT_AGENT} --resource {RESOURCE_ID} --section {SECTION_ID}",
+        "readQueryCommand": "python3 scripts/reference_reader.py read -g {CURRENT_AGENT} --resource {RESOURCE_ID} --query {TOPIC} --max-sections 3",
+        "policy": "Resources with readStrategy=relevant_sections require explicit section or query selection; full reads require --full."
+      }
+    }
+  },
+  "documentLayout": {
+    "script": "scripts/doc_layout.py",
+    "docRootContract": {
+      "projectFacts": "docs/**",
+      "versionFacts": "version/{VERSION}/doc/**",
+      "taskFacts": "version/{VERSION}/task/**"
+    },
+    "forbiddenVersionDirectories": [
+      "version/{VERSION}/docs",
+      "version/{VERSION}/document",
+      "version/{VERSION}/documents"
+    ],
+    "taskPlanAllowedPathRoots": [
+      "docs/**",
+      "version/{VERSION}/doc/**",
+      "version/{VERSION}/task/**"
+    ],
+    "normalEvidenceSearchRoots": [
+      "docs",
+      "version/{VERSION}/doc"
+    ]
+  },
+  "storageModelVersion": 6,
+  "workRecordSchemaVersion": 4,
+  "evidenceSchemaVersion": 4,
+  "reviewRegistrySchemaVersion": 1,
+  "requestIntakeSchemaVersion": 1,
+  "workflowProfiles": {
+    "BUG_FLOW": {
+      "targetType": "BUG",
+      "entryPhase": "requirement_confirmation",
+      "requiredPhases": [
+        "requirement_confirmation",
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "test_design",
+        "implementation_plan",
+        "development",
+        "code_review",
+        "testing",
+        "completion_verification"
+      ],
+      "skippedPhases": [],
+      "description": "BUG_ID and wk -b descriptions always use the bug workflow."
+    },
+    "FEATURE_FLOW": {
+      "targetType": "FEATURE",
+      "entryPhase": "requirement_confirmation",
+      "requiredPhases": [
+        "requirement_confirmation",
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "test_design",
+        "implementation_plan",
+        "development",
+        "code_review",
+        "testing",
+        "completion_verification"
+      ],
+      "skippedPhases": [],
+      "description": "Existing FEATURE_ID intake uses the standard lifecycle until project facts classify a narrower change."
+    },
+    "STANDARD_FEATURE_FLOW": {
+      "targetType": "FEATURE",
+      "classification": "NEW_REQUIREMENT",
+      "entryPhase": "requirement_confirmation",
+      "requiredPhases": [
+        "requirement_confirmation",
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "test_design",
+        "implementation_plan",
+        "development",
+        "code_review",
+        "testing",
+        "completion_verification"
+      ],
+      "skippedPhases": []
+    },
+    "REQUIREMENT_CHANGE_FLOW": {
+      "targetType": "FEATURE",
+      "classification": "REQUIREMENT_CHANGE",
+      "entryPhase": "requirement_confirmation",
+      "requiredPhases": [
+        "requirement_confirmation",
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "test_design",
+        "implementation_plan",
+        "development",
+        "code_review",
+        "testing",
+        "completion_verification"
+      ],
+      "skippedPhases": [],
+      "requiresOneOf": [
+        "relatedRequirement",
+        "relatedFeature"
+      ]
+    },
+    "SIMPLE_OPTIMIZATION_FLOW": {
+      "targetType": "FEATURE",
+      "classification": "SIMPLE_OPTIMIZATION",
+      "entryPhase": "development",
+      "requiredPhases": [
+        "development",
+        "code_review",
+        "testing",
+        "completion_verification"
+      ],
+      "skippedPhases": [
+        "requirement_confirmation",
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "test_design",
+        "implementation_plan"
+      ],
+      "requiredImpactValue": "NONE",
+      "requiredImpactFields": [
+        "businessLogic",
+        "dataModel",
+        "apiContract",
+        "permission",
+        "workflow",
+        "persistence",
+        "externalSideEffect",
+        "migration",
+        "dependency"
+      ],
+      "requiresRelatedFeature": true,
+      "incompatibleWorkModes": [
+        "minimal",
+        "lightweight"
+      ],
+      "requiredSequence": [
+        "development",
+        "code_review",
+        "testing",
+        "completion_verification"
+      ],
+      "description": "Presentation-only optimization with no logic, data, contract, permission, workflow, persistence, side-effect, migration, or dependency changes."
+    },
+    "BLOCKED": {
+      "targetType": "FEATURE",
+      "classification": "NEEDS_CONFIRMATION",
+      "entryPhase": "",
+      "requiredPhases": [],
+      "skippedPhases": []
+    }
+  },
+  "contractQueryPolicy": {
+    "wholeDocumentOutputForbidden": true,
+    "defaultMaxSelectionBytes": 24576,
+    "hardMaxSelectionBytes": 65536,
+    "runtimeQueryCommand": "python3 scripts/runtime_contract.py",
+    "routingQueryCommand": "python3 scripts/context_routing.py",
+    "reviewQueryCommand": "python3 scripts/review_contract.py",
+    "capabilityPackQueryCommand": "python3 scripts/capability_packs.py",
+    "normalizedSourceSchemaVersion": 2,
+    "materializer": "scripts/contract_normalization.py"
+  },
+  "scriptPermissionProfiles": {
+    "PERM-2864F1A595": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "EngineeringStandardsReviewAgent",
+        "CompletionVerificationAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-DCD409DBAE": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent"
+      ],
+      "mutation": "MIXED"
+    },
+    "PERM-2004406F4A": {
+      "mode": "TASK_CONTEXT",
+      "mutation": "MIXED"
+    },
+    "PERM-969BBE3F4E": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "IncrementalArchiveAgent"
+      ],
+      "mutation": "MIXED"
+    },
+    "PERM-39C1E5DDF1": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "IncrementalArchiveAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-920C8FBA64": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "IncrementalArchiveAgent",
+        "CompletionVerificationAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-65985933D9": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "RequirementAnalysisAgent",
+        "BusinessModelAgent",
+        "ImpactAnalysisReviewAgent",
+        "CrossModuleIntegrationReviewAgent",
+        "DocumentRenderAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-CCD504299B": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "RequirementAnalysisAgent",
+        "BusinessModelAgent",
+        "DocumentRenderAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-2B7113BD67": {
+      "mode": "DECLARED_AGENT",
+      "mutation": "MIXED"
+    },
+    "PERM-31677921FB": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "CompletionVerificationAgent",
+        "IncrementalArchiveAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-F75D5A323A": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "TddAgent",
+        "TestAgent",
+        "TestEvidenceReviewAgent",
+        "CompletionVerificationAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-7AB8188FC9": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "RequirementAnalysisAgent",
+        "TestDesignAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-0D484C1A25": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "RequirementConfirmationAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-6DE51A7B01": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "DesignAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-5E7C4A5ED1": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "TestDesignAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-28584457B3": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "RequirementAnalysisAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-E335302CDC": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "RequirementAnalysisAgent",
+        "BusinessModelAgent",
+        "DesignAgent",
+        "DocumentRenderAgent",
+        "IncrementalArchiveAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-BA7BAADE82": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "RequirementAnalysisAgent",
+        "ImpactAnalysisReviewAgent",
+        "CompletionVerificationAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-04130CBA5B": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "CompletionVerificationAgent",
+        "EngineeringStandardsReviewAgent"
+      ],
+      "mutation": "MIXED"
+    },
+    "PERM-2B13D87BE0": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "CompletionVerificationAgent"
+      ]
+    },
+    "PERM-43CE3BBCC2": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ImplementationPlanAgent"
+      ],
+      "mutation": "MUTATING"
+    },
+    "PERM-CC58BBA326": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "DevelopAgent",
+        "TddAgent",
+        "TestAgent",
+        "SpecComplianceReviewAgent",
+        "EngineeringStandardsReviewAgent",
+        "ArchitectureReviewAgent",
+        "CompletionVerificationAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-9066B8F87B": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "DevelopAgent",
+        "ArchitectureReviewAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-57EB54A960": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "CompletionVerificationAgent",
+        "EngineeringStandardsReviewAgent",
+        "DevelopAgent",
+        "ArchitectureReviewAgent",
+        "SpecComplianceReviewAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-5A6E7C9D11": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "CompletionVerificationAgent"
+      ],
+      "mutation": "READ_ONLY"
+    },
+    "PERM-ARCHIVE-WRAPPER": {
+      "mode": "STATIC",
+      "allowedAgents": [
+        "ProjectManagerAgent",
+        "IncrementalArchiveAgent"
+      ],
+      "mutation": "MUTATING"
+    }
+  },
+  "scriptPermissionAssignments": {
+    "PERM-2864F1A595": [
+      "check_skill.check",
+      "semantic_audit.check",
+      "quality_gate.run"
+    ],
+    "PERM-DCD409DBAE": [
+      "long_task.init",
+      "work_mode.init",
+      "work_mode.apply",
+      "long_task.finalize-phase",
+      "long_task.reopen-phase",
+      "long_task.amend-phase",
+      "long_task.advance-development-step",
+      "long_task.advance-phase",
+      "long_task.sync-work-mode",
+      "long_task.set-task-policy",
+      "long_task.compact-events",
+      "long_task.revalidate-traceability",
+      "evidence.status",
+      "evidence.repair-history",
+      "risk_detect.scan",
+      "risk_detect.waive",
+      "long_task.sync-risk-reviewers",
+      "git_checkpoint.commit",
+      "git_checkpoint.push",
+      "git_checkpoint.connector-request",
+      "git_checkpoint.connector-complete",
+      "task_plan.finalize",
+      "request_intake.classify",
+      "request_intake.reclassify",
+      "wk.start",
+      "baseline_guard.status",
+      "wk.close",
+      "long_task.skip-phase",
+      "wk.confirm",
+      "wk.step",
+      "wk.progress"
+    ],
+    "PERM-2004406F4A": [
+      "long_task.validate",
+      "long_task.resume",
+      "long_task.start-attempt",
+      "long_task.finish-attempt",
+      "long_task.publish-artifact",
+      "long_task.task-context",
+      "long_task.attempts",
+      "long_task.read-attempt",
+      "long_task.latest-attempt",
+      "long_task.task-events",
+      "long_task.issue-event",
+      "execution_evidence.run",
+      "wk.reconcile",
+      "wk.record-result",
+      "wk.begin",
+      "wk.finish"
+    ],
+    "PERM-969BBE3F4E": [
+      "merge_docs.init",
+      "merge_docs.validate",
+      "merge_docs.preview",
+      "document_portal.render",
+      "artifact_relations.build"
+    ],
+    "PERM-39C1E5DDF1": [
+      "merge_docs.apply",
+      "merge_docs.archive"
+    ],
+    "PERM-920C8FBA64": [
+      "merge_docs.status"
+    ],
+    "PERM-65985933D9": [
+      "render_relationships.check"
+    ],
+    "PERM-CCD504299B": [
+      "render_relationships.generate"
+    ],
+    "PERM-2B7113BD67": [
+      "review_contract.list",
+      "review_contract.show",
+      "long_task.append-work-event",
+      "long_task.work-events",
+      "evidence.register",
+      "evidence.validate",
+      "evidence.show",
+      "evidence.snapshot-register",
+      "evidence.bundle-register",
+      "evidence.query",
+      "acceptance.verify",
+      "acceptance.manual",
+      "acceptance.validate",
+      "risk_detect.validate",
+      "risk_detect.add",
+      "manual_review.prepare",
+      "manual_review.draft",
+      "manual_review.wizard",
+      "manual_review.submit",
+      "manual_review.show",
+      "context_resolver.resolve",
+      "requirement_doc.validate",
+      "requirement_doc.status",
+      "design_doc.validate",
+      "case_doc.validate",
+      "ai_context.resolve",
+      "business_flow.validate",
+      "task_verify.verify",
+      "task_layout.sync",
+      "task_layout.validate",
+      "task_layout.view",
+      "doc_layout.check",
+      "reference_reader.index",
+      "reference_reader.read",
+      "task_plan.validate",
+      "task_plan.submit-review",
+      "task_plan.status",
+      "task_plan.query",
+      "runtime_contract.list",
+      "runtime_contract.show",
+      "runtime_contract.command",
+      "runtime_contract.phase",
+      "runtime_contract.permissions",
+      "context_routing.list",
+      "context_routing.show",
+      "context_routing.route",
+      "context_routing.condition",
+      "context_routing.resource",
+      "context_routing.resolve",
+      "review_contract.criterion",
+      "review_contract.policy",
+      "review_contract.required",
+      "wk.help",
+      "project_environment.status",
+      "review_contract.risk-templates",
+      "review_session.plan",
+      "review_session.validate",
+      "cli_help.list",
+      "cli_help.show",
+      "cli_help.validate",
+      "capability_packs.list",
+      "capability_packs.show",
+      "capability_packs.resolve",
+      "capability_packs.validate",
+      "wk.packs",
+      "long_task.help",
+      "document_portal.validate",
+      "artifact_relations.validate",
+      "artifact_relations.query"
+    ],
+    "PERM-31677921FB": [
+      "work_mode.validate",
+      "work_mode.status",
+      "long_task.validate-work-record"
+    ],
+    "PERM-F75D5A323A": [
+      "independent_test_environment.status"
+    ],
+    "PERM-7AB8188FC9": [
+      "acceptance.add",
+      "acceptance.ensure-review"
+    ],
+    "PERM-0D484C1A25": [
+      "requirement_doc.init",
+      "requirement_doc.sync-list"
+    ],
+    "PERM-6DE51A7B01": [
+      "design_doc.init"
+    ],
+    "PERM-5E7C4A5ED1": [
+      "case_doc.init"
+    ],
+    "PERM-28584457B3": [
+      "requirement_doc.sync-traceability",
+      "requirement_doc.finalize-requirement-analysis",
+      "business_flow.init"
+    ],
+    "PERM-E335302CDC": [
+      "business_flow.render"
+    ],
+    "PERM-BA7BAADE82": [
+      "business_flow.impact"
+    ],
+    "PERM-04130CBA5B": [
+      "git_checkpoint.validate",
+      "git_checkpoint.status",
+      "request_intake.validate",
+      "wk.status",
+      "wk.doctor",
+      "wk.next",
+      "wk.env",
+      "wk.impact",
+      "wk.delivery",
+      "governance_profile.recommend",
+      "project_constraints.validate",
+      "project_constraints.status"
+    ],
+    "PERM-5A6E7C9D11": [
+      "long_task.list-risk-triggers"
+    ],
+    "PERM-43CE3BBCC2": [
+      "task_plan.init",
+      "task_plan.seal",
+      "task_plan.revise"
+    ],
+    "PERM-CC58BBA326": [
+      "auto_remediation.policy",
+      "auto_remediation.classify",
+      "auto_remediation.diagnose-log",
+      "auto_remediation.preflight",
+      "auto_remediation.convergence"
+    ],
+    "PERM-9066B8F87B": [
+      "auto_remediation.architecture"
+    ],
+    "PERM-57EB54A960": [
+      "wk.context"
+    ],
+    "PERM-ARCHIVE-WRAPPER": [
+      "wk.document-archive"
+    ]
+  },
+  "reviewOrchestration": {
+    "model": "PHASE_GATE_CORE_BUNDLE_RISK_TEMPLATE_DELTA",
+    "coreProfileCount": 17,
+    "riskTemplateCount": 8,
+    "reviewSession": {
+      "enabled": true,
+      "sharedFreeze": [
+        "phase",
+        "revision",
+        "inputDigest",
+        "evidenceSnapshot",
+        "riskDetection",
+        "impactPlan"
+      ],
+      "independentAxisResults": true,
+      "notApplicableRiskReview": "APPLICABILITY_DECISION_ONLY"
+    },
+    "deltaReview": {
+      "enabled": true,
+      "planner": "scripts/impact_analysis.py",
+      "unknownImpact": "CONSERVATIVE_FULL_PROFILE",
+      "newReviewResultPerExactRevision": true,
+      "unaffectedCriterion": "RECAPTURE_OR_REBIND_CURRENT_REVISION_EVIDENCE"
+    }
+  },
+  "developmentLifecycle": {
+    "embeddedTdd": true,
+    "states": [
+      "DEV_READY",
+      "RED_VERIFIED",
+      "IMPLEMENTING",
+      "IMPLEMENTED",
+      "DEV_VERIFIED"
+    ],
+    "preImplementation": {
+      "state": "RED_VERIFIED",
+      "reviewer": "TDDReviewAgent",
+      "requiredCriterionIds": [
+        "RC-TDD-001",
+        "RC-TDD-005",
+        "RC-TDD-006"
+      ],
+      "rule": "New behavior/BUG RED evidence must exist before the corresponding production mutation; pure refactor uses a GREEN baseline."
+    },
+    "postImplementation": {
+      "state": "DEV_VERIFIED",
+      "reviewers": [
+        "TDDReviewAgent",
+        "SpecComplianceReviewAgent"
+      ],
+      "rule": "GREEN/REFACTOR/spec compliance are verified on the frozen development revision."
+    }
+  },
+  "finishAttemptPolicy": "autoEvidence",
+  "deliveryReadiness": {
+    "enabled": true,
+    "parentPhase": "completion_verification",
+    "gateKind": "CAPABILITY_SUBGATE",
+    "createsCanonicalPhase": false,
+    "contract": "assets/delivery-readiness-contract.json",
+    "planner": "scripts/delivery_readiness.py",
+    "projectAgnostic": true
+  },
+  "scriptCommandSurfaces": {
+    "excluded": {
+      "scripts/delivery_readiness.py": "shared implementation; public entrypoint is wk.delivery",
+      "scripts/domain_governance.py": "internal domain-governance implementation; no public permission surface",
+      "scripts/engineering_graph.py": "internal graph implementation; no public permission surface"
+    },
+    "aliases": {
+      "long_task.render-work-record": "long_task.work-events"
+    },
+    "nonParserCommands": {
+      "check_skill": [
+        "check"
+      ],
+      "quality_gate": [
+        "run"
+      ],
+      "semantic_audit": [
+        "check"
+      ],
+      "render_relationships": [
+        "check",
+        "generate"
+      ]
+    },
+    "mutability": {
+      "acceptance.add": "MUTATING",
+      "acceptance.ensure-review": "MUTATING",
+      "acceptance.manual": "READ_ONLY",
+      "acceptance.validate": "READ_ONLY",
+      "acceptance.verify": "READ_ONLY",
+      "ai_context.resolve": "MUTATING",
+      "artifact_relations.build": "MUTATING",
+      "artifact_relations.query": "READ_ONLY",
+      "artifact_relations.validate": "READ_ONLY",
+      "auto_remediation.architecture": "READ_ONLY",
+      "auto_remediation.classify": "READ_ONLY",
+      "auto_remediation.convergence": "READ_ONLY",
+      "auto_remediation.diagnose-log": "READ_ONLY",
+      "auto_remediation.policy": "READ_ONLY",
+      "auto_remediation.preflight": "READ_ONLY",
+      "baseline_guard.status": "READ_ONLY",
+      "business_flow.impact": "MUTATING",
+      "business_flow.init": "MUTATING",
+      "business_flow.render": "MUTATING",
+      "business_flow.validate": "READ_ONLY",
+      "capability_packs.list": "READ_ONLY",
+      "capability_packs.resolve": "READ_ONLY",
+      "capability_packs.show": "READ_ONLY",
+      "capability_packs.validate": "READ_ONLY",
+      "case_doc.init": "MUTATING",
+      "case_doc.validate": "READ_ONLY",
+      "check_skill.check": "READ_ONLY",
+      "cli_help.list": "READ_ONLY",
+      "cli_help.show": "READ_ONLY",
+      "cli_help.validate": "READ_ONLY",
+      "context_resolver.resolve": "READ_ONLY",
+      "context_routing.condition": "READ_ONLY",
+      "context_routing.list": "READ_ONLY",
+      "context_routing.resolve": "READ_ONLY",
+      "context_routing.resource": "READ_ONLY",
+      "context_routing.route": "READ_ONLY",
+      "context_routing.show": "READ_ONLY",
+      "design_doc.init": "MUTATING",
+      "design_doc.validate": "READ_ONLY",
+      "doc_layout.check": "READ_ONLY",
+      "document_portal.render": "MUTATING",
+      "document_portal.validate": "READ_ONLY",
+      "evidence.bundle-register": "MUTATING",
+      "evidence.query": "READ_ONLY",
+      "evidence.register": "MUTATING",
+      "evidence.repair-history": "MUTATING",
+      "evidence.show": "READ_ONLY",
+      "evidence.snapshot-register": "MUTATING",
+      "evidence.status": "READ_ONLY",
+      "evidence.validate": "READ_ONLY",
+      "execution_evidence.run": "MUTATING",
+      "git_checkpoint.commit": "MUTATING",
+      "git_checkpoint.connector-complete": "MUTATING",
+      "git_checkpoint.connector-request": "MUTATING",
+      "git_checkpoint.push": "MUTATING",
+      "git_checkpoint.status": "READ_ONLY",
+      "git_checkpoint.validate": "READ_ONLY",
+      "governance_profile.recommend": "READ_ONLY",
+      "independent_test_environment.status": "READ_ONLY",
+      "long_task.advance-development-step": "MUTATING",
+      "long_task.advance-phase": "MUTATING",
+      "long_task.append-work-event": "MUTATING",
+      "long_task.attempts": "READ_ONLY",
+      "long_task.finalize-phase": "MUTATING",
+      "long_task.finish-attempt": "MUTATING",
+      "long_task.compact-events": "MUTATING",
+      "long_task.revalidate-traceability": "MUTATING",
+      "long_task.help": "READ_ONLY",
+      "long_task.init": "MUTATING",
+      "long_task.issue-event": "MUTATING",
+      "long_task.latest-attempt": "READ_ONLY",
+      "long_task.publish-artifact": "MUTATING",
+      "long_task.read-attempt": "READ_ONLY",
+      "long_task.reopen-phase": "MUTATING",
+      "long_task.amend-phase": "MUTATING",
+      "long_task.resume": "MUTATING",
+      "long_task.set-task-policy": "MUTATING",
+      "long_task.skip-phase": "MUTATING",
+      "long_task.start-attempt": "MUTATING",
+      "long_task.sync-risk-reviewers": "MUTATING",
+      "long_task.sync-work-mode": "MUTATING",
+      "long_task.task-context": "READ_ONLY",
+      "long_task.task-events": "READ_ONLY",
+      "long_task.list-risk-triggers": "READ_ONLY",
+      "long_task.validate": "READ_ONLY",
+      "long_task.validate-work-record": "READ_ONLY",
+      "long_task.work-events": "READ_ONLY",
+      "manual_review.draft": "MUTATING",
+      "manual_review.prepare": "MUTATING",
+      "manual_review.show": "READ_ONLY",
+      "manual_review.submit": "MUTATING",
+      "manual_review.wizard": "MUTATING",
+      "merge_docs.apply": "MUTATING",
+      "merge_docs.archive": "MUTATING",
+      "merge_docs.init": "MUTATING",
+      "merge_docs.preview": "READ_ONLY",
+      "merge_docs.status": "READ_ONLY",
+      "merge_docs.validate": "READ_ONLY",
+      "project_constraints.status": "READ_ONLY",
+      "project_constraints.validate": "READ_ONLY",
+      "project_environment.status": "READ_ONLY",
+      "quality_gate.run": "READ_ONLY",
+      "reference_reader.index": "READ_ONLY",
+      "reference_reader.read": "READ_ONLY",
+      "render_relationships.check": "READ_ONLY",
+      "render_relationships.generate": "MUTATING",
+      "request_intake.classify": "MUTATING",
+      "request_intake.reclassify": "MUTATING",
+      "request_intake.validate": "READ_ONLY",
+      "requirement_doc.finalize-requirement-analysis": "MUTATING",
+      "requirement_doc.init": "MUTATING",
+      "requirement_doc.status": "READ_ONLY",
+      "requirement_doc.sync-list": "MUTATING",
+      "requirement_doc.sync-traceability": "MUTATING",
+      "requirement_doc.validate": "READ_ONLY",
+      "review_contract.criterion": "READ_ONLY",
+      "review_contract.list": "READ_ONLY",
+      "review_contract.policy": "READ_ONLY",
+      "review_contract.required": "READ_ONLY",
+      "review_contract.risk-templates": "READ_ONLY",
+      "review_contract.show": "READ_ONLY",
+      "review_session.plan": "READ_ONLY",
+      "review_session.validate": "READ_ONLY",
+      "risk_detect.add": "MUTATING",
+      "risk_detect.scan": "MUTATING",
+      "risk_detect.validate": "READ_ONLY",
+      "risk_detect.waive": "MUTATING",
+      "runtime_contract.command": "READ_ONLY",
+      "runtime_contract.list": "READ_ONLY",
+      "runtime_contract.permissions": "READ_ONLY",
+      "runtime_contract.phase": "READ_ONLY",
+      "runtime_contract.show": "READ_ONLY",
+      "semantic_audit.check": "READ_ONLY",
+      "task_layout.sync": "MUTATING",
+      "task_layout.validate": "READ_ONLY",
+      "task_layout.view": "READ_ONLY",
+      "task_plan.finalize": "MUTATING",
+      "task_plan.init": "MUTATING",
+      "task_plan.revise": "MUTATING",
+      "task_plan.seal": "MUTATING",
+      "task_plan.status": "READ_ONLY",
+      "task_plan.query": "READ_ONLY",
+      "task_plan.submit-review": "MUTATING",
+      "task_plan.validate": "READ_ONLY",
+      "task_verify.verify": "READ_ONLY",
+      "wk.close": "MUTATING",
+      "wk.context": "READ_ONLY",
+      "wk.delivery": "MUTATING",
+      "wk.doctor": "MUTATING",
+      "wk.document-archive": "MUTATING",
+      "wk.env": "READ_ONLY",
+      "wk.help": "READ_ONLY",
+      "wk.impact": "MUTATING",
+      "wk.next": "READ_ONLY",
+      "wk.packs": "READ_ONLY",
+      "wk.reconcile": "MUTATING",
+      "wk.start": "MUTATING",
+      "wk.status": "READ_ONLY",
+      "work_mode.apply": "MUTATING",
+      "work_mode.init": "MUTATING",
+      "work_mode.status": "READ_ONLY",
+      "work_mode.validate": "READ_ONLY",
+      "wk.confirm": "MUTATING",
+      "wk.step": "MUTATING",
+      "wk.begin": "MUTATING",
+      "wk.progress": "MUTATING",
+      "wk.finish": "MUTATING",
+      "wk.record-result": "MUTATING"
+    }
+  },
+  "storageModelIdentity": "NEW_PROJECT_CANONICAL_V1",
+  "storageModelSource": "assets/storage-contract.json#/modelVersion",
+  "aiOrchestration": {
+    "lifecycleAuthority": "task_events.jsonl",
+    "delegation": "existing atomic commands only",
+    "previewWrites": false,
+    "riskPolicy": {
+      "profiles": {
+        "LOW": "FAST",
+        "MEDIUM": "STANDARD",
+        "HIGH": "FULL"
+      },
+      "escalationTriggers": [
+        "cross_module",
+        "cross_context",
+        "schema",
+        "api_contract",
+        "data_model",
+        "permission",
+        "transaction",
+        "security",
+        "migration",
+        "P0",
+        "P1"
+      ],
+      "lowRequiredAbsentSignals": [
+        "schema",
+        "api_contract",
+        "data_model",
+        "permission",
+        "transaction",
+        "security",
+        "migration"
+      ],
+      "signalAliases": {
+        "apiContract": "api_contract",
+        "dataModel": "data_model",
+        "crossModule": "cross_module",
+        "crossContext": "cross_context",
+        "schemaImpact": "schema",
+        "apiImpact": "api_contract",
+        "dbImpact": "data_model",
+        "permissionImpact": "permission",
+        "transactionImpact": "transaction",
+        "securityImpact": "security",
+        "migrationImpact": "migration"
+      },
+      "unknownRisk": "MEDIUM",
+      "explicitStandardProfileFloor": "STANDARD",
+      "maySkipHardGates": false
+    },
+    "contextCache": {
+      "path": "cache/context/{revision}/{profile}.json",
+      "allowedPayloadFields": [
+        "contractQueries",
+        "contextRouting",
+        "allowedCommands",
+        "stableIdIndex",
+        "revisionSummary"
+      ],
+      "invalidatesOn": [
+        "revision",
+        "work.md",
+        "runtime-contract.json",
+        "review-contract.json",
+        "context-routing.json",
+        "task_events.jsonl",
+        "task_plan.json",
+        "request_intake.json",
+        "traceability.json"
+      ],
+      "cacheGateConclusions": false
+    }
+  }
+}

@@ -1,0 +1,75 @@
+# 设计核心规范
+
+## 快速规则
+
+先确认当前任务的输入、revision、允许范围和停止条件。机器字段和参数边界统一见 [机器字段与状态边界](../core/machine-boundaries.md)。
+
+## 详细规则
+
+设计将已确认需求转化为明确的边界、契约、数据和状态转换、失败行为、副作用以及验证切入点。优先复用项目现有模式，记录不可逆取舍，并将结果绑定到输入 revision。仅在当前范围涉及时加载业务模型、枚举和实现契约的详细 Reference。
+
+设计阶段的 Skill 实现边界：`scripts/design_doc.py` 只作为设计文档校验 CLI 执行，`scripts/_core/document_utils.py` 不属于设计上下文，均不得为理解设计规则而读取。参数通过 `wk.py help`、`cli_help.py` 或命令 `--help` 获取；设计规则来自本 Reference、命中的机器 Contract 和项目事实。除非任务明确属于 Skill 维护、CLI 故障诊断、Skill 实现 Review 或用户明确要求，否则不得读取 Skill 的 `scripts/**/*.py` 实现源码。
+
+## 设计问题会话协议
+
+当用户提出设计问题或对某项决策存在争议时，先在会话中回答问题，再提出修改建议。回答必须足够详细，使用户无需打开完整设计文件即可确认或否定推理。按以下顺序回答：
+
+1. 用一句精确的话重述决策或问题；如果已有决策 ID，同时写明适用范围和当前决策 ID。
+2. 拆分容易混淆的概念：不可变编译事实、运行代（runtime generation）/生命周期、所有者或绑定身份、Scope/Session/Handle 身份、结构相等和值相等、对象身份。说明每个相关对象代表哪一种概念。
+3. 画出合法组合以及至少一个非法组合，并解释在受保护效果、持久化写入、Session 注册或 Container 访问发生前，失败应如何传播。
+4. 解释当前或拟议的相等性检查为什么不足。明确区分结构相等、值相等、名称/ID、精确对象身份和 generation 所有权；不能用相同 plan 或相同 Context 证明运行时归属。
+5. 说明推荐的绑定边界以及把检查放在该边界的原因。相比由调用方分别传入相关对象，优先使用由生产者持有、原子携带全部身份的 binding 或 capability。
+6. 用可执行形式说明不变量，包括必须匹配的身份、必须处于活动状态的生命周期，以及非法组合必须失败的时点。
+<!-- common-develop-invariant: LIGHTWEIGHT_TEST_ACTIONS_FORBIDDEN -->
+7. 列出验证场景，具体说明输入、可观察的拒绝或成功结果以及验证位置。轻量模式下只列出验证场景，不创建或执行测试产物；如需恢复测试相关动作，必须先关闭 `wk -ws`。
+8. 以未解决的假设、备选方案和需要用户确认的确切事项收尾。会话回答在用户确认前只是候选决策；确认后，才能在 canonical design 中记录决策及其 Evidence。
+
+对于所有权或生命周期问题，可使用以下最小模型：
+
+```text
+immutable compiled context
+  -> runtime generation / production root
+    -> scope -> session / handle / container / effect port
+```
+
+不要根据相同的 plan、相同的 Context 值、相同的名称、相同的 frame ID、包可见性或共享 JVM 推断所有权。如果两个对象可能由不同 root 创建，设计必须携带并验证不可伪造的 generation 身份，或等价的生产者持有 capability。
+
+## 面向人阅读的当前设计
+
+维护唯一的当前 canonical `{MODULE_CODE}_design.md`（或项目已有的等价文件）。在不阅读 Review 或 Evidence 记录的情况下，文件首屏必须让人能够回答：
+
+1. 哪些内容发生变化，哪些内容保持不变；
+2. 主要组件和 Owner 边界是什么；
+3. 正常流程以及最重要的失败流程是什么；
+4. 选择了什么事务、幂等、并发和恢复语义；
+5. 关键取舍或不可逆决策是什么；
+6. 如何验证该设计。
+
+将这份紧凑摘要放在类型目录、字段矩阵、伪代码或追踪表之前。每个详细章节先给出简短叙述，仅在能够澄清关系时使用图、表或代码。通过稳定锚点链接需求、业务模型、API/DB、测试和 Evidence 事实，不要复制这些事实的完整内容。
+
+## 可开发设计
+
+以 `assets/documents/structured-docs/design.template.md` 作为 canonical 结构，并在 Design Review 前运行 `scripts/design_doc.py validate --stage ready`。只有消除范围内每项行为的实现歧义后，设计才可进入开发：
+
+1. 列出所有新增、修改、删除、复用以及有意保持不变的组件、表、字段、接口和原有行为；
+2. 用真实的代码/配置/表/API 证据绑定当前行为，不能只写“复用现有逻辑”；
+3. 说明每个变更表和字段的用途、值来源、创建写入、更新条件、可变性、约束、迁移、回滚以及当前实现证据；
+4. 将每个重要业务动作映射到其读取、写入、条件、锁、保存/刷新时机、事务边界、提交结果和失败结果；
+5. 将接口字段端到端映射经过校验、命令/领域字段、持久化或下游契约、响应/事件字段、权限、错误、幂等和兼容性；
+6. 描述对现有函数的调整，包括前后行为、受影响调用方、数据/API/UI 兼容性、回归范围和回滚影响；
+7. 提供按依赖排序的代码蓝图，细化到真实或明确拟议的文件/类/配置、方法/符号、具体职责、依赖和验证方式；
+8. 完整说明事务、并发、一致性、失败、可观测性、安全、迁移和验证语义。
+
+在代码蓝图之前，每个实现对象都必须从 `implementation-strategy.md` 获得一个 `IMPL-DEC-*`。按 `REUSE → COMPATIBLE_EXTEND → MODIFY → CREATE` 顺序决策，将决策绑定到当前代码证据，并让蓝图的每一行都能回链到该决策。只有在有理由排除所有前序选项，并明确共享逻辑的处置方式和 Owner 后，`CREATE` 才算就绪。
+
+按渐进式阅读组织内容。第一部分应是自洽的设计叙事：一页摘要、前后行为、当前证据、目标边界、主要和失败流程、数据/持久化依据、兼容性以及开发交接。每个图或紧凑摘要表前先写简短说明。第二部分提供便于查阅的实现矩阵；附录放置追踪关系、决策和开放问题。不要在读者理解问题和选定方案之前放置大型字段、API、代码或追踪矩阵。
+
+设计矩阵是便于阅读的变更/使用投影。API/DB 与 dependency-impact changeset 是版本范围内的增量，只能通过 `python3 scripts/merge_docs.py query --doc-root DOC_ROOT --version VERSION --module MODULE --artifact api|db|dependency-impact` 读取，通过 `python3 scripts/merge_docs.py write ... --apply` 经过校验后原子写入；Agent 不直接打开或编辑 `changes/*.yaml`。这些增量不得合并为项目级完整 API/DB 文档。当前实现结构应从代码、OpenAPI、DDL、Migration、数据库 introspection 或项目明确声明的等价来源读取。`*_design.md` 负责记录依据、行为、读写/保存时机、兼容性和代码变更指导。每个 API/DB 增量都必须同时链接其 changeset 查询结果和当前实现证据；不要将完整端点或 Schema 目录复制到 Markdown。
+
+实现前，API/DB 增量是当前版本经过审查的目标。实现后，将其与当前实现权威进行比较，并将差异结果登记为 Evidence。归档增量的源引用、摘要、决策和验证结果；不要在 `docs/module/{MODULE}/` 下生成 `{MODULE}_api.yaml`、`{MODULE}_db.yaml`、完整 API/DB Markdown 或项目级完整 ER 视图。
+
+项目级完整 API/DB 文件不是本 Skill 的事实源，也不应由归档脚本生成或更新。当前事实始终来自项目声明的代码、OpenAPI、DDL、Migration、Schema 或等价来源；版本 changeset 只记录当前版本目标增量。
+
+如果项目没有数据库、外部 API、UI、迁移或其他列出的关注项，记录 `不适用（理由：...）`；不要为了让矩阵看起来完整而虚构产物。包含占位符、未检查的就绪门禁、不支持路径、针对声称变更的空 API/DB 壳或未解决实现语义的设计，不具备开发就绪条件。
+
+不要按 Review 轮次或 revision 创建同级文件，例如 `*_design_{ROUND}_*.md` 或 `*_implementation_plan_{ROUND}_*.md`。revision 应更新 canonical 文件，并由 Git/Evidence/Review/task 事件保留历史。只有语义独立的 bounded topic 才允许使用单独设计文件，而且必须具有稳定主题名称，并从 canonical design 建立索引链接。

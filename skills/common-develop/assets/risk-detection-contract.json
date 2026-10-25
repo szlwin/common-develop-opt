@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "highConfidenceThreshold": 7,
+  "rules": [
+    {
+      "id": "RISK-SEC-001",
+      "riskType": "security",
+      "confidence": 9,
+      "filePatterns": [
+        "**/security/**",
+        "**/auth/**",
+        "**/*permission*",
+        "**/*token*",
+        "**/*secret*"
+      ],
+      "contentPatterns": [
+        "authorize",
+        "authentication",
+        "permission",
+        "password",
+        "secret",
+        "token",
+        "csrf",
+        "sql injection"
+      ]
+    },
+    {
+      "id": "RISK-API-001",
+      "riskType": "api_contract",
+      "confidence": 8,
+      "filePatterns": [
+        "**/controller/**",
+        "**/api/**",
+        "**/*openapi*",
+        "**/*swagger*",
+        "**/*dto*"
+      ],
+      "contentPatterns": [
+        "requestmapping",
+        "getmapping",
+        "postmapping",
+        "responseentity",
+        "openapi",
+        "errorcode"
+      ]
+    },
+    {
+      "id": "RISK-DATA-001",
+      "riskType": "data_migration",
+      "confidence": 9,
+      "filePatterns": [
+        "**/migration/**",
+        "**/migrations/**",
+        "**/*.sql",
+        "**/*ddl*",
+        "**/*schema*"
+      ],
+      "contentPatterns": [
+        "alter table",
+        "create table",
+        "drop table",
+        "add column",
+        "backfill",
+        "migration"
+      ]
+    },
+    {
+      "id": "RISK-CON-001",
+      "riskType": "concurrency",
+      "confidence": 8,
+      "filePatterns": [
+        "**/*lock*",
+        "**/*queue*",
+        "**/*async*"
+      ],
+      "contentPatterns": [
+        "synchronized",
+        "lock(",
+        "mutex",
+        "atomic",
+        "async",
+        "await",
+        "executor",
+        "queue",
+        "compareandset"
+      ]
+    },
+    {
+      "id": "RISK-PERF-001",
+      "riskType": "performance",
+      "confidence": 7,
+      "filePatterns": [
+        "**/*repository*",
+        "**/*query*",
+        "**/*batch*",
+        "**/*cache*"
+      ],
+      "contentPatterns": [
+        "select *",
+        "n+1",
+        "batch",
+        "cache",
+        "pagination",
+        "for (",
+        "while ("
+      ]
+    },
+    {
+      "id": "RISK-ARCH-MAINT-001",
+      "riskType": "architecture_change",
+      "confidence": 7,
+      "filePatterns": [
+        "**/*legacy*",
+        "**/*god*",
+        "**/*temporary*"
+      ],
+      "contentPatterns": [
+        "todo",
+        "fixme",
+        "temporary",
+        "workaround"
+      ]
+    },
+    {
+      "id": "RISK-IMP-001",
+      "riskType": "impact_analysis",
+      "confidence": 8,
+      "filePatterns": [
+        "**/*delete*",
+        "**/*cancel*",
+        "**/*migration*"
+      ],
+      "contentPatterns": [
+        "delete",
+        "cancel",
+        "rollback",
+        "cascade",
+        "state transition",
+        "supersede"
+      ]
+    },
+    {
+      "id": "RISK-ARCH-001",
+      "riskType": "architecture_change",
+      "confidence": 8,
+      "filePatterns": [
+        "**/*module*",
+        "**/*architecture*",
+        "**/*dependency*"
+      ],
+      "contentPatterns": [
+        "module",
+        "dependency",
+        "adapter",
+        "port",
+        "facade"
+      ]
+    }
+  ],
+  "traceabilityRules": [
+    {
+      "id": "RISK-IMP-TRACE-001",
+      "flag": "impact_required",
+      "riskType": "impact_analysis",
+      "confidence": 9
+    },
+    {
+      "id": "RISK-XMOD-TRACE-001",
+      "flag": "cross_module_implementation_required",
+      "riskType": "cross_module_integration",
+      "confidence": 9
+    }
+  ]
+}

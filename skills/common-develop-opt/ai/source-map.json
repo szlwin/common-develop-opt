@@ -1,0 +1,489 @@
+{
+  "schemaVersion": 2,
+  "kind": "INDEX_ONLY",
+  "authority": "common-develop-opt",
+  "bootstrap": "SKILL.md",
+  "readPolicy": {
+    "maxPrimaryTopics": 1,
+    "maxSecondaryTopics": 2,
+    "loadLargeDocuments": "by-section-or-query",
+    "implementationSource": "do-not-read-by-default"
+  },
+  "authoritativeSources": {
+    "runtime": "assets/runtime/runtime-contract.json",
+    "review": "assets/review/review-contract.json",
+    "routing": "context-routing.json",
+    "semantic": "assets/runtime/semantic-contract.json",
+    "longTaskRecords": "assets/storage/long-task/record-contract.json",
+    "evidence": "assets/review/evidence.schema.json",
+    "acceptance": "assets/review/acceptance-assertion.schema.json",
+    "risk": "assets/runtime/risk-detection-contract.json",
+    "requirement": "assets/documents/structured-docs/requirement.template.md",
+    "design": "assets/documents/structured-docs/design.template.md",
+    "designValidation": "scripts/design_doc.py",
+    "implementationStrategy": "assets/runtime/semantic-contract.json#canonicalTerms/implementationStrategyDecision",
+    "implementationStrategyExample": "references/requirement-design/implementation-strategy-example.md",
+    "testCase": "version/{VERSION}/requirement/{REQUIREMENT_ID}/test_case.md",
+    "testCaseTemplate": "assets/documents/structured-docs/test_case.template.md",
+    "testCaseValidation": "scripts/case_doc.py",
+    "pageDesignExample": "references/specialist/page-design-example.md",
+    "humanDocumentPortal": "docs/README.md",
+    "versionDocumentSummary": "version/{VERSION}/version_summary.md",
+    "documentPortalGenerator": "scripts/document_portal.py",
+    "projectDocumentPortalTemplate": "assets/documents/structured-docs/project-index.template.md",
+    "versionDocumentSummaryTemplate": "assets/documents/structured-docs/version-summary.template.md",
+    "artifactRelationSchema": "assets/documents/artifact-relation.schema.json",
+    "artifactRelationBuilder": "scripts/artifact_relations.py",
+    "engineeringGraphProjection": "docs/_relations/engineering_graph.yaml",
+    "traceabilityMatrixProjection": "docs/_relations/traceability_matrix.md",
+    "dependencyGraphProjection": "docs/_relations/dependency_graph.md",
+    "dependencyImpactChangesetSchema": "assets/documents/structured-docs/dependency-impact.changeset.schema.json",
+    "changesetReader": "scripts/merge_docs.py query",
+    "changesetWriter": "scripts/merge_docs.py write",
+    "dependencyImpactCurrentFact": "docs/_relations/dependency_impact.yaml",
+    "dependencyImpactReadingView": "docs/_relations/dependency_impact.md",
+    "designTopicArchiveSchema": "assets/documents/structured-docs/design-topic.schema.json",
+    "designTopicCurrentSnapshots": "docs/module/{MODULE}/design/*.md",
+    "archiveManifestSchema": "assets/documents/structured-docs/archive-manifest.schema.json",
+    "apiDbVersionDelta": "scripts/merge_docs.py query --version {VERSION} --module {MODULE} --artifact api|db",
+    "apiDbCurrentImplementation": "project-declared code/OpenAPI/DDL/Migration/Schema sources",
+    "apiDbDeltaProjectionSchema": "assets/documents/structured-docs/version-delta.schema.json",
+    "apiDbDeltaArchive": "scripts/merge_docs.py",
+    "workModeState": "version/{VERSION}/work.md",
+    "archivePlan": "generated/merge_plan.yaml",
+    "archiveHistory": "archive_manifest.yaml",
+    "businessFlow": "docs/_flows/{FLOW_GROUP}_flow.yaml",
+    "crossModuleImplementation": "docs/_relations/dependency_impact.yaml#crossModuleImplementations",
+    "gitCheckpoint": "version/{VERSION}/task/{TARGET_ID}/git_checkpoints.yaml",
+    "executionPolicy": "assets/runtime/runtime-contract.json#/executionPolicy",
+    "taskVerification": "scripts/task_verify.py",
+    "taskLayout": "scripts/task_layout.py",
+    "currentManifest": "version/{VERSION}/task/{TARGET_ID}/cache/current_manifest.json",
+    "currentImpact": "version/{VERSION}/task/{TARGET_ID}/cache/current_impact.json",
+    "storageContract": "assets/storage/storage-contract.json",
+    "taskVerificationSchema": "assets/development/task-verification-result.schema.json",
+    "documentLayout": "assets/runtime/runtime-contract.json#/documentLayout",
+    "referenceReader": "scripts/reference_reader.py",
+    "developmentTaskPlan": "version/{VERSION}/task/{TARGET_ID}/development_task_plan.json",
+    "developmentTaskPlanReviews": "version/{VERSION}/task/{TARGET_ID}/evidence/reviews.jsonl",
+    "developmentTaskPlanScript": "scripts/task_plan.py",
+    "developmentTaskPlanSchema": "assets/development/development-task-plan.schema.json",
+    "developmentTaskReviewSchema": "assets/development/development-task-review.schema.json",
+    "requestIntake": "version/{VERSION}/task/{TARGET_ID}/request_intake.json",
+    "requestIntakeSchema": "assets/development/request-intake.schema.json",
+    "workflowProfiles": "assets/runtime/runtime-contract.json#/workflowProfiles",
+    "unifiedWk": "scripts/wk.py",
+    "release": "assets/package/release-contract.json",
+    "capabilityPacks": "assets/development/capability-pack-contract.json",
+    "capabilityPackResults": "assets/development/capability-result.schema.json",
+    "capabilityPackQuery": "scripts/wk.py",
+    "v1CommandSurface": "assets/development/capability-pack-contract.json#/commandSurface",
+    "v1CommandSurfaceExport": "scripts/cli_help.py list --inventory --json",
+    "stageResult": "assets/review/stage-result.schema.json",
+    "baselineGuard": "scripts/baseline_guard.py",
+    "baselineTag": "assets/package/release-contract.json#/baselineTag",
+    "criticalBaselineFiles": "assets/package/release-contract.json#/criticalBaselineFiles",
+    "runtimeQuery": "scripts/runtime_contract.py",
+    "routingQuery": "scripts/context_routing.py",
+    "reviewQuery": "scripts/review_contract.py",
+    "wkHelp": "scripts/wk.py help",
+    "cliHelp": "scripts/cli_help.py",
+    "contractMaterializer": "scripts/runtime/contract_normalization.py",
+    "incrementalValidity": "assets/runtime/incremental-validity-contract.json",
+    "reviewSessionSchema": "assets/review/review-session.schema.json",
+    "reviewSessionPlanner": "scripts/review_session.py",
+    "gitConnectorTransport": "scripts/runtime/git_connector_transport.py",
+    "gitConnectorRequestSchema": "assets/package/git-connector-request.schema.json",
+    "gitConnectorReceiptSchema": "assets/package/git-connector-receipt.schema.json",
+    "projectGovernanceProfile": "scripts/governance_profile.py",
+    "projectConstraints": "scripts/runtime/project_constraints.py",
+    "projectAdoption": "references/recovery-archive/project-adoption.md",
+    "referenceResolution": "scripts/document_core/reference_resolution.py",
+    "reviewInputConsistency": "scripts/runtime/_core/review_inputs.py",
+    "canonicalArtifactIndex": "scripts/document_core/reference_resolution.py#CanonicalArtifactIndex",
+    "storage": "assets/storage/storage-contract.json",
+    "package": "assets/package.json",
+    "machineSchemas": "assets/*.schema.json",
+    "faultGuidance": "references/diagnostics/fault-codes.md",
+    "migrationInventory": "references/migration-map.json",
+    "assetCatalog": "assets/asset-catalog.json",
+    "candidateServiceBoundary": "references/diagnostics/candidate-service-boundary.md",
+    "moduleEnums": "docs/module/{MODULE}/{MODULE}_desc.md#枚举",
+    "versionModuleEnums": "version/{VERSION}/module/{MODULE}/{MODULE}_desc.md#枚举",
+    "projectUnionLanguage": "docs/union/union_language.md",
+    "versionUnionLanguageDelta": "version/{VERSION}/union/union_language_changes.md"
+  },
+  "topics": {
+    "gettingStarted": "references/getting-started.md",
+    "requirementDesign": "references/requirement-and-design.md",
+    "implementation": "references/implementation.md",
+    "tddTesting": "references/tdd-and-testing.md",
+    "collaboration": "references/collaboration.md",
+    "deliveryRecovery": "references/git-and-delivery.md",
+    "artifactConsistency": "references/diagnostics/artifact-consistency.md"
+  },
+  "commands": {
+    "identity": "scripts/artifact_identity.py",
+    "dependencies": "scripts/discover_dependencies.py",
+    "candidate": "scripts/publish_candidate.py",
+    "reviewInputs": "scripts/review_lifecycle.py",
+    "service": "scripts/service_cli.py"
+  },
+  "compatibility": {
+    "originalResources": "Historical snapshots archived outside the runtime package.",
+    "policy": "Read formal resources through the catalogs; archived sources are provenance only.",
+    "legacyLifecycle": "Public scripts delegate to the runtime package implementations."
+  },
+  "rules": {
+    "machineShapes": null
+  },
+  "sources": {
+    "architectureReviewMode": {
+      "machine": "assets/runtime/runtime-contract.json#/commandInterface/workModes/architectureReview",
+      "human": "references/review-agents/architecture-review-development.md"
+    },
+    "requestIntake": {
+      "machine": "assets/development/request-intake.schema.json",
+      "human": "references/core/request-intake.md"
+    },
+    "unifiedWk": {
+      "machine": "assets/runtime/runtime-contract.json#/commandInterface",
+      "human": "references/recovery-archive/wk-cli.md"
+    },
+    "reviewPolicyCatalog": {
+      "machine": "assets/review/review-contract.json#/evidencePolicyCatalog",
+      "profileTemplates": "assets/review/review-contract.json#/profileTemplates",
+      "query": "scripts/review_contract.py",
+      "riskReviewTemplates": "assets/review/review-contract.json#/riskReviewTemplates",
+      "reviewSessionPolicy": "assets/review/review-contract.json#/reviewSessionPolicy"
+    },
+    "granularContextRouting": {
+      "machine": "context-routing.json",
+      "goldenSnapshots": "tests/fixtures/context-routing-golden.json",
+      "requirement": [
+        "references/requirement-design/requirement-analysis-core.md",
+        "references/requirement-design/requirement-acceptance.md",
+        "references/requirement-design/requirement-traceability.md"
+      ],
+      "review": [
+        "references/review-agents/review-core.md",
+        "references/review-agents/review-result-contract.md",
+        "references/review-agents/review-evidence.md"
+      ],
+      "testing": [
+        "references/testing/testing-core.md",
+        "references/testing/test-evidence.md",
+        "references/testing/test-environment.md"
+      ],
+      "documentation": [
+        "references/specialist/documentation-core.md",
+        "references/recovery-archive/archive-documentation.md"
+      ],
+      "workflow": [
+        "references/core/lifecycle-core.md",
+        "references/core/work-mode-core.md",
+        "references/testing/workflow-verification.md"
+      ],
+      "longTask": [
+        "references/recovery-archive/long-task-core.md"
+      ],
+      "verification": [
+        "references/specialist/evidence-core.md",
+        "references/review-agents/review-evidence.md",
+        "references/git-delivery/acceptance-core.md",
+        "references/review-agents/risk-verification.md",
+        "references/testing/verification-integration.md"
+      ],
+      "fixedExecution": [
+        "references/core/execution-core.md",
+        "scripts/runtime/context_resolver.py#executionCore",
+        "scripts/ai_context.py#executionCore"
+      ],
+      "projectManagement": [
+        "references/review-agents/orchestration-core.md"
+      ],
+      "requirementConfirmation": [
+        "references/requirement-design/requirement-confirmation-core.md"
+      ],
+      "tdd": [
+        "references/testing/tdd-core.md",
+        "references/testing/test-matrix-design.md",
+        "references/testing/red-green-refactor.md",
+        "references/testing/test-seam.md",
+        "references/testing/test-persistence.md",
+        "references/testing/test-data-isolation.md",
+        "references/testing/test-coverage-complexity.md",
+        "references/testing/tdd-evidence.md",
+        "references/testing/tdd-role-boundary.md"
+      ],
+      "completion": [
+        "references/core/completion-gate-core.md",
+        "scripts/ai_context.py#completionGateSummary"
+      ],
+      "html": [
+        "references/specialist/html-core.md"
+      ],
+      "workMode": [
+        "references/core/work-mode-core.md",
+        "scripts/ai_context.py#workMode"
+      ],
+      "architectureReview": [
+        "references/recovery-archive/wk-ar-state-core.md",
+        "references/review-agents/review-result-contract.md",
+        "scripts/ai_context.py#architectureReviewContext"
+      ],
+      "archive": [
+        "references/recovery-archive/archive-core.md"
+      ],
+      "requestIntake": [
+        "references/core/request-intake.md#request-intake-quick-rules",
+        "references/core/request-intake.md#request-intake-classification-rules",
+        "references/core/request-intake.md#request-intake-simple-optimization",
+        "references/core/request-intake.md#request-intake-reclassification",
+        "scripts/ai_context.py#requestIntakeContext"
+      ],
+      "compactBaseRoutes": {
+        "requirementAnalysis": [
+          "references/requirement-design/requirement-analysis-core.md",
+          "references/git-delivery/acceptance-core.md#acceptance-quick-rules",
+          "references/requirement-design/requirement-traceability.md#traceability-quick-rules"
+        ],
+        "businessFlow": [
+          "references/requirement-design/business-flow.detail.md#business-flow-quick-rules",
+          "references/requirement-design/business-model.detail.md#business-model-quick-rules"
+        ],
+        "businessModel": [
+          "references/requirement-design/business-model.detail.md#business-model-quick-rules",
+          "references/core/enum.md#enum-quick-rules"
+        ],
+        "design": [
+          "references/requirement-design/design-core.md",
+          "references/requirement-design/implementation-contract.detail.md#implementation-contract-quick-rules",
+          "references/core/enum.md#enum-quick-rules"
+        ],
+        "backend": [
+          "references/implementation/backend-code-reference.detail.md#backend-implementation-boundary",
+          "references/requirement-design/implementation-contract.detail.md#implementation-contract-quick-rules",
+          "references/implementation/develop.detail.md#develop-quick-rules"
+        ],
+        "frontend": [
+          "references/implementation/web-code-reference.detail.md#frontend-implementation-boundary",
+          "references/requirement-design/implementation-contract.detail.md#implementation-contract-quick-rules",
+          "references/implementation/develop.detail.md#develop-quick-rules"
+        ],
+        "implementationPlan": [
+          "references/requirement-design/implementation-plan.detail.md#implementation-plan-quick-rules",
+          "references/review-agents/orchestration-core.md"
+        ],
+        "development": [
+          "references/implementation/develop.detail.md#develop-quick-rules",
+          "references/requirement-design/implementation-contract.detail.md#implementation-contract-quick-rules"
+        ],
+        "debugging": [
+          "references/implementation/debugging-core.md",
+          "references/testing/tdd-core.md",
+          "references/implementation/develop.detail.md#develop-quick-rules"
+        ],
+        "taskVerification": [
+          "references/recovery-archive/task-verification-core.md",
+          "references/testing/verification-integration.md",
+          "references/specialist/evidence-core.md"
+        ],
+        "gitCheckpoint": [
+          "references/git-delivery/git-checkpoint-core.md",
+          "references/core/work-mode-core.md"
+        ],
+        "modelCode": [
+          "references/implementation/model-code-core.md",
+          "references/requirement-design/implementation-contract.detail.md#implementation-contract-quick-rules"
+        ],
+        "pageDesign": [
+          "references/specialist/page-design.md#page-design-quick-rules",
+          "references/core/work-mode-core.md"
+        ],
+        "automaticMode": [
+          "references/core/auto-mode-core.md",
+          "references/review-agents/orchestration-core.md",
+          "references/core/completion-gate-core.md"
+        ]
+      },
+      "projectGovernance": [
+        "scripts/governance_profile.py",
+        "references/core/request-intake.md#4-面向非专家的沟通协议",
+        "references/recovery-archive/project-adoption.md"
+      ],
+      "projectConstraints": [
+        "scripts/runtime/project_constraints.py",
+        "assets/runtime/project-constraints.schema.json"
+      ]
+    },
+    "baselineIntegrity": {
+      "machine": "assets/package/release-contract.json#/criticalBaselineFiles",
+      "command": "scripts/baseline_guard.py status",
+      "human": "references/recovery-archive/baseline-integrity.md"
+    },
+    "releaseConsistency": {
+      "machine": "assets/package/release-contract.json",
+      "routing": "context-routing.json#/routingPolicy",
+      "validation": "scripts/check_skill.py",
+      "rule": "Current numeric capabilities are derived from machine values; superseded numeric feature flags are forbidden."
+    },
+    "contractQueries": {
+      "policy": "assets/runtime/runtime-contract.json#/contractQueryPolicy",
+      "runtime": "scripts/runtime_contract.py",
+      "routing": "scripts/context_routing.py",
+      "review": "scripts/review_contract.py",
+      "wkHelp": "scripts/wk.py help",
+      "rule": "Return one bounded field, command, route, resource, profile, criterion, or policy; whole-document output is forbidden."
+    },
+    "contractNormalization": {
+      "schemaVersion": 2,
+      "materializer": "scripts/runtime/contract_normalization.py",
+      "runtime": "scripts/runtime_contract.py",
+      "review": "scripts/review_contract.py",
+      "routing": "scripts/context_routing.py",
+      "policy": "assets/runtime/runtime-contract.json#/contractQueryPolicy"
+    },
+    "internalCapabilityPacks": {
+      "machine": "assets/development/capability-pack-contract.json",
+      "resultSchema": "assets/development/capability-result.schema.json",
+      "query": "scripts/runtime/capability_packs.py",
+      "unifiedEntry": "scripts/wk.py packs",
+      "human": "references/review-agents/orchestration-core.md#8-单-skill-与内部能力包",
+      "rule": "document-facts, task-runtime, and review-verification are internal modules with one common-develop authority and one atomic release unit"
+    },
+    "lifecycleConvergence": {
+      "machineState": "version/{VERSION}/task/{TARGET_ID}/task_events.jsonl",
+      "decision": "scripts/runtime/_long_task/lifecycle_decision.py",
+      "orchestration": "scripts/wk.py",
+      "human": "references/recovery-archive/long-task-core.md"
+    },
+    "mutationPolicy": {
+      "machine": "assets/runtime/runtime-contract.json#/commandInterface/workModes/reviewOnly",
+      "state": "version/{VERSION}/work.md#common-develop-mutation-policy",
+      "resolver": "scripts/work_mode.py",
+      "human": "references/core/work-mode-core.md"
+    },
+    "projectCapabilities": {
+      "machine": "project_env.md / harness_env.md#common-develop-capabilities",
+      "projection": "scripts/project_environment.py",
+      "human": "references/testing/test-environment.md"
+    },
+    "executionEvidence": {
+      "machine": "assets/review/evidence.schema.json",
+      "collector": "scripts/execution_evidence.py",
+      "human": "references/specialist/evidence-core.md"
+    },
+    "incrementalValidity": {
+      "machine": "assets/runtime/incremental-validity-contract.json",
+      "provenance": "scripts/runtime/_long_task/revision_provenance.py",
+      "impact": "scripts/document_core/impact_analysis.py",
+      "orchestration": "scripts/wk.py impact",
+      "reviewEvidence": "references/review-agents/review-evidence.md",
+      "human": "references/recovery-archive/wk-cli.md"
+    },
+    "domainGovernance": {
+      "authority": "docs/_domain/domain_context_map.yaml + business_model.yaml",
+      "schema": "assets/documents/structured-docs/domain-context-map.schema.json",
+      "validator": "scripts/document_core/domain_governance.py",
+      "human": "references/specialist/domain-governance.md",
+      "rule": "Optional governance; presence activates strict Domain/Bounded Context validation without duplicating Business Model authority."
+    },
+    "domainSemanticIndex": {
+      "authority": "DERIVED",
+      "schema": "assets/package/domain-semantic-index.schema.json",
+      "builder": "scripts/document_core/semantic_index.py",
+      "rule": "Rebuildable projection only; never writes authority facts."
+    },
+    "engineeringKnowledgeGraph": {
+      "authority": "DERIVED",
+      "schema": "assets/package/engineering-graph.schema.json",
+      "source": "docs/_relations/dependency_impact.yaml plus semantic authority projections",
+      "builder": "scripts/document_core/engineering_graph.py",
+      "human": "references/specialist/engineering-knowledge-graph.md"
+    },
+    "graphBasedImpact": {
+      "authority": "assets/runtime/incremental-validity-contract.json#/graphImpactPolicy",
+      "graph": "scripts/document_core/engineering_graph.py",
+      "planner": "scripts/document_core/impact_analysis.py",
+      "reviewSession": "scripts/review_session.py"
+    },
+    "deliveryReadiness": {
+      "authority": "assets/package/delivery-readiness-contract.json",
+      "capabilities": "project_env.md / harness_env.md#common-develop-capabilities",
+      "planner": "scripts/runtime/delivery_readiness.py",
+      "human": "references/git-delivery/delivery-readiness.md",
+      "rule": "Capability subgate under completion_verification; no project-specific release/deployment phase."
+    },
+    "projectGovernance": {
+      "machine": "scripts/governance_profile.py",
+      "schema": "assets/runtime/project-governance.schema.json",
+      "human": "references/core/request-intake.md#4-面向非专家的沟通协议"
+    },
+    "projectConstraints": {
+      "machine": "scripts/runtime/project_constraints.py",
+      "schema": "assets/runtime/project-constraints.schema.json",
+      "human": "references/recovery-archive/project-adoption.md"
+    },
+    "projectAdoption": {
+      "human": "references/recovery-archive/project-adoption.md"
+    }
+  },
+  "currentStoragePointers": {
+    "workRecord": "version/{VERSION}/work_record.md",
+    "evidenceRegistry": "version/{VERSION}/task/{TARGET_ID}/evidence/registry.jsonl",
+    "reviewRegistry": "version/{VERSION}/task/{TARGET_ID}/evidence/reviews.jsonl",
+    "currentManifest": "version/{VERSION}/task/{TARGET_ID}/cache/current_manifest.json"
+  },
+  "storageModelRef": "assets/storage/storage-contract.json#/modelVersion",
+  "doNotLoadByDefault": [
+    "all references",
+    "entire work_record.md",
+    "all task attempts",
+    "historical HTML copies",
+    "unrelated project versions",
+    "entire git_checkpoints.yaml history",
+    "entire evidence/registry.jsonl",
+    "entire reviews.jsonl history",
+    "all evidence snapshot sha256 objects",
+    "generated task cache histories",
+    "entire evidence/reviews.jsonl history",
+    "superseded development task-plan revisions",
+    "entire assets/runtime/runtime-contract.json",
+    "entire assets/review/review-contract.json",
+    "entire context-routing.json"
+  ],
+  "rule": "This file contains pointers only and must not redefine lifecycle, statuses, Agents, reviewers, work modes, or permissions.",
+  "bootstrapCommand": "python3 scripts/wk.py begin",
+  "skillImplementationReadPolicy": {
+    "default": "FORBIDDEN",
+    "scope": "normal_project_work",
+    "purpose": "Use the Skill through its resolved context, References, and declared CLI interfaces without loading Skill implementation source.",
+    "allowedInputs": [
+      "wk begin or on-demand ai_context resolve output",
+      "resolved Reference resources",
+      "CLI help/query output",
+      "validator or command output",
+      "project facts and project source code"
+    ],
+    "forbiddenGlobs": [
+      "scripts/*.py",
+      "scripts/**/*.py",
+      "scripts/_core/**",
+      "scripts/runtime/**"
+    ],
+    "entrypointPolicy": {
+      "scripts/design_doc.py": "EXECUTE_ONLY",
+      "scripts/case_doc.py": "EXECUTE_ONLY",
+      "scripts/_core/document_utils.py": "INTERNAL_IMPLEMENTATION_FORBIDDEN"
+    },
+    "interfaceDiscovery": "Use wk.py help, cli_help.py, or the command's --help/query output; do not inspect Python source to discover parameters or behavior.",
+    "exceptions": [
+      "skill_maintenance",
+      "cli_failure_diagnosis",
+      "skill_implementation_review",
+      "explicit_user_request"
+    ],
+    "exceptionRule": "An exception must be explicit in the task context; it does not apply to ordinary requirement, design, planning, development, review, or testing work."
+  }
+}

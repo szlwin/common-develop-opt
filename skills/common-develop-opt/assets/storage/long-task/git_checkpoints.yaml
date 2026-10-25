@@ -1,0 +1,4 @@
+schema_version: 2
+target_id: "{{TARGET_ID}}"
+version: "{{VERSION}}"
+checkpoints: []

@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "module": "MOD",
+    "featureCode": "MOD0001",
+    "featureName": "示例列表维护",
+    "pageType": "list-page",
+    "developMode": "patch",
+    "targetFiles": {
+      "page": "{project-page-path}",
+      "constants": "{project-field-config-path}",
+      "api": "{project-api-path}"
+    },
+    "implementationReferences": [
+      "{existing-similar-page-path}"
+    ]
+  },
+  "componentMapping": {
+    "queryForm": "从 implementationReferences 解析",
+    "table": "从 implementationReferences 解析",
+    "dialog": "从 implementationReferences 解析",
+    "confirm": "从 implementationReferences 解析",
+    "message": "从 implementationReferences 解析"
+  },
+  "api": [
+    {
+      "name": "queryExamplePage",
+      "url": "/admin/mod/example/queryPage",
+      "method": "POST",
+      "existence": "unknown",
+      "backendAction": "check",
+      "requestBinding": "按项目请求封装",
+      "request": {
+        "pageNum": "number",
+        "pageSize": "number",
+        "keyword": "string",
+        "status": "number"
+      },
+      "response": {
+        "pageDataPath": "data.records",
+        "totalPath": "data.total",
+        "fields": [
+          "id",
+          "code",
+          "name",
+          "status",
+          "createDate"
+        ]
+      },
+      "dataSources": [
+        "t_mod_example"
+      ],
+      "gap": "如现有接口缺少查询条件或返回列，后端需按本规范补充"
+    },
+    {
+      "name": "saveExample",
+      "url": "",
+      "method": "POST",
+      "existence": "missing",
+      "backendAction": "create",
+      "requestBinding": "按项目请求封装",
+      "request": {
+        "id": "form.id",
+        "name": "form.name",
+        "status": "form.status"
+      },
+      "response": {
+        "success": "boolean",
+        "message": "string"
+      },
+      "dataSources": [
+        "t_mod_example"
+      ],
+      "gap": "URL 为空，表示前端需要该能力但当前无接口；后端需按本定义新增接口"
+    }
+  ],
+  "dataSources": [
+    {
+      "scene": "列表查询",
+      "tables": [
+        "t_mod_example"
+      ],
+      "joinHint": "单表查询；如业务需要多表字段，应列出多个表，具体 JOIN 以后端 ER 图和现有代码为准"
+    }
+  ],
+  "query": [
+    {
+      "label": "关键字",
+      "field": "keyword",
+      "component": "input",
+      "match": "like",
+      "sourceTables": [
+        "t_mod_example"
+      ],
+      "sourceColumns": [
+        "t_mod_example.code",
+        "t_mod_example.name"
+      ]
+    },
+    {
+      "label": "状态",
+      "field": "status",
+      "component": "select",
+      "match": "eq",
+      "enumRef": "@MOD.EXAMPLE.STATUS",
+      "sourceTables": [
+        "t_mod_example"
+      ],
+      "sourceColumns": [
+        "t_mod_example.status"
+      ]
+    }
+  ],
+  "table": {
+    "columns": [
+      {
+        "label": "编号",
+        "field": "code",
+        "type": "string",
+        "sourceTables": [
+          "t_mod_example"
+        ],
+        "sourceColumns": [
+          "t_mod_example.code"
+        ]
+      },
+      {
+        "label": "名称",
+        "field": "name",
+        "type": "string",
+        "sourceTables": [
+          "t_mod_example"
+        ],
+        "sourceColumns": [
+          "t_mod_example.name"
+        ]
+      },
+      {
+        "label": "状态",
+        "field": "status",
+        "type": "enum",
+        "enumRef": "@MOD.EXAMPLE.STATUS",
+        "sourceTables": [
+          "t_mod_example"
+        ],
+        "sourceColumns": [
+          "t_mod_example.status"
+        ]
+      }
+    ],
+    "rowActions": [
+      {
+        "code": "ACTION_EDIT",
+        "label": "编辑",
+        "type": "dialog",
+        "visibleWhen": "true",
+        "dialog": "editDialog",
+        "params": {
+          "id": "row.id"
+        },
+        "success": [
+          "openDialog"
+        ]
+      }
+    ]
+  },
+  "forms": [
+    {
+      "name": "editDialog",
+      "title": "编辑示例",
+      "fields": [
+        {
+          "label": "名称",
+          "field": "name",
+          "component": "input",
+          "required": true,
+          "sourceTable": "t_mod_example",
+          "sourceColumn": "name"
+        },
+        {
+          "label": "状态",
+          "field": "status",
+          "component": "select",
+          "enumRef": "@MOD.EXAMPLE.STATUS",
+          "required": true,
+          "sourceTable": "t_mod_example",
+          "sourceColumn": "status"
+        }
+      ],
+      "submitApi": "saveExample"
+    }
+  ],
+  "codeRules": [
+    "查询条件和表格列配置复用当前项目的文件拆分方式",
+    "页面文件职责与现有同类页面保持一致",
+    "新增或修改 API 方法写入 meta.targetFiles.api 指定文件",
+    "status/type/state 字段必须使用枚举，不允许裸数值",
+    "patch 模式下保留已有页面结构，只做最小必要修改",
+    "操作按钮必须有出现条件或可操作条件；涉及权限、状态、归属、前置流程时不得默认始终可点"
+  ],
+  "commentRequirements": [
+    {
+      "target": "public API methods and exported business services",
+      "requiredWhen": "new or behaviorally changed",
+      "mustExplain": [
+        "business responsibility",
+        "pre/postconditions",
+        "idempotency or side effects",
+        "expected business errors",
+        "trace IDs"
+      ]
+    },
+    {
+      "target": "non-obvious branches",
+      "requiredWhen": "rule, compensation, compatibility, concurrency, security, or data consistency could be broken by simplification",
+      "mustExplain": [
+        "why the branch exists",
+        "business consequence if removed",
+        "RULE/IMP/FLOW/DEC reference"
+      ]
+    }
+  ],
+  "confirmItems": [
+    {
+      "code": "C001",
+      "question": "queryExamplePage 现有接口是否已返回页面所需字段？",
+      "defaultAnswer": "先检查现有接口；不满足则修改接口"
+    },
+    {
+      "code": "C002",
+      "question": "saveExample 是否需要新增后端接口？",
+      "defaultAnswer": "URL 为空，默认新增接口；若后端已有等价接口则改为复用或修改"
+    }
+  ]
+}

@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 2,
+  "longTaskSchemaVersion": 2,
+  "reviewRegistrySchemaVersion": 1,
+  "records": {
+    "taskState": {
+      "allowedFields": [
+        "schema_version",
+        "target_id",
+        "version",
+        "task_status",
+        "current_phase",
+        "current_round",
+        "current_agent",
+        "project_manager_agent",
+        "execution_mode",
+        "active_task_ids",
+        "current_attempt_id",
+        "artifact_revisions",
+        "collaboration_reviews",
+        "review_rounds",
+        "open_issue_ids",
+        "last_gate",
+        "failed_attempts",
+        "next_action",
+        "next_agent",
+        "resume_from",
+        "max_auto_review_rounds",
+        "stale_events",
+        "checkpoint_at",
+        "work_mode",
+        "work_policy",
+        "request_intake",
+        "architecture_review",
+        "historical_closure",
+        "event_projection",
+        "auto_remediation",
+        "active_amendment"
+      ]
+    },
+    "artifactRevision": {
+      "allowedFields": [
+        "revision",
+        "status",
+        "iteration_id",
+        "iteration_no"
+      ]
+    },
+    "collaborationReview": {
+      "allowedFields": [
+        "artifact_revision",
+        "required_reviewers",
+        "conditional_reviewers",
+        "additional_reviewers",
+        "independent_conclusions",
+        "status",
+        "current_iteration_id",
+        "review_history"
+      ]
+    },
+    "additionalReviewer": {
+      "allowedFields": [
+        "trigger",
+        "reason",
+        "evidence_ids"
+      ]
+    },
+    "independentConclusion": {
+      "allowedFields": [
+        "profile_id",
+        "revision",
+        "conclusion",
+        "review_result_ref",
+        "finding_ids",
+        "reviewed_at"
+      ]
+    },
+    "taskPlanItem": {
+      "allowedFields": [
+        "id",
+        "title",
+        "objective",
+        "phase",
+        "depends_on",
+        "owner_agent",
+        "reviewer_agents",
+        "input_revisions",
+        "allowed_files",
+        "acceptance_trace_ids",
+        "flow_step_refs",
+        "flow_refs",
+        "validation_commands",
+        "expected_results",
+        "stop_conditions",
+        "max_attempts",
+        "logical_task_id",
+        "feature_id",
+        "iteration_id",
+        "iteration_no",
+        "supersedes_iteration_id",
+        "revision_reason",
+        "risk_triggers"
+      ]
+    },
+    "traceabilityItem": {
+      "allowedFields": [
+        "id",
+        "description",
+        "status",
+        "acceptance_criteria",
+        "requirement_refs",
+        "requirement_source_digest",
+        "impact_required",
+        "dependency_impact_refs",
+        "business_flow_required",
+        "business_flow_refs",
+        "cross_module_implementation_required",
+        "cross_module_implementation_refs",
+        "business_model_refs",
+        "design_refs",
+        "test_case_ids",
+        "plan_task_ids",
+        "contract_refs",
+        "implementation_refs",
+        "verification_evidence_ids",
+        "verified_by_agents",
+        "notes"
+      ]
+    },
+    "traceabilityRevalidation": {
+      "allowedFields": [
+        "trace_id",
+        "from_status",
+        "to_status",
+        "phase",
+        "revision",
+        "evidence_ids",
+        "review_result_ref",
+        "acceptance_ids",
+        "traceability_digest",
+        "reason",
+        "agent",
+        "created_at"
+      ]
+    },
+    "reviewIssue": {
+      "allowedFields": [
+        "id",
+        "issue_type",
+        "axis",
+        "severity",
+        "confidence",
+        "status",
+        "phase",
+        "round",
+        "artifact_revision",
+        "raised_by_agent",
+        "owner_agent",
+        "title",
+        "description",
+        "impact",
+        "motivating_evidence",
+        "question",
+        "question_to",
+        "responses",
+        "recommendation",
+        "affected_artifacts",
+        "affected_trace_ids",
+        "decision",
+        "resolution_revision",
+        "resolution_evidence",
+        "verified_by_agent",
+        "verified_at",
+        "defer_reason"
+      ]
+    },
+    "stageOutcome": {
+      "allowedFields": [
+        "id",
+        "phase",
+        "round",
+        "status",
+        "produced_by_agent",
+        "input_revisions",
+        "output_revision",
+        "evidence_ids",
+        "open_risks",
+        "started_at",
+        "completed_at",
+        "iteration_id",
+        "iteration_no",
+        "is_current",
+        "superseded_by"
+      ]
+    },
+    "handoff": {
+      "allowedFields": [
+        "schema_version",
+        "target_id",
+        "version",
+        "task_id",
+        "phase",
+        "round",
+        "from_agent",
+        "to_agent",
+        "input_revisions",
+        "output_revision",
+        "read_files",
+        "modified_files",
+        "new_files",
+        "decision_ids",
+        "review_conclusion_refs",
+        "discussion_issue_ids",
+        "traceability_updates",
+        "validation",
+        "open_issues",
+        "blockers",
+        "next_action",
+        "stop_conditions",
+        "created_at"
+      ]
+    },
+    "staleEvent": {
+      "allowedFields": [
+        "from_phase",
+        "source_revision",
+        "invalidated_phases",
+        "reason",
+        "created_at",
+        "executed_by_agent",
+        "changed_phase",
+        "confirmation_ref",
+        "confirmation_event_id",
+        "confirmation_event_digest",
+        "confirmation_fingerprint",
+        "user_confirmed",
+        "confirmed_at"
+      ]
+    },
+    "criterionResult": {
+      "allowedFields": [
+        "criterion_id",
+        "status",
+        "evidence",
+        "finding_ids",
+        "reason"
+      ]
+    },
+    "reviewEvidence": {
+      "allowedFields": [
+        "evidence_id",
+        "claim"
+      ]
+    },
+    "taskAttempt": {
+      "allowedFields": [
+        "attempt_id",
+        "task_id",
+        "attempt_no",
+        "agent",
+        "phase",
+        "status",
+        "input_revision",
+        "output_revision",
+        "started_at",
+        "completed_at",
+        "failure_type",
+        "failure_reason",
+        "modified_files",
+        "command_evidence_ids",
+        "evidence_ids",
+        "summary",
+        "next_action",
+        "iteration_id",
+        "iteration_no",
+        "last_command_audit"
+      ]
+    },
+    "workEvent": {
+      "allowedFields": [
+        "schema_version",
+        "record_id",
+        "event_id",
+        "timestamp",
+        "event_type",
+        "status",
+        "agent",
+        "source",
+        "version",
+        "target_id",
+        "scope",
+        "phase",
+        "task_type",
+        "execution_mode",
+        "task_id",
+        "attempt_id",
+        "iteration_id",
+        "iteration_no",
+        "input_revision",
+        "output_revision",
+        "stage_outcome_refs",
+        "evidence_ids",
+        "review_result_refs",
+        "issue_ids",
+        "git_checkpoint_refs",
+        "summary",
+        "state_change",
+        "sql_change_summary",
+        "validation_summary",
+        "blockers",
+        "modified_files_summary",
+        "next_action",
+        "next_agent",
+        "correction_of"
+      ]
+    },
+    "workModeState": {
+      "allowedFields": [
+        "ref",
+        "digest",
+        "model_code",
+        "page_design",
+        "minimal",
+        "auto",
+        "architecture_review",
+        "git_checkpoint",
+        "git_push",
+        "review_only",
+        "lightweight",
+        "lightweight_waived",
+        "minimal_skipped_phases",
+        "skipped_phases",
+        "synced_at"
+      ]
+    },
+    "reviewResult": {
+      "allowedFields": [
+        "schema_version",
+        "review_id",
+        "assertion_id",
+        "acceptance_id",
+        "profile_id",
+        "reviewer",
+        "confirmed_by",
+        "confirmation_mode",
+        "drafted_by_agent",
+        "review_phase",
+        "review_revision",
+        "assertion_phase",
+        "assertion_revision",
+        "result",
+        "conclusion_mode",
+        "conclusion",
+        "selected_evidence_ids",
+        "issue_ids",
+        "default_answer",
+        "answer_exceptions",
+        "summary",
+        "notes",
+        "confirmed_at"
+      ]
+    },
+    "architectureReviewState": {
+      "allowedFields": [
+        "enabled",
+        "step",
+        "skeleton_iteration_id",
+        "skeleton_revision",
+        "skeleton_review_result_refs",
+        "implementation_iteration_id",
+        "implementation_revision",
+        "final_review_revision",
+        "final_review_result_refs",
+        "updated_at"
+      ]
+    },
+    "requestIntakeState": {
+      "allowedFields": [
+        "ref",
+        "digest",
+        "classification",
+        "workflow_profile",
+        "entry_phase",
+        "classification_revision",
+        "synced_at",
+        "governance_profile",
+        "governance_recommendation_digest",
+        "governance_override_active"
+      ]
+    },
+    "taskEvent": {
+      "allowedFields": [
+        "schema_version",
+        "seq",
+        "event_id",
+        "timestamp",
+        "type",
+        "entity_id",
+        "source",
+        "prev_digest",
+        "payload",
+        "digest"
+      ]
+    },
+    "eventProjection": {
+      "allowedFields": [
+        "source_event_seq",
+        "source_digest",
+        "synced_at",
+        "storage_mode"
+      ]
+    },
+    "autoRemediationProjection": {
+      "allowedFields": [
+        "event_seq",
+        "event_type",
+        "timestamp",
+        "entity_id",
+        "decision",
+        "signal"
+      ]
+    },
+    "amendmentEvent": {
+      "allowedFields": [
+        "amendment_id",
+        "phase",
+        "base_revision",
+        "revision",
+        "change_class",
+        "changed_sections",
+        "affected_phases",
+        "affected_task_ids",
+        "affected_trace_ids",
+        "affected_acceptance_ids",
+        "preserved_evidence_ids",
+        "invalidated_evidence_ids",
+        "impact_plan_digest",
+        "impact_plan_path",
+        "canonical_file",
+        "canonical_document_digest",
+        "amendment_no",
+        "reason",
+        "created_at",
+        "executed_by_agent"
+      ]
+    }
+  },
+  "workRecordSchemaVersion": 4,
+  "storagePolicy": {
+    "taskState": "Pure ignored cache at cache/current_manifest.json; current runtime is deterministically reduced from task_events.jsonl.",
+    "instanceTemplates": "Generated task instances contain data blocks only; field explanations remain in record-contract and References.",
+    "handoff": "Current handoff is derived from verification/context; handoff/*.md is optional explicit audit history only.",
+    "resumeContext": "cache/resume_context.md is ignored derived output.",
+    "gitCheckpoint": "git_checkpoints.yaml is created only when wk -gc creates or records the first checkpoint.",
+    "taskPlan": "Static execution specification only; runtime status, attempt count, output revision and validation evidence live in task_events.jsonl. Iteration-scoped max_attempts policy overrides also live in task_events.jsonl and never mutate task_plan.json.",
+    "reviewIssues": "Issue lifecycle is canonical in task_events.jsonl.",
+    "riskReviewerRegistration": "additional_reviewers is risk audit metadata, not a disjoint identity set. A current risk-backed entry may name an already required or conditional Reviewer only when reviewer, trigger, development revision, and complete evidence IDs exactly match risk.json; all other overlaps fail closed.",
+    "artifactRetention": "Keep one canonical current requirement/design fact file. Preserve revisions through Git refs, Evidence, Review, and task events; do not create per-round fact copies or ad-hoc command-output trees. Prefer GIT_REF, then one multi-use content-addressed bundle, and treat cache as disposable."
+  },
+  "autoEvidencePolicy": {
+    "commandResultSchemaVersion": 2,
+    "commandSource": "task_plan.json.tasks[].validation_commands",
+    "exactMatchRequired": true,
+    "attemptBinding": ["current phase", "output revision", "task attempt"],
+    "failureIsNotCompletion": true,
+    "reviewerEvidenceSeparate": true,
+    "stderrCapture": "finish-attempt --auto-evidence stores stderr separately when present",
+    "timeoutSeconds": 300,
+    "timeoutAuditFields": ["timeout_seconds", "duration_ms", "completed_at", "status", "error_code"],
+    "timeoutErrorCode": "COMMAND_TIMEOUT",
+    "timeoutLifecycleEvent": "ATTEMPT_COMMAND_RECORDED",
+    "reference": "references/long-task-core.md#自动验证证据"
+  },
+  "taskEventPolicy": {
+    "file": "task_events.jsonl",
+    "schemaVersion": 1,
+    "canonicalFor": [
+      "taskStateRuntime",
+      "taskRuntime",
+      "taskAttempt",
+      "stageOutcome",
+      "staleEvent",
+      "autoRemediationEvent",
+      "issueLifecycle",
+      "taskPolicy",
+      "authorizationBatch",
+      "authorizationConsumption",
+      "artifactAmendment",
+      "traceabilityRevalidation"
+    ],
+    "derivedManifest": "cache/current_manifest.json",
+    "appendOnly": true,
+    "hashChain": true,
+    "eventTypes": [
+      "TASK_STATE_PATCHED",
+      "TASK_REDUCER_SNAPSHOT",
+      "TASK_RUNTIME_SET",
+      "ATTEMPT_STARTED",
+      "ATTEMPT_COMMAND_RECORDED",
+      "ATTEMPT_FINISHED",
+      "ATTEMPT_CANCELLED",
+      "STAGE_OUTCOME_PUBLISHED",
+      "STAGE_OUTCOME_FINALIZED",
+      "STAGE_OUTCOME_SUPERSEDED",
+      "STAGE_OUTCOME_RECORDED",
+      "PHASE_STALE",
+      "ARTIFACT_AMENDED",
+      "AUTO_REMEDIATION_DECISION",
+      "AUTO_REMEDIATION_CONVERGENCE",
+      "ISSUE_OPENED",
+      "ISSUE_ASSIGNED",
+      "ISSUE_REMEDIATED",
+      "ISSUE_VERIFIED",
+      "ISSUE_CLOSED",
+      "ISSUE_DEFERRED",
+      "ISSUE_REOPENED",
+      "ISSUE_REJECTED",
+      "TASK_POLICY_SET",
+      "AUTHORIZATION_BATCH_CONFIRMED",
+      "AUTHORIZATION_BATCH_CONSUMED",
+      "TRACEABILITY_REVALIDATED"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/db.schema.json",
+  "title": "DB current-state validation projection",
+  "description": "Internal schema used to replay and validate version DB deltas in memory. It is not a project-level full DB document output.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifact", "module", "revision", "tables"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "artifact": {"const": "db"},
+    "module": {
+      "type": "object",
+      "required": ["code", "name"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1}
+      }
+    },
+    "revision": {"type": "string", "minLength": 1},
+    "baseRevision": {"type": "string"},
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "columns", "indexes", "foreignKeys", "traceIds"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^DB-[A-Z0-9_-]+$"},
+          "name": {"type": "string", "minLength": 1},
+          "status": {"enum": ["active", "deprecated"]},
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "type", "nullable"],
+              "properties": {
+                "name": {"type": "string", "minLength": 1},
+                "type": {"type": "string", "minLength": 1},
+                "nullable": {"type": "boolean"},
+                "default": {},
+                "constraints": {"type": "array", "items": {"type": "string", "minLength": 1}}
+              }
+            }
+          },
+          "indexes": {"type": "array"},
+          "foreignKeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "columns", "targetTable", "targetColumns"],
+              "properties": {
+                "id": {"type": "string", "minLength": 1},
+                "columns": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+                "targetTable": {"type": "string", "minLength": 1},
+                "targetColumns": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+                "cardinality": {"enum": ["one-to-one", "one-to-many", "many-to-one", "many-to-many"]}
+              }
+            }
+          },
+          "traceIds": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+        }
+      }
+    }
+  }
+}

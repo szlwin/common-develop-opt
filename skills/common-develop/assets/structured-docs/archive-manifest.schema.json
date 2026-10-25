@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/archive-manifest.schema.json",
+  "title": "common-develop 增量归档历史",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "appliedChangeSets"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "appliedChangeSets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "archives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "module",
+          "manifestRef",
+          "pageRef",
+          "resultDigest"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "module": {
+            "type": "string"
+          },
+          "manifestRef": {
+            "type": "string"
+          },
+          "pageRef": {
+            "type": "string"
+          },
+          "resultDigest": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

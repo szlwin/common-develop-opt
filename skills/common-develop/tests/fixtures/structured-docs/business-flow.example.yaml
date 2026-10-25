@@ -1,0 +1,335 @@
+schemaVersion: 1
+artifact: business_flow
+flowGroup:
+  code: ORDER_LIFECYCLE
+  name: 订单订购与售后
+  description: 描述用户准备、商品准备、下单、支付、履约和退款之间的关键业务衔接。
+revision: FLOW-R01@example
+baseRevision: FLOW-R00@init
+flows:
+  - id: FLOW-ORDER-E2E
+    name: 订单订购与售后端到端流程
+    level: L0
+    type: MAIN
+    ownerModule: ORD
+    participantModules:
+      - USR
+      - PRD
+      - ORD
+      - PAY
+    goal: 用户完成从身份准备、选择可售商品到支付、履约及必要退款的完整交易。
+    trigger: 用户产生购买意图且平台允许交易。
+    requirementRefs:
+      - id: ORD0013
+        documentRef: version/V_1.0/doc/V_1.0_0030/requirement.md
+    featureRefs:
+      - id: ORD0013-F01
+        module: USR
+      - id: ORD0013-F02
+        module: PRD
+      - id: ORD0013-F03
+        module: ORD
+      - id: ORD0013-F04
+        module: PAY
+    ruleRefs:
+      - BR-ORD0013-001
+    acceptanceRefs:
+      - AC-ORD0013-001
+    traceIds:
+      - TR-ORD0013-001
+    preconditions:
+      - 用户、商品和支付能力能够在对应子流程中准备完成。
+    steps:
+      - id: STEP-ORDER-E2E-01
+        order: 1
+        name: 完成用户身份准备
+        ownerModule: USR
+        featureRef: ORD0013-F01
+        childFlowRef: FLOW-USER-READY
+        preconditions: []
+        postconditions:
+          - 用户身份可用于下单。
+      - id: STEP-ORDER-E2E-02
+        order: 2
+        name: 完成商品可售准备
+        ownerModule: PRD
+        featureRef: ORD0013-F02
+        childFlowRef: FLOW-PRODUCT-READY
+        preconditions: []
+        postconditions:
+          - 至少一个 SKU 可售。
+      - id: STEP-ORDER-E2E-03
+        order: 3
+        name: 创建订单
+        ownerModule: ORD
+        featureRef: ORD0013-F03
+        preconditions:
+          - 用户与商品均可用。
+        postconditions:
+          - 形成待支付订单。
+      - id: STEP-ORDER-E2E-04
+        order: 4
+        name: 执行支付
+        ownerModule: PAY
+        featureRef: ORD0013-F04
+        childFlowRef: FLOW-PAYMENT
+        preconditions:
+          - 订单金额已确认。
+        postconditions:
+          - 形成可追溯支付结果。
+    variants: []
+    failurePaths:
+      - id: FAIL-ORDER-E2E-001
+        atStep: STEP-ORDER-E2E-04
+        condition: 支付失败或超时
+        result: 订单保持待支付或进入支付失败状态。
+        followupFlowRef: FLOW-PAYMENT
+        compensation: 不进入履约，不扣减最终库存。
+        blocking: true
+        acceptanceRefs:
+          - AC-ORD0013-001
+    successCriteria:
+      - 订单、支付和履约状态能够一致追溯。
+    businessModelRefs:
+      - AGG-ORDER
+    dependencyImpactRefs:
+      - docs/_relations/dependency_impact.yaml#REL-ORDER-PAY
+    designRefs:
+      - docs/ORD/ORD_design.md#订单订购实现
+    testCaseIds:
+      - CASE-ORDER-E2E-001
+    status: ACTIVE
+    createdVersion: V_1.0
+    lastChangedVersion: V_1.0
+    supersedes: []
+  - id: FLOW-USER-READY
+    name: 用户身份准备
+    level: L1
+    type: PREPARATION
+    parentFlowId: FLOW-ORDER-E2E
+    ownerModule: USR
+    participantModules:
+      - USR
+    goal: 形成可登录并可用于交易的统一用户身份。
+    trigger: 用户尚无有效身份或登录会话。
+    requirementRefs:
+      - id: ORD0013
+        documentRef: version/V_1.0/doc/V_1.0_0030/requirement.md
+    featureRefs:
+      - id: ORD0013-F01
+        module: USR
+    ruleRefs:
+      - BR-ORD0013-002
+    acceptanceRefs:
+      - AC-ORD0013-002
+    traceIds:
+      - TR-ORD0013-002
+    preconditions: []
+    steps:
+      - id: STEP-USER-READY-01
+        order: 1
+        name: 验证身份并建立统一用户
+        ownerModule: USR
+        featureRef: ORD0013-F01
+        preconditions: []
+        postconditions:
+          - 用户身份可用。
+    variants:
+      - id: FVAR-REGISTER-MOBILE
+        name: 手机号注册
+        condition: 用户选择手机号
+        differences:
+          - 使用短信验证码完成身份验证。
+        ruleRefs:
+          - BR-ORD0013-002
+      - id: FVAR-REGISTER-EMAIL
+        name: 邮箱注册
+        condition: 用户选择邮箱
+        differences:
+          - 使用邮件验证码完成身份验证。
+        ruleRefs:
+          - BR-ORD0013-002
+      - id: FVAR-REGISTER-WECHAT
+        name: 微信注册
+        condition: 用户选择微信授权
+        differences:
+          - 微信身份绑定统一用户。
+        ruleRefs:
+          - BR-ORD0013-002
+    failurePaths: []
+    successCriteria:
+      - 不同身份方式最终映射到唯一统一用户。
+    businessModelRefs: []
+    dependencyImpactRefs: []
+    designRefs: []
+    testCaseIds: []
+    status: ACTIVE
+    createdVersion: V_1.0
+    lastChangedVersion: V_1.0
+    supersedes: []
+  - id: FLOW-PRODUCT-READY
+    name: 商品可售准备
+    level: L1
+    type: PREPARATION
+    parentFlowId: FLOW-ORDER-E2E
+    ownerModule: PRD
+    participantModules:
+      - PRD
+    goal: 完成分类、SPU、SKU、定价和库存初始化，使商品可被下单。
+    trigger: 运营人员准备发布商品。
+    requirementRefs:
+      - id: ORD0013
+        documentRef: version/V_1.0/doc/V_1.0_0030/requirement.md
+    featureRefs:
+      - id: ORD0013-F02
+        module: PRD
+    ruleRefs:
+      - BR-ORD0013-003
+    acceptanceRefs:
+      - AC-ORD0013-003
+    traceIds:
+      - TR-ORD0013-003
+    preconditions: []
+    steps:
+      - id: STEP-PRODUCT-READY-01
+        order: 1
+        name: 建立商品与销售单元
+        ownerModule: PRD
+        featureRef: ORD0013-F02
+        preconditions: []
+        postconditions:
+          - 商品 SKU 可售。
+    variants: []
+    failurePaths: []
+    successCriteria:
+      - 可售 SKU 具有明确价格和库存状态。
+    businessModelRefs: []
+    dependencyImpactRefs: []
+    designRefs: []
+    testCaseIds: []
+    status: ACTIVE
+    createdVersion: V_1.0
+    lastChangedVersion: V_1.0
+    supersedes: []
+  - id: FLOW-PAYMENT
+    name: 订单支付
+    level: L1
+    type: MAIN
+    parentFlowId: FLOW-ORDER-E2E
+    ownerModule: PAY
+    participantModules:
+      - ORD
+      - PAY
+    goal: 完成订单支付并形成可追溯支付结果。
+    trigger: 订单进入待支付状态。
+    requirementRefs:
+      - id: ORD0013
+        documentRef: version/V_1.0/doc/V_1.0_0030/requirement.md
+    featureRefs:
+      - id: ORD0013-F03
+        module: ORD
+      - id: ORD0013-F04
+        module: PAY
+    ruleRefs:
+      - BR-ORD0013-004
+    acceptanceRefs:
+      - AC-ORD0013-004
+    traceIds:
+      - TR-ORD0013-004
+    preconditions:
+      - 订单有效且金额已确认。
+    steps:
+      - id: STEP-PAYMENT-01
+        order: 1
+        name: 检查订单支付资格
+        ownerModule: ORD
+        featureRef: ORD0013-F03
+        preconditions:
+          - 订单未关闭。
+        postconditions:
+          - 确认订单可支付。
+      - id: STEP-PAYMENT-02
+        order: 2
+        name: 检查或开通支付账号
+        ownerModule: PAY
+        featureRef: ORD0013-F04
+        childFlowRef: FLOW-PAYMENT-ACCOUNT-OPEN
+        preconditions:
+          - 用户已认证。
+        postconditions:
+          - 支付账号满足渠道要求。
+      - id: STEP-PAYMENT-03
+        order: 3
+        name: 执行支付
+        ownerModule: PAY
+        featureRef: ORD0013-F04
+        preconditions:
+          - 支付账号可用。
+        postconditions:
+          - 形成支付成功、失败或处理中结果。
+    variants: []
+    failurePaths:
+      - id: FAIL-PAYMENT-001
+        atStep: STEP-PAYMENT-02
+        condition: 支付账号未开通
+        result: 进入支付账号开通子流程。
+        followupFlowRef: FLOW-PAYMENT-ACCOUNT-OPEN
+        compensation: 无
+        blocking: true
+        acceptanceRefs:
+          - AC-ORD0013-004
+    successCriteria:
+      - 支付结果与订单资金状态一致。
+    businessModelRefs: []
+    dependencyImpactRefs: []
+    designRefs: []
+    testCaseIds: []
+    status: ACTIVE
+    createdVersion: V_1.0
+    lastChangedVersion: V_1.0
+    supersedes: []
+  - id: FLOW-PAYMENT-ACCOUNT-OPEN
+    name: 支付账号开通
+    level: L2
+    type: SUPPORTING
+    parentFlowId: FLOW-PAYMENT
+    ownerModule: PAY
+    participantModules:
+      - PAY
+    goal: 在渠道要求下建立可用于支付的账号能力。
+    trigger: 支付检查发现账号不存在或不可用。
+    requirementRefs:
+      - id: ORD0013
+        documentRef: version/V_1.0/doc/V_1.0_0030/requirement.md
+    featureRefs:
+      - id: ORD0013-F04
+        module: PAY
+    ruleRefs:
+      - BR-ORD0013-005
+    acceptanceRefs:
+      - AC-ORD0013-005
+    traceIds:
+      - TR-ORD0013-005
+    preconditions:
+      - 用户同意支付渠道要求。
+    steps:
+      - id: STEP-PAY-ACCOUNT-01
+        order: 1
+        name: 完成账号资料验证与开通
+        ownerModule: PAY
+        featureRef: ORD0013-F04
+        preconditions: []
+        postconditions:
+          - 支付账号可用并返回支付流程。
+    variants: []
+    failurePaths: []
+    successCriteria:
+      - 开通结果可验证且可返回父流程继续支付。
+    businessModelRefs: []
+    dependencyImpactRefs: []
+    designRefs: []
+    testCaseIds: []
+    status: ACTIVE
+    createdVersion: V_1.0
+    lastChangedVersion: V_1.0
+    supersedes: []

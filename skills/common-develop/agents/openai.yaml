@@ -1,0 +1,4 @@
+interface:
+  display_name: "Common Develop"
+  short_description: "基于事实、revision、证据和独立 Review 的多 Agent 研发流程"
+  default_prompt: "使用 $common-develop 时先读本包 SKILL.md；按四种入口选择：新任务由 ProjectManagerAgent 用 wk start 预览、补齐必要决策后 apply；恢复任务用 wk begin；普通执行消费 actionPlan，由 ProjectManagerAgent 用 progress 推进；维护诊断才按需 scripts/ai_context.py resolve 或 help。以 ai/source-map.json 和机器契约为事实源，普通项目验证不得运行 Skill 包维护。禁止隐式 git push；仅用户明确启用 -gp 且 -gc 已启用并通过现有门禁时允许推送。不得执行 merge、Release 或部署。"

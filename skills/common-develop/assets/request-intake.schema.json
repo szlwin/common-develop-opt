@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openai.local/common-develop/request-intake.schema.json",
+  "title": "Common Develop Request Intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "targetId",
+    "targetType",
+    "originalInput",
+    "inputType",
+    "classification",
+    "workflowProfile",
+    "entryPhase",
+    "requiredPhases",
+    "skippedPhases",
+    "relatedRequirement",
+    "relatedFeature",
+    "impactAssessment",
+    "reason",
+    "evidenceRefs",
+    "decisionAgent",
+    "createdAt",
+    "classificationRevision",
+    "supersedesIntakeRef",
+    "reclassifiedFrom",
+    "reclassificationReason",
+    "reclassifiedAt",
+    "historyRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "targetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetType": {
+      "enum": [
+        "BUG",
+        "FEATURE"
+      ]
+    },
+    "originalInput": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputType": {
+      "enum": [
+        "ID",
+        "DESCRIPTION"
+      ]
+    },
+    "classification": {
+      "enum": [
+        "BUG",
+        "EXISTING_FEATURE",
+        "NEW_REQUIREMENT",
+        "REQUIREMENT_CHANGE",
+        "SIMPLE_OPTIMIZATION",
+        "NEEDS_CONFIRMATION"
+      ]
+    },
+    "workflowProfile": {
+      "enum": [
+        "BUG_FLOW",
+        "FEATURE_FLOW",
+        "STANDARD_FEATURE_FLOW",
+        "REQUIREMENT_CHANGE_FLOW",
+        "SIMPLE_OPTIMIZATION_FLOW",
+        "BLOCKED"
+      ]
+    },
+    "entryPhase": {
+      "enum": [
+        "requirement_confirmation",
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "test_design",
+        "implementation_plan",
+        "development",
+        "code_review",
+        "testing",
+        "completion_verification",
+        ""
+      ]
+    },
+    "requiredPhases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "skippedPhases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "relatedRequirement": {
+      "type": "string"
+    },
+    "relatedFeature": {
+      "type": "string"
+    },
+    "impactAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "businessLogic",
+        "dataModel",
+        "apiContract",
+        "permission",
+        "workflow",
+        "persistence",
+        "externalSideEffect",
+        "migration",
+        "dependency"
+      ],
+      "properties": {
+        "businessLogic": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "dataModel": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "apiContract": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "permission": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "workflow": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "persistence": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "externalSideEffect": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "migration": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        },
+        "dependency": {
+          "enum": [
+            "NONE",
+            "CHANGED",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "reason": {
+      "type": "string"
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "decisionAgent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "classificationRevision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supersedesIntakeRef": {
+      "type": "string"
+    },
+    "reclassifiedFrom": {
+      "type": "string"
+    },
+    "reclassificationReason": {
+      "type": "string"
+    },
+    "reclassifiedAt": {
+      "type": "string"
+    },
+    "historyRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "governanceRecommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "signals",
+        "recommendedWorkflow",
+        "recommendedMode",
+        "confidence",
+        "reason",
+        "advisory",
+        "overridable",
+        "overrideAllowed",
+        "override",
+        "inputDigest",
+        "overrideReasonRequired"
+      ],
+      "properties": {
+        "profile": {
+          "enum": [
+            "SMALL",
+            "PRODUCT",
+            "HIGH_RISK"
+          ]
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inferredSignals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "explicitSignals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "impactSignals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changeScopeSignals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "graphImpact": {
+          "type": "object"
+        },
+        "hardConstraintSignals": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "currentGovernanceProfile": {
+          "type": "string"
+        },
+        "override": {
+          "type": "object"
+        },
+        "changedScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changedRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exploration": {
+          "type": "boolean"
+        },
+        "recommendedWorkflow": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recommendedMode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "advisory": {
+          "const": true
+        },
+        "overridable": {
+          "const": true
+        },
+        "overrideAllowed": {
+          "const": true
+        },
+        "whatWillNotChange": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "inputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "overrideReasonRequired": {
+          "const": true
+        }
+      }
+    }
+  }
+}

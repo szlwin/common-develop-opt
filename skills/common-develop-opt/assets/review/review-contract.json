@@ -1,0 +1,2178 @@
+{
+  "schemaVersion": 2,
+  "profileKeyFormat": "<phase>:<reviewerAgent>",
+  "principles": [
+    "FIXED_ARTIFACT_REVISION",
+    "READ_ONLY_INDEPENDENT_REVIEW",
+    "SEPARATE_REVIEW_AXES",
+    "EVIDENCE_BEFORE_ASSERTION",
+    "EXACT_SCOPE_AND_LIMITATIONS",
+    "ACTUAL_SEVERITY_AND_CONFIDENCE",
+    "FIX_THEN_ORIGINAL_REVIEWER_REVERIFY",
+    "NO_PASS_FROM_ABSENCE_OF_FINDINGS"
+  ],
+  "criterionStatuses": [
+    "PASSED",
+    "FAILED",
+    "BLOCKED",
+    "NOT_APPLICABLE"
+  ],
+  "evidenceTypes": {
+    "requirement_ref": "需求或验收标准的稳定锚点",
+    "document_ref": "事实 Markdown 的稳定章节锚点",
+    "model_ref": "业务模型或依赖关系锚点",
+    "design_ref": "设计或实现契约锚点",
+    "plan_ref": "实施计划任务锚点",
+    "schema_ref": "API、DB 或结构化 Schema 锚点",
+    "decision_ref": "已确认决策记录",
+    "diagram_ref": "关系图或跨模块实现映射锚点",
+    "code_ref": "代码文件与行号",
+    "diff_ref": "固定比较范围或 diff hunk",
+    "test_ref": "测试 Case、测试文件或断言锚点",
+    "command_ref": "验证命令及退出码记录",
+    "log_ref": "完整日志或输出记录",
+    "runtime_ref": "运行环境、revision 或运行结果记录",
+    "config_ref": "项目配置或工具规则锚点",
+    "metric_ref": "性能、容量或质量指标记录",
+    "flow_ref": "结构化业务流程、步骤、变体或失败路径锚点"
+  },
+  "evidencePolicyCatalog": {
+    "EP-0134FAAD8C": {
+      "anyOfTypes": [
+        "code_ref",
+        "diff_ref"
+      ]
+    },
+    "EP-03F2F57E26": {
+      "anyOfTypes": [
+        "design_ref",
+        "schema_ref"
+      ]
+    },
+    "EP-06F953FC94": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "design_ref",
+        "code_ref"
+      ]
+    },
+    "EP-16C2631EF7": {
+      "anyOfTypes": [
+        "test_ref",
+        "diff_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-1A4CBDC1E3": {
+      "anyOfTypes": [
+        "diagram_ref",
+        "design_ref"
+      ]
+    },
+    "EP-1B33E01D97": {
+      "anyOfTypes": [
+        "command_ref",
+        "log_ref",
+        "runtime_ref"
+      ],
+      "allOfTypes": [
+        "command_ref"
+      ]
+    },
+    "EP-1EB1EDB488": {
+      "anyOfTypes": [
+        "design_ref",
+        "test_ref"
+      ]
+    },
+    "EP-221F5584C0": {
+      "anyOfTypes": [
+        "model_ref",
+        "document_ref"
+      ]
+    },
+    "EP-225E5D350D": {
+      "anyOfTypes": [
+        "code_ref",
+        "test_ref",
+        "log_ref"
+      ]
+    },
+    "EP-2854796235": {
+      "anyOfTypes": [
+        "code_ref",
+        "test_ref",
+        "diff_ref"
+      ]
+    },
+    "EP-2EF24D092B": {
+      "anyOfTypes": [
+        "flow_ref",
+        "test_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-34AD341858": {
+      "anyOfTypes": [
+        "code_ref",
+        "test_ref"
+      ]
+    },
+    "EP-3618F4C3AB": {
+      "anyOfTypes": [
+        "test_ref",
+        "model_ref"
+      ]
+    },
+    "EP-3634180D69": {
+      "anyOfTypes": [
+        "log_ref",
+        "test_ref"
+      ]
+    },
+    "EP-371B1870E8": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "document_ref"
+      ]
+    },
+    "EP-37FBB682E6": {
+      "anyOfTypes": [
+        "code_ref",
+        "requirement_ref",
+        "diff_ref"
+      ]
+    },
+    "EP-380160FB90": {
+      "anyOfTypes": [
+        "test_ref",
+        "requirement_ref"
+      ]
+    },
+    "EP-386DA7F68C": {
+      "anyOfTypes": [
+        "test_ref"
+      ]
+    },
+    "EP-3CE5F44356": {
+      "anyOfTypes": [
+        "plan_ref"
+      ]
+    },
+    "EP-3CEF6F3899": {
+      "anyOfTypes": [
+        "code_ref",
+        "test_ref",
+        "command_ref",
+        "design_ref"
+      ]
+    },
+    "EP-3D8D84CD6E": {
+      "anyOfTypes": [
+        "flow_ref",
+        "document_ref"
+      ]
+    },
+    "EP-3F79972124": {
+      "anyOfTypes": [
+        "requirement_ref"
+      ]
+    },
+    "EP-470F998925": {
+      "anyOfTypes": [
+        "code_ref",
+        "config_ref",
+        "test_ref"
+      ]
+    },
+    "EP-47CC31778F": {
+      "anyOfTypes": [
+        "plan_ref",
+        "design_ref"
+      ]
+    },
+    "EP-4908B0FEF4": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "diff_ref"
+      ]
+    },
+    "EP-49B745FDC4": {
+      "anyOfTypes": [
+        "test_ref",
+        "command_ref",
+        "diff_ref"
+      ]
+    },
+    "EP-4D37FE53A7": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "diagram_ref"
+      ]
+    },
+    "EP-4DC64B365D": {
+      "anyOfTypes": [
+        "model_ref",
+        "design_ref"
+      ]
+    },
+    "EP-4E6EFECCDF": {
+      "anyOfTypes": [
+        "design_ref",
+        "code_ref",
+        "config_ref"
+      ]
+    },
+    "EP-507B1E6353": {
+      "anyOfTypes": [
+        "test_ref",
+        "command_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-50F4B3F832": {
+      "anyOfTypes": [
+        "diagram_ref",
+        "schema_ref"
+      ]
+    },
+    "EP-52085544BE": {
+      "anyOfTypes": [
+        "test_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-582B916D0D": {
+      "anyOfTypes": [
+        "test_ref",
+        "metric_ref",
+        "command_ref"
+      ]
+    },
+    "EP-5A1AAE08FF": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "diff_ref",
+        "code_ref"
+      ]
+    },
+    "EP-5AAE484D64": {
+      "anyOfTypes": [
+        "model_ref",
+        "requirement_ref"
+      ]
+    },
+    "EP-5AEF30D0F9": {
+      "anyOfTypes": [
+        "flow_ref",
+        "document_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-5EF769CE5F": {
+      "anyOfTypes": [
+        "design_ref",
+        "code_ref",
+        "test_ref"
+      ]
+    },
+    "EP-6143EC164B": {
+      "anyOfTypes": [
+        "code_ref",
+        "document_ref"
+      ]
+    },
+    "EP-62F0085B7E": {
+      "anyOfTypes": [
+        "model_ref",
+        "code_ref",
+        "test_ref"
+      ]
+    },
+    "EP-64CA8A3119": {
+      "anyOfTypes": [
+        "test_ref",
+        "diagram_ref"
+      ]
+    },
+    "EP-652E7C1046": {
+      "anyOfTypes": [
+        "diff_ref",
+        "requirement_ref"
+      ],
+      "allOfTypes": [
+        "diff_ref"
+      ]
+    },
+    "EP-664FD77DBD": {
+      "anyOfTypes": [
+        "metric_ref",
+        "requirement_ref",
+        "code_ref"
+      ]
+    },
+    "EP-6B2D998D23": {
+      "anyOfTypes": [
+        "decision_ref",
+        "requirement_ref"
+      ]
+    },
+    "EP-6CD01E3B1E": {
+      "anyOfTypes": [
+        "code_ref",
+        "metric_ref",
+        "schema_ref"
+      ]
+    },
+    "EP-6E200A6ADD": {
+      "anyOfTypes": [
+        "design_ref",
+        "requirement_ref",
+        "model_ref"
+      ]
+    },
+    "EP-6FADA64B33": {
+      "anyOfTypes": [
+        "schema_ref",
+        "design_ref"
+      ]
+    },
+    "EP-7219DFED20": {
+      "anyOfTypes": [
+        "plan_ref",
+        "code_ref"
+      ]
+    },
+    "EP-7491C1A834": {
+      "anyOfTypes": [
+        "code_ref"
+      ]
+    },
+    "EP-7A43143108": {
+      "anyOfTypes": [
+        "code_ref",
+        "design_ref"
+      ]
+    },
+    "EP-7FE7C4363D": {
+      "anyOfTypes": [
+        "metric_ref",
+        "command_ref",
+        "runtime_ref"
+      ],
+      "allOfTypes": [
+        "metric_ref"
+      ]
+    },
+    "EP-83EAB9E13C": {
+      "anyOfTypes": [
+        "schema_ref",
+        "code_ref",
+        "test_ref"
+      ]
+    },
+    "EP-862D7F894B": {
+      "anyOfTypes": [
+        "model_ref",
+        "diagram_ref"
+      ]
+    },
+    "EP-866B35291C": {
+      "anyOfTypes": [
+        "design_ref",
+        "plan_ref",
+        "requirement_ref"
+      ]
+    },
+    "EP-8C23517FEA": {
+      "anyOfTypes": [
+        "design_ref",
+        "diagram_ref"
+      ]
+    },
+    "EP-8DABC221F4": {
+      "anyOfTypes": [
+        "plan_ref",
+        "requirement_ref"
+      ]
+    },
+    "EP-9335EB884A": {
+      "anyOfTypes": [
+        "code_ref",
+        "log_ref",
+        "test_ref"
+      ]
+    },
+    "EP-9780E3CFE5": {
+      "anyOfTypes": [
+        "test_ref",
+        "command_ref",
+        "log_ref"
+      ],
+      "allOfTypes": [
+        "test_ref",
+        "command_ref"
+      ]
+    },
+    "EP-9B8B6CE29D": {
+      "anyOfTypes": [
+        "flow_ref",
+        "model_ref",
+        "design_ref"
+      ]
+    },
+    "EP-A6E18D7488": {
+      "anyOfTypes": [
+        "design_ref",
+        "code_ref"
+      ]
+    },
+    "EP-B0F6CC167C": {
+      "anyOfTypes": [
+        "flow_ref",
+        "diagram_ref"
+      ]
+    },
+    "EP-B1C7AC4F21": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "code_ref",
+        "test_ref"
+      ]
+    },
+    "EP-B302526D2E": {
+      "anyOfTypes": [
+        "command_ref",
+        "test_ref",
+        "requirement_ref"
+      ]
+    },
+    "EP-B35143F668": {
+      "anyOfTypes": [
+        "flow_ref",
+        "requirement_ref",
+        "model_ref"
+      ]
+    },
+    "EP-B693B9546E": {
+      "anyOfTypes": [
+        "test_ref",
+        "command_ref"
+      ]
+    },
+    "EP-C1D3D7EC05": {
+      "anyOfTypes": [
+        "model_ref",
+        "schema_ref"
+      ]
+    },
+    "EP-C63F3C4A45": {
+      "anyOfTypes": [
+        "log_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-CA77749E6B": {
+      "anyOfTypes": [
+        "design_ref",
+        "test_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-CCF4ADC723": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "model_ref",
+        "diagram_ref"
+      ]
+    },
+    "EP-CE1BF0F631": {
+      "anyOfTypes": [
+        "test_ref",
+        "code_ref"
+      ]
+    },
+    "EP-DE988F257F": {
+      "anyOfTypes": [
+        "test_ref",
+        "code_ref",
+        "command_ref"
+      ]
+    },
+    "EP-DF8819570C": {
+      "anyOfTypes": [
+        "design_ref",
+        "runtime_ref"
+      ]
+    },
+    "EP-E122573248": {
+      "anyOfTypes": [
+        "plan_ref",
+        "command_ref"
+      ]
+    },
+    "EP-E34928172E": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "decision_ref"
+      ]
+    },
+    "EP-E3B6885D03": {
+      "anyOfTypes": [
+        "command_ref",
+        "log_ref"
+      ],
+      "allOfTypes": [
+        "command_ref"
+      ]
+    },
+    "EP-E3C66B4ECE": {
+      "anyOfTypes": [
+        "code_ref",
+        "config_ref",
+        "diff_ref"
+      ]
+    },
+    "EP-E946DBA7BD": {
+      "anyOfTypes": [
+        "design_ref",
+        "code_ref",
+        "diagram_ref"
+      ]
+    },
+    "EP-F541C8CEEB": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "design_ref",
+        "code_ref",
+        "test_ref"
+      ]
+    },
+    "EP-F55A407116": {
+      "anyOfTypes": [
+        "code_ref",
+        "design_ref",
+        "flow_ref"
+      ]
+    },
+    "EP-F5BDB48B35": {
+      "anyOfTypes": [
+        "runtime_ref",
+        "command_ref"
+      ]
+    },
+    "EP-F66AD47816": {
+      "anyOfTypes": [
+        "code_ref",
+        "metric_ref"
+      ]
+    },
+    "EP-FB12F1F709": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "schema_ref",
+        "decision_ref"
+      ]
+    },
+    "EP-FB5C2218D2": {
+      "anyOfTypes": [
+        "requirement_ref",
+        "test_ref",
+        "document_ref"
+      ]
+    },
+    "EP-FB9B5120C8": {
+      "anyOfTypes": [
+        "code_ref",
+        "diff_ref",
+        "design_ref"
+      ]
+    }
+  },
+  "conclusionDerivation": {
+    "BLOCKED": "任一必检项为 BLOCKED。",
+    "NEEDS_CHANGES": "不存在 BLOCKED，但至少一项为 FAILED。",
+    "PASSED": "全部 criterion 均为 PASSED，或在允许时以有理由的 NOT_APPLICABLE 结束，且无开放 P0/P1。"
+  },
+  "criteriaCatalog": {
+    "RC-REQ-001": {
+      "title": "目标与对象明确",
+      "question": "是否明确说明受影响对象、当前状态、目标状态和业务原因？",
+      "evidencePolicyRef": "EP-371B1870E8"
+    },
+    "RC-REQ-002": {
+      "title": "范围边界明确",
+      "question": "是否明确列出范围内、范围外及不允许隐式扩展的内容？",
+      "evidencePolicyRef": "EP-E34928172E"
+    },
+    "RC-REQ-003": {
+      "title": "验收可观察",
+      "question": "每项完成标准是否可由业务结果、状态、数据或接口行为直接观察？",
+      "evidencePolicyRef": "EP-3F79972124"
+    },
+    "RC-REQ-004": {
+      "title": "失败与禁止副作用",
+      "question": "是否定义失败路径、禁止副作用和异常情况下的期望结果？",
+      "evidencePolicyRef": "EP-3F79972124"
+    },
+    "RC-REQ-005": {
+      "title": "关键决策已闭合",
+      "question": "影响实现或验收的业务歧义是否已决策，未决项是否阻断而非被假设？",
+      "evidencePolicyRef": "EP-6B2D998D23"
+    },
+    "RC-ANL-001": {
+      "title": "规则原子化与追踪",
+      "question": "业务规则是否原子化并关联需求、功能和验收标准？",
+      "evidencePolicyRef": "EP-371B1870E8"
+    },
+    "RC-ANL-002": {
+      "title": "横切边界完整",
+      "question": "权限、事务、幂等、并发、错误和审计边界是否被识别？",
+      "evidencePolicyRef": "EP-371B1870E8"
+    },
+    "RC-ANL-003": {
+      "title": "关联影响触发准确",
+      "question": "删除、取消、迁移和状态联动是否正确标记影响分析并关联事实？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-CCF4ADC723"
+    },
+    "RC-ANL-004": {
+      "title": "跨模块触发准确",
+      "question": "涉及多个模块或外部系统时是否正确标记跨模块实现映射？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-4D37FE53A7"
+    },
+    "RC-ANL-005": {
+      "title": "可设计且不过早实现",
+      "question": "分析是否足以支持设计，同时未把未经确认的技术方案当成业务事实？",
+      "evidencePolicyRef": "EP-371B1870E8"
+    },
+    "RC-BM-001": {
+      "title": "统一语言唯一",
+      "question": "关键术语是否定义唯一且不存在同义冲突或平行模型？",
+      "evidencePolicyRef": "EP-221F5584C0"
+    },
+    "RC-BM-002": {
+      "title": "对象与聚合边界",
+      "question": "实体、值对象、聚合及责任边界是否匹配业务一致性要求？",
+      "evidencePolicyRef": "EP-862D7F894B"
+    },
+    "RC-BM-003": {
+      "title": "不变量完整",
+      "question": "关键业务不变量是否明确、可执行并覆盖异常路径？",
+      "evidencePolicyRef": "EP-5AAE484D64"
+    },
+    "RC-BM-004": {
+      "title": "状态与转换完整",
+      "question": "状态、合法转换、守卫条件和终态是否完整且无不可达或非法路径？",
+      "evidencePolicyRef": "EP-862D7F894B"
+    },
+    "RC-BM-005": {
+      "title": "命令事件错误一致",
+      "question": "命令、事件、策略和业务错误语义是否一致并可追踪？",
+      "evidencePolicyRef": "EP-C1D3D7EC05"
+    },
+    "RC-BM-006": {
+      "title": "关联生命周期完整",
+      "question": "关联对象的创建、删除、取消、保留、历史及在途数据策略是否明确？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-862D7F894B"
+    },
+    "RC-BM-007": {
+      "title": "模型不泄漏存储实现",
+      "question": "业务模型是否避免用表结构或框架对象直接替代业务概念？",
+      "evidencePolicyRef": "EP-4DC64B365D"
+    },
+    "RC-DES-001": {
+      "title": "需求与模型覆盖",
+      "question": "设计是否覆盖全部适用需求、业务规则和模型不变量？",
+      "evidencePolicyRef": "EP-6E200A6ADD"
+    },
+    "RC-DES-002": {
+      "title": "模块边界与依赖",
+      "question": "模块责任、依赖方向和跨模块接口是否清晰且无循环依赖？",
+      "evidencePolicyRef": "EP-8C23517FEA"
+    },
+    "RC-DES-003": {
+      "title": "API契约完整",
+      "question": "请求、响应、校验、错误、权限和幂等契约是否明确？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-03F2F57E26"
+    },
+    "RC-DES-004": {
+      "title": "数据设计完整",
+      "question": "数据结构、约束、索引、外键、历史数据和删除策略是否满足业务模型？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-03F2F57E26"
+    },
+    "RC-DES-005": {
+      "title": "事务与一致性",
+      "question": "本地事务、最终一致性和跨模块提交边界是否明确？",
+      "evidencePolicyRef": "EP-8C23517FEA"
+    },
+    "RC-DES-006": {
+      "title": "幂等重试与去重",
+      "question": "可重试操作是否定义幂等键、去重、重试上限和结果复用？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-03F2F57E26"
+    },
+    "RC-DES-007": {
+      "title": "并发与顺序",
+      "question": "共享状态、竞态、锁、版本检查、消息顺序和重复投递是否被处理？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-8C23517FEA"
+    },
+    "RC-DES-008": {
+      "title": "错误补偿与恢复",
+      "question": "失败分类、补偿、人工恢复和不可恢复状态是否明确？",
+      "evidencePolicyRef": "EP-8C23517FEA"
+    },
+    "RC-DES-009": {
+      "title": "可观测性",
+      "question": "日志、指标、Trace、审计及关键业务状态是否足以诊断和验证？",
+      "evidencePolicyRef": "EP-DF8819570C"
+    },
+    "RC-DES-010": {
+      "title": "测试接缝",
+      "question": "设计是否提供稳定、可隔离且不过度依赖 Mock 的测试接缝？",
+      "evidencePolicyRef": "EP-1EB1EDB488"
+    },
+    "RC-DES-011": {
+      "title": "实现可行性",
+      "question": "技术栈、依赖、文件范围和复杂度是否可在当前项目中实现？",
+      "evidencePolicyRef": "EP-4E6EFECCDF"
+    },
+    "RC-TEST-001": {
+      "title": "验收追踪覆盖",
+      "question": "每个适用验收标准是否至少映射一个可执行 Case？",
+      "evidencePolicyRef": "EP-380160FB90"
+    },
+    "RC-TEST-002": {
+      "title": "正常路径覆盖",
+      "question": "主要成功路径和业务状态变化是否被验证？",
+      "evidencePolicyRef": "EP-386DA7F68C"
+    },
+    "RC-TEST-003": {
+      "title": "边界覆盖",
+      "question": "空值、极值、重复、顺序、时间和容量边界是否被覆盖？",
+      "evidencePolicyRef": "EP-386DA7F68C"
+    },
+    "RC-TEST-004": {
+      "title": "失败路径覆盖",
+      "question": "业务拒绝、依赖失败、超时、重试耗尽和补偿失败是否被覆盖？",
+      "evidencePolicyRef": "EP-386DA7F68C"
+    },
+    "RC-TEST-005": {
+      "title": "权限与安全覆盖",
+      "question": "角色、授权、输入校验和敏感数据行为是否被覆盖？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-386DA7F68C"
+    },
+    "RC-TEST-006": {
+      "title": "一致性覆盖",
+      "question": "事务、幂等、并发和重复执行结果是否被覆盖？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-386DA7F68C"
+    },
+    "RC-TEST-007": {
+      "title": "跨模块与补偿覆盖",
+      "question": "部分成功、跨模块失败、补偿和人工恢复是否被覆盖？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-64CA8A3119"
+    },
+    "RC-TEST-008": {
+      "title": "验证真实行为",
+      "question": "测试是否验证真实可观察行为，而非仅验证 Mock 调用或实现细节？",
+      "evidencePolicyRef": "EP-CE1BF0F631"
+    },
+    "RC-TEST-009": {
+      "title": "环境命令明确",
+      "question": "测试环境、前置数据、命令和预期退出状态是否明确可复现？",
+      "evidencePolicyRef": "EP-B693B9546E"
+    },
+    "RC-TEST-010": {
+      "title": "证据完整新鲜",
+      "question": "证据是否绑定当前 revision，包含完整输出、退出码、跳过项和失败数？",
+      "evidencePolicyRef": "EP-1B33E01D97"
+    },
+    "RC-PLAN-001": {
+      "title": "范围覆盖",
+      "question": "计划是否覆盖全部设计变更、测试、文档和影响项？",
+      "evidencePolicyRef": "EP-47CC31778F"
+    },
+    "RC-PLAN-002": {
+      "title": "纵向可验证切片",
+      "question": "任务是否形成可独立验证的纵向业务切片，而非仅按技术层拆分？",
+      "evidencePolicyRef": "EP-3CE5F44356"
+    },
+    "RC-PLAN-003": {
+      "title": "依赖无环且完整",
+      "question": "任务依赖是否完整、无环并与输入 revision 对齐？",
+      "evidencePolicyRef": "EP-3CE5F44356"
+    },
+    "RC-PLAN-004": {
+      "title": "执行顺序安全",
+      "question": "任务依赖、执行顺序和共享状态边界是否明确且不会产生顺序错误？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-7219DFED20"
+    },
+    "RC-PLAN-005": {
+      "title": "文件与范围约束",
+      "question": "每个任务是否明确允许文件和禁止范围，避免扩散修改？",
+      "evidencePolicyRef": "EP-3CE5F44356"
+    },
+    "RC-PLAN-006": {
+      "title": "验证命令与结果",
+      "question": "每个任务是否有具体命令、预期结果和证据位置？",
+      "evidencePolicyRef": "EP-E122573248"
+    },
+    "RC-PLAN-007": {
+      "title": "停止与重试条件",
+      "question": "失败、超范围、依赖变化和重试上限是否定义停止条件？",
+      "evidencePolicyRef": "EP-3CE5F44356"
+    },
+    "RC-PLAN-008": {
+      "title": "责任与审查完整",
+      "question": "owner、Reviewer、追踪项和交付 revision 是否明确？",
+      "evidencePolicyRef": "EP-8DABC221F4"
+    },
+    "RC-TDD-001": {
+      "title": "RED有效",
+      "question": "失败是否因目标行为缺失而出现，而非环境、语法或无关错误？",
+      "evidencePolicyRef": "EP-9780E3CFE5"
+    },
+    "RC-TDD-002": {
+      "title": "GREEN最小",
+      "question": "实现是否只满足当前 Case，未提前加入无需求依据的能力？",
+      "evidencePolicyRef": "EP-2854796235"
+    },
+    "RC-TDD-003": {
+      "title": "重构有基线",
+      "question": "REFACTOR 是否在表征测试或当前通过测试保护下进行？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-49B745FDC4"
+    },
+    "RC-TDD-004": {
+      "title": "BUG经历红绿",
+      "question": "缺陷修复是否先由回归测试稳定复现，再由修复转绿？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-9780E3CFE5"
+    },
+    "RC-TDD-005": {
+      "title": "测试接缝稳定",
+      "question": "测试是否使用稳定接口，避免绑定私有实现细节？",
+      "evidencePolicyRef": "EP-CE1BF0F631"
+    },
+    "RC-TDD-006": {
+      "title": "Mock边界合理",
+      "question": "Mock 是否仅用于外部或不稳定边界，核心业务行为是否由真实实现验证？",
+      "evidencePolicyRef": "EP-CE1BF0F631"
+    },
+    "RC-SPEC-001": {
+      "title": "固定比较对象",
+      "question": "审查是否基于明确的 artifact revision 或固定 diff 范围？",
+      "evidencePolicyRef": "EP-652E7C1046"
+    },
+    "RC-SPEC-002": {
+      "title": "无缺失需求",
+      "question": "所有适用需求和验收标准是否完整实现？",
+      "evidencePolicyRef": "EP-5A1AAE08FF"
+    },
+    "RC-SPEC-003": {
+      "title": "行为正确",
+      "question": "已实现行为是否与需求语义一致，不是部分实现或错误实现？",
+      "evidencePolicyRef": "EP-B1C7AC4F21"
+    },
+    "RC-SPEC-004": {
+      "title": "无范围漂移",
+      "question": "实现是否没有加入 spec 未要求且未批准的行为或抽象？",
+      "evidencePolicyRef": "EP-4908B0FEF4"
+    },
+    "RC-SPEC-005": {
+      "title": "追踪闭环",
+      "question": "需求、设计、代码和测试是否通过稳定 ID 闭环？",
+      "evidencePolicyRef": "EP-F541C8CEEB"
+    },
+    "RC-SPEC-006": {
+      "title": "关联影响已实现",
+      "question": "删除、取消、状态联动和跨模块补偿是否按批准策略实现？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-62F0085B7E"
+    },
+    "RC-SPEC-007": {
+      "title": "实现策略符合",
+      "question": "实现是否遵循当前 IMPL-DEC 决策及 REUSE→COMPATIBLE_EXTEND→MODIFY→CREATE 顺序，没有未经批准地平行新建或改变兼容语义？",
+      "evidencePolicyRef": "EP-F541C8CEEB"
+    },
+    "RC-ENG-001": {
+      "title": "项目规范符合",
+      "question": "实现是否符合项目编码、命名、目录、框架和工具规范？",
+      "evidencePolicyRef": "EP-E3C66B4ECE"
+    },
+    "RC-ENG-002": {
+      "title": "结构与边界健康",
+      "question": "职责、模块边界、依赖方向和接口深度是否合理？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-ENG-003": {
+      "title": "错误与一致性正确",
+      "question": "错误处理、事务、幂等和数据一致性是否正确且无隐藏副作用？",
+      "evidencePolicyRef": "EP-225E5D350D"
+    },
+    "RC-ENG-004": {
+      "title": "注释契约准确",
+      "question": "公共接口、方法和关键分支注释是否必要、准确并解释业务原因，且需求、逻辑、业务与影响注释是否包含可解析的来源文档路径、稳定锚点并与当前 revision 一致？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-ENG-005": {
+      "title": "测试质量可靠",
+      "question": "测试是否稳定、可读、验证真实行为且无不必要 Mock？",
+      "evidencePolicyRef": "EP-DE988F257F"
+    },
+    "RC-ENG-006": {
+      "title": "维护性异味可接受",
+      "question": "是否不存在重复、过长职责、数据团、原始类型滥用和散弹式修改等明显异味？",
+      "failureSeverityFloor": "P2",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-ENG-007": {
+      "title": "无投机抽象",
+      "question": "是否没有为未出现的需求添加钩子、层次或通用化？",
+      "failureSeverityFloor": "P2",
+      "evidencePolicyRef": "EP-37FBB682E6"
+    },
+    "RC-ENG-008": {
+      "title": "枚举和值处理完整",
+      "question": "新增状态、枚举和值是否在所有相关分支、序列化和测试中完整处理？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-IMP-001": {
+      "title": "关系节点完整",
+      "question": "相关需求、功能、对象和模块是否全部进入关系事实？",
+      "evidencePolicyRef": "EP-862D7F894B"
+    },
+    "RC-IMP-002": {
+      "title": "关系语义准确",
+      "question": "关系类型、方向、条件和生效时机是否准确？",
+      "evidencePolicyRef": "EP-862D7F894B"
+    },
+    "RC-IMP-003": {
+      "title": "处置策略明确",
+      "question": "删除、取消、解除、保留、转移或补偿策略是否明确且无默认级联假设？",
+      "evidencePolicyRef": "EP-5AAE484D64"
+    },
+    "RC-IMP-004": {
+      "title": "历史与在途数据",
+      "question": "历史记录、在途事务、已引用对象和审计数据是否有处理策略？",
+      "evidencePolicyRef": "EP-4DC64B365D"
+    },
+    "RC-IMP-005": {
+      "title": "影响传播完整",
+      "question": "受影响设计、API、DB、代码、测试和文档是否被标记并在 revision 变化时失效？",
+      "evidencePolicyRef": "EP-866B35291C"
+    },
+    "RC-IMP-006": {
+      "title": "测试映射完整",
+      "question": "每项处置策略和影响路径是否映射 Case 与验证证据？",
+      "evidencePolicyRef": "EP-3618F4C3AB"
+    },
+    "RC-XMOD-001": {
+      "title": "参与者与Owner明确",
+      "question": "所有模块、外部系统及每一步 owner 是否明确？",
+      "evidencePolicyRef": "EP-1A4CBDC1E3"
+    },
+    "RC-XMOD-002": {
+      "title": "顺序与契约明确",
+      "question": "步骤顺序、API/事件/回调契约及前后置条件是否完整？",
+      "evidencePolicyRef": "EP-50F4B3F832"
+    },
+    "RC-XMOD-003": {
+      "title": "一致性边界明确",
+      "question": "本地事务、最终一致性和可见状态边界是否明确？",
+      "evidencePolicyRef": "EP-8C23517FEA"
+    },
+    "RC-XMOD-004": {
+      "title": "重复乱序与超时",
+      "question": "幂等、重试、超时、重复和乱序处理是否明确？",
+      "evidencePolicyRef": "EP-8C23517FEA"
+    },
+    "RC-XMOD-005": {
+      "title": "部分成功与补偿",
+      "question": "每个部分成功点是否有补偿或明确不可补偿策略？",
+      "evidencePolicyRef": "EP-8C23517FEA"
+    },
+    "RC-XMOD-006": {
+      "title": "人工恢复与观测",
+      "question": "补偿失败时的人工恢复、告警、Trace 和审计是否明确？",
+      "evidencePolicyRef": "EP-DF8819570C"
+    },
+    "RC-XMOD-007": {
+      "title": "实现映射验证闭环",
+      "question": "CMI/CMSTEP 的正常、失败、补偿和恢复路径是否映射到适用 Case、非测试验证和 Evidence？",
+      "evidencePolicyRef": "EP-64CA8A3119"
+    },
+    "RC-SEC-001": {
+      "title": "认证边界",
+      "question": "受保护入口是否执行可信认证并拒绝缺失或伪造身份？",
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-SEC-002": {
+      "title": "授权边界",
+      "question": "每个敏感操作是否在服务端按资源和动作执行授权？",
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-SEC-003": {
+      "title": "敏感数据与密钥",
+      "question": "敏感字段、Token、密钥和日志是否按最小暴露原则处理？",
+      "evidencePolicyRef": "EP-470F998925"
+    },
+    "RC-SEC-004": {
+      "title": "输入输出安全",
+      "question": "输入校验、注入面、输出编码和反序列化边界是否安全？",
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-SEC-005": {
+      "title": "会话与重放",
+      "question": "会话生命周期、Token 失效、重放和幂等攻击是否处理？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-SEC-006": {
+      "title": "安全审计与错误泄漏",
+      "question": "安全事件是否可审计，错误是否不泄漏敏感实现信息？",
+      "evidencePolicyRef": "EP-9335EB884A"
+    },
+    "RC-SEC-007": {
+      "title": "安全反例测试",
+      "question": "关键安全控制是否有负向测试而非只靠代码阅读？",
+      "evidencePolicyRef": "EP-B693B9546E"
+    },
+    "RC-PERF-001": {
+      "title": "关键路径预算",
+      "question": "关键路径和性能目标是否明确，变更是否满足预算？",
+      "evidencePolicyRef": "EP-664FD77DBD"
+    },
+    "RC-PERF-002": {
+      "title": "查询与IO",
+      "question": "查询数量、索引、批量访问和外部 IO 是否避免放大？",
+      "evidencePolicyRef": "EP-6CD01E3B1E"
+    },
+    "RC-PERF-003": {
+      "title": "循环与批处理",
+      "question": "循环、批处理和分页是否有明确复杂度与容量边界？",
+      "evidencePolicyRef": "EP-F66AD47816"
+    },
+    "RC-PERF-004": {
+      "title": "缓存与资源",
+      "question": "缓存一致性、内存、线程、连接和文件资源是否受控？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-F66AD47816"
+    },
+    "RC-PERF-005": {
+      "title": "性能证据",
+      "question": "性能结论是否有基准、负载或可重复指标证据？",
+      "evidencePolicyRef": "EP-7FE7C4363D"
+    },
+    "RC-MIG-001": {
+      "title": "前向结构变更",
+      "question": "Schema 变更顺序是否允许安全部署和数据写入？",
+      "evidencePolicyRef": "EP-6FADA64B33"
+    },
+    "RC-MIG-002": {
+      "title": "历史数据回填",
+      "question": "历史数据、缺省值、批量回填和异常数据是否有确定策略？",
+      "evidencePolicyRef": "EP-03F2F57E26"
+    },
+    "RC-MIG-003": {
+      "title": "过渡读写状态",
+      "question": "过渡期读写规则和完成条件是否明确且不会产生双重事实？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-A6E18D7488"
+    },
+    "RC-MIG-004": {
+      "title": "回滚与不可逆风险",
+      "question": "回滚路径、不可逆操作和数据丢失风险是否明确？",
+      "evidencePolicyRef": "EP-03F2F57E26"
+    },
+    "RC-MIG-005": {
+      "title": "幂等与一致性",
+      "question": "迁移、回填和重跑是否幂等并可检测部分完成？",
+      "evidencePolicyRef": "EP-225E5D350D"
+    },
+    "RC-MIG-006": {
+      "title": "对账与验证",
+      "question": "迁移前后是否有计数、抽样、校验和及异常清单？",
+      "evidencePolicyRef": "EP-582B916D0D"
+    },
+    "RC-API-001": {
+      "title": "请求响应契约",
+      "question": "字段、类型、必填、默认值和语义是否明确且实现一致？",
+      "evidencePolicyRef": "EP-83EAB9E13C"
+    },
+    "RC-API-002": {
+      "title": "错误契约",
+      "question": "状态码、业务错误码、错误体和重试语义是否稳定？",
+      "evidencePolicyRef": "EP-83EAB9E13C"
+    },
+    "RC-API-003": {
+      "title": "幂等重试契约",
+      "question": "重试、幂等键、重复请求和结果查询契约是否明确？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-83EAB9E13C"
+    },
+    "RC-API-004": {
+      "title": "调用方影响",
+      "question": "调用方、版本和兼容窗口影响是否被识别并有明确决策？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-FB12F1F709"
+    },
+    "RC-API-005": {
+      "title": "边界校验与权限",
+      "question": "API 边界是否执行输入校验、认证和授权？",
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-API-006": {
+      "title": "契约测试",
+      "question": "请求、响应、错误和兼容决策是否由契约测试验证？",
+      "evidencePolicyRef": "EP-B693B9546E"
+    },
+    "RC-CONC-001": {
+      "title": "共享状态识别",
+      "question": "所有共享可变状态和竞争路径是否被识别？",
+      "evidencePolicyRef": "EP-7A43143108"
+    },
+    "RC-CONC-002": {
+      "title": "原子性与锁",
+      "question": "原子操作、锁范围、隔离级别和版本检查是否正确？",
+      "evidencePolicyRef": "EP-7A43143108"
+    },
+    "RC-CONC-003": {
+      "title": "顺序与重复",
+      "question": "事件顺序、重复投递和并发更新是否有确定结果？",
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-CONC-004": {
+      "title": "重试幂等",
+      "question": "冲突重试和幂等处理是否不会放大副作用？",
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-CONC-005": {
+      "title": "失败与恢复",
+      "question": "死锁、超时、任务丢失和部分提交是否可检测和恢复？",
+      "evidencePolicyRef": "EP-9335EB884A"
+    },
+    "RC-CONC-006": {
+      "title": "并发测试",
+      "question": "关键竞态是否有可重复或压力测试证据？",
+      "evidencePolicyRef": "EP-507B1E6353"
+    },
+    "RC-MAINT-001": {
+      "title": "职责内聚",
+      "question": "模块、类和方法是否职责单一且边界清晰？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-MAINT-002": {
+      "title": "重复受控",
+      "question": "相同业务逻辑是否只有一个可维护事实源？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-MAINT-003": {
+      "title": "命名与领域类型",
+      "question": "名称是否表达业务意图，领域概念是否避免原始类型滥用？",
+      "evidencePolicyRef": "EP-7491C1A834"
+    },
+    "RC-MAINT-004": {
+      "title": "复杂度可理解",
+      "question": "分支、嵌套、状态和副作用是否可理解并可局部推理？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-MAINT-005": {
+      "title": "依赖方向稳定",
+      "question": "变化是否不会造成散弹式修改或反向依赖？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-MAINT-006": {
+      "title": "可测试性",
+      "question": "核心行为是否能通过稳定接口测试而不依赖私有细节？",
+      "evidencePolicyRef": "EP-34AD341858"
+    },
+    "RC-MAINT-007": {
+      "title": "注释与文档同步",
+      "question": "必要注释和契约文档是否准确且与代码同步，注释中的来源文档路径与稳定锚点是否仍有效？",
+      "evidencePolicyRef": "EP-6143EC164B"
+    },
+    "RC-MAINT-008": {
+      "title": "公共逻辑与抽象受控",
+      "question": "相同业务规则是否归于唯一 Owner，同时没有用布尔/模式参数、跨域 switch 或万能工具类把不同语义强行抽象？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-ARCH-001": {
+      "title": "边界职责",
+      "question": "模块和服务边界是否按业务能力与一致性要求划分？",
+      "evidencePolicyRef": "EP-E946DBA7BD"
+    },
+    "RC-ARCH-002": {
+      "title": "依赖方向",
+      "question": "依赖方向是否稳定、无循环且基础设施不反向支配领域？",
+      "evidencePolicyRef": "EP-E946DBA7BD"
+    },
+    "RC-ARCH-003": {
+      "title": "接口深度",
+      "question": "接口是否以较小表面积隐藏足够行为，避免浅层中转？",
+      "evidencePolicyRef": "EP-A6E18D7488"
+    },
+    "RC-ARCH-004": {
+      "title": "故障隔离",
+      "question": "依赖失败、资源耗尽和部分故障是否被隔离？",
+      "evidencePolicyRef": "EP-5EF769CE5F"
+    },
+    "RC-ARCH-005": {
+      "title": "演进与YAGNI",
+      "question": "结构是否支持当前演进且没有无需求依据的通用化？",
+      "evidencePolicyRef": "EP-06F953FC94"
+    },
+    "RC-ARCH-006": {
+      "title": "可测试可观察",
+      "question": "架构是否提供稳定测试接缝和端到端可观测链路？",
+      "evidencePolicyRef": "EP-CA77749E6B"
+    },
+    "RC-EVID-001": {
+      "title": "Revision与环境一致",
+      "question": "测试是否运行在被审查的当前 revision 和声明环境？",
+      "evidencePolicyRef": "EP-F5BDB48B35"
+    },
+    "RC-EVID-002": {
+      "title": "命令输出完整",
+      "question": "是否保存完整命令、退出码、通过/失败数量和关键输出？",
+      "evidencePolicyRef": "EP-E3B6885D03"
+    },
+    "RC-EVID-003": {
+      "title": "真实数据与最终状态",
+      "question": "是否验证真实数据、事务、最终状态和禁止副作用？",
+      "evidencePolicyRef": "EP-52085544BE"
+    },
+    "RC-EVID-004": {
+      "title": "跳过与易波动透明",
+      "question": "跳过、隔离、重试和易波动测试是否显式记录并解释？",
+      "allowNotApplicable": true,
+      "evidencePolicyRef": "EP-3634180D69"
+    },
+    "RC-EVID-005": {
+      "title": "失败证据可诊断",
+      "question": "失败日志是否足以定位责任阶段且未被后续输出掩盖？",
+      "evidencePolicyRef": "EP-C63F3C4A45"
+    },
+    "RC-EVID-006": {
+      "title": "覆盖与新鲜度",
+      "question": "证据是否覆盖当前变更范围并在 revision 变化后重新生成？",
+      "evidencePolicyRef": "EP-16C2631EF7"
+    },
+    "RC-EVID-007": {
+      "title": "声明与证据匹配",
+      "question": "每项通过声明是否由对应验证命令直接证明，而非由局部检查外推？",
+      "evidencePolicyRef": "EP-B302526D2E"
+    },
+    "RC-ACPT-001": {
+      "title": "验收语义编译完整",
+      "question": "自然语言验收项和任务 expected_results 是否逐项映射到阻断型可执行断言，且转换未弱化、遗漏或替换原业务语义？",
+      "evidencePolicyRef": "EP-FB5C2218D2"
+    },
+    "RC-BFLOW-001": {
+      "title": "分层与边界",
+      "question": "L0/L1/L2、父子关系、准备/主交易/后续/补偿边界是否清晰且不过度展开？",
+      "evidencePolicyRef": "EP-3D8D84CD6E"
+    },
+    "RC-BFLOW-002": {
+      "title": "跨文档追踪",
+      "question": "流程是否引用真实需求、模块、功能、规则、AC 和 TR，模块 owner 与功能归属是否一致？",
+      "evidencePolicyRef": "EP-B35143F668"
+    },
+    "RC-BFLOW-003": {
+      "title": "路径完整",
+      "question": "主路径、关键变体、阻塞失败、回退和补偿是否具有可观察结果且无隐藏跳转？",
+      "evidencePolicyRef": "EP-B0F6CC167C"
+    },
+    "RC-BFLOW-004": {
+      "title": "模型与设计映射",
+      "question": "流程步骤是否映射当前业务模型和技术设计，且未复制或冲突？",
+      "evidencePolicyRef": "EP-9B8B6CE29D"
+    },
+    "RC-BFLOW-005": {
+      "title": "验证覆盖",
+      "question": "主路径、关键变体和阻塞失败路径是否有 Case 或允许的非测试证据？",
+      "evidencePolicyRef": "EP-2EF24D092B"
+    },
+    "RC-BFLOW-006": {
+      "title": "Revision 与归档链接",
+      "question": "流程 revision、changeset、模块索引和预览/项目链接是否当前、可回查且可解析？",
+      "evidencePolicyRef": "EP-5AEF30D0F9"
+    },
+    "RC-AR-001": {
+      "title": "方法与输入输出契约完整",
+      "question": "第一步是否定义全部主要方法/函数签名、参数、返回值、异常与副作用契约，并与设计和验收保持一致？",
+      "evidencePolicyRef": "EP-FB9B5120C8"
+    },
+    "RC-AR-002": {
+      "title": "调用编排与主分支完整",
+      "question": "第一步是否写明调用顺序、主要判断、成功/失败分支、状态转换和返回路径，而不是只留空壳？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-AR-003": {
+      "title": "具体实现严格延后",
+      "question": "第一步是否未实现被调用方法的具体业务、持久化或外部副作用，并以显式未实现边界阻止误用？",
+      "evidencePolicyRef": "EP-0134FAAD8C"
+    },
+    "RC-AR-004": {
+      "title": "边界和失败语义可实现",
+      "question": "第一步是否明确事务、幂等、并发、重试、补偿、错误传播与资源释放边界，使第二步无需重新设计主流程？",
+      "evidencePolicyRef": "EP-F55A407116"
+    },
+    "RC-AR-005": {
+      "title": "骨架可追踪且可验证",
+      "question": "方法和分支是否可追踪到需求、设计、Case 或非测试验收，并具备可编译、可类型检查或可静态验证的证据？",
+      "evidencePolicyRef": "EP-3CEF6F3899"
+    },
+    "RC-BM-008": {
+      "title": "领域与限界上下文语义归属",
+      "question": "启用 Domain Governance 时，术语、聚合、不变量和行为是否归属于明确 Bounded Context，且跨 Context 语义使用显式 translation/consumption 而非复制 Owner 规则？",
+      "evidencePolicyRef": "EP-862D7F894B"
+    },
+    "RC-ARCH-007": {
+      "title": "Context Ownership 与消费边界",
+      "question": "启用 Domain Governance 时，架构是否保持 Owner/Consumer 边界、依赖方向与跨 Context translation，不在 Consumer 内重复定义 Owner 的业务真相？",
+      "evidencePolicyRef": "EP-E946DBA7BD"
+    },
+    "RC-ARCH-008": {
+      "title": "CREATE 职责与归属成立",
+      "question": "CREATE 是否有独立且稳定的业务职责，已以代码证据排除复用、兼容扩展和修改，并将公共逻辑放在正确 Owner 而不扩大依赖边界？",
+      "evidencePolicyRef": "EP-E946DBA7BD"
+    },
+    "RC-IMP-007": {
+      "title": "图化影响传播可解释",
+      "question": "使用 Engineering Graph 缩小或扩展影响范围时，每个 impacted ref 是否具有可回查传播路径，并在跨 Context 时触发对应风险/重验？",
+      "evidencePolicyRef": "EP-3618F4C3AB"
+    }
+  },
+  "machineGateCriterionIds": [
+    "RC-BFLOW-006"
+  ],
+  "profileTemplates": {
+    "PT-API-CONTRACT": {
+      "criterionIds": [
+        "RC-API-001",
+        "RC-API-002",
+        "RC-API-003",
+        "RC-API-004",
+        "RC-API-005",
+        "RC-API-006"
+      ]
+    },
+    "PT-CONCURRENCY": {
+      "criterionIds": [
+        "RC-CONC-001",
+        "RC-CONC-002",
+        "RC-CONC-003",
+        "RC-CONC-004",
+        "RC-CONC-005",
+        "RC-CONC-006"
+      ]
+    },
+    "PT-CROSS-MODULE-INTEGRATION": {
+      "criterionIds": [
+        "RC-XMOD-001",
+        "RC-XMOD-002",
+        "RC-XMOD-003",
+        "RC-XMOD-004",
+        "RC-XMOD-005",
+        "RC-XMOD-006",
+        "RC-XMOD-007",
+        "RC-BFLOW-003",
+        "RC-BFLOW-004"
+      ]
+    },
+    "PT-DATA-MIGRATION": {
+      "criterionIds": [
+        "RC-MIG-001",
+        "RC-MIG-002",
+        "RC-MIG-003",
+        "RC-MIG-004",
+        "RC-MIG-005",
+        "RC-MIG-006"
+      ]
+    },
+    "PT-IMPACT-ANALYSIS": {
+      "criterionIds": [
+        "RC-IMP-001",
+        "RC-IMP-002",
+        "RC-IMP-003",
+        "RC-IMP-004",
+        "RC-IMP-005",
+        "RC-IMP-006",
+        "RC-IMP-007"
+      ]
+    },
+    "PT-SECURITY": {
+      "criterionIds": [
+        "RC-SEC-001",
+        "RC-SEC-002",
+        "RC-SEC-003",
+        "RC-SEC-004",
+        "RC-SEC-005",
+        "RC-SEC-006",
+        "RC-SEC-007"
+      ]
+    },
+    "PT-PERFORMANCE": {
+      "criterionIds": [
+        "RC-PERF-001",
+        "RC-PERF-002",
+        "RC-PERF-003",
+        "RC-PERF-004",
+        "RC-PERF-005"
+      ]
+    },
+    "PT-ARCHITECTURE": {
+      "criterionIds": [
+        "RC-ARCH-001",
+        "RC-ARCH-002",
+        "RC-ARCH-004",
+        "RC-ARCH-006",
+        "RC-PLAN-003",
+        "RC-PLAN-004",
+        "RC-AR-001",
+        "RC-AR-002",
+        "RC-AR-003",
+        "RC-AR-004",
+        "RC-AR-005",
+        "RC-ARCH-003",
+        "RC-ARCH-005",
+        "RC-ARCH-007",
+        "RC-ARCH-008"
+      ]
+    }
+  },
+  "profiles": {
+    "requirement_confirmation:RequirementAnalysisAgent": {
+      "purpose": "以一次 Semantic Gate 验证需求清晰度、边界、可观察验收与失败语义。",
+      "scopeSourceTypes": [
+        "requirement_confirmation",
+        "acceptance_criteria"
+      ],
+      "axes": [
+        "semantic_alignment",
+        "verification_readiness"
+      ],
+      "criterionIds": [
+        "RC-REQ-001",
+        "RC-REQ-002",
+        "RC-REQ-003",
+        "RC-REQ-004",
+        "RC-REQ-005"
+      ]
+    },
+    "requirement_analysis:BusinessModelAgent": {
+      "purpose": "验证分析的业务语义、对象/关系、设计边界与业务流程输入足以进入建模。",
+      "scopeSourceTypes": [
+        "requirement_analysis",
+        "traceability",
+        "dependency_impact",
+        "business_flow"
+      ],
+      "axes": [
+        "semantic_model",
+        "design_readiness"
+      ],
+      "criterionIds": [
+        "RC-ANL-001",
+        "RC-ANL-003",
+        "RC-ANL-004",
+        "RC-BM-001",
+        "RC-BM-002",
+        "RC-BM-006",
+        "RC-BFLOW-001",
+        "RC-BFLOW-002",
+        "RC-BFLOW-003",
+        "RC-ANL-002",
+        "RC-ANL-005",
+        "RC-DES-001",
+        "RC-DES-011"
+      ]
+    },
+    "requirement_analysis:TestDesignAgent": {
+      "purpose": "验证需求分析的规则、验收与失败路径已经形成可观察的验证边界，足以供后续测试设计使用。",
+      "scopeSourceTypes": [
+        "requirement_analysis",
+        "traceability",
+        "acceptance_criteria",
+        "business_flow"
+      ],
+      "axes": [
+        "verification_readiness"
+      ],
+      "criterionIds": [
+        "RC-ANL-001",
+        "RC-ANL-002",
+        "RC-REQ-003",
+        "RC-REQ-004",
+        "RC-BFLOW-003",
+        "RC-ANL-005"
+      ]
+    },
+    "business_model:BusinessModelReviewAgent": {
+      "purpose": "单向累积验证业务模型未偏离已确认需求，并形成完整不变量、状态与设计边界。",
+      "scopeSourceTypes": [
+        "requirement",
+        "business_model",
+        "traceability",
+        "dependency_impact",
+        "business_flow",
+        "design_inputs"
+      ],
+      "axes": [
+        "semantic_alignment",
+        "business_model_integrity",
+        "design_readiness"
+      ],
+      "criterionIds": [
+        "RC-REQ-001",
+        "RC-REQ-002",
+        "RC-REQ-003",
+        "RC-REQ-004",
+        "RC-REQ-005",
+        "RC-ANL-001",
+        "RC-BM-001",
+        "RC-BM-002",
+        "RC-BM-003",
+        "RC-BM-004",
+        "RC-BM-005",
+        "RC-BM-006",
+        "RC-BM-007",
+        "RC-BFLOW-002",
+        "RC-BFLOW-004",
+        "RC-DES-001",
+        "RC-DES-002",
+        "RC-DES-005",
+        "RC-DES-008",
+        "RC-DES-010",
+        "RC-DES-011",
+        "RC-BM-008"
+      ]
+    },
+    "business_model:TestDesignAgent": {
+      "purpose": "验证业务模型已表达测试设计所需的规则、状态与异常边界，不要求已有验证 Case。",
+      "scopeSourceTypes": [
+        "business_model",
+        "traceability"
+      ],
+      "axes": [
+        "verification_readiness"
+      ],
+      "criterionIds": [
+        "RC-BM-003",
+        "RC-BM-004",
+        "RC-BM-005",
+        "RC-BM-006",
+        "RC-BFLOW-003"
+      ]
+    },
+    "design:RequirementReviewAgent": {
+      "purpose": "只验证 Design 是否违反已通过的 Requirement / Business Model invariant，不重复重审上游产物本身。",
+      "scopeSourceTypes": [
+        "requirement",
+        "design",
+        "traceability",
+        "business_flow",
+        "business_model"
+      ],
+      "axes": [
+        "semantic_alignment"
+      ],
+      "criterionIds": [
+        "RC-REQ-002",
+        "RC-REQ-003",
+        "RC-REQ-004",
+        "RC-REQ-005",
+        "RC-DES-001",
+        "RC-BFLOW-002",
+        "RC-BM-001",
+        "RC-BM-003",
+        "RC-BM-004",
+        "RC-BM-005",
+        "RC-BM-006",
+        "RC-BFLOW-004",
+        "RC-BM-008"
+      ]
+    },
+    "design:ArchitectureReviewAgent": {
+      "purpose": "验证模块、边界、依赖、事务/一致性和失败关闭语义。",
+      "scopeSourceTypes": [
+        "design",
+        "architecture_diagram",
+        "business_flow"
+      ],
+      "axes": [
+        "architecture"
+      ],
+      "criterionIds": [
+        "RC-ARCH-001",
+        "RC-ARCH-002",
+        "RC-ARCH-003",
+        "RC-ARCH-004",
+        "RC-ARCH-005",
+        "RC-ARCH-006",
+        "RC-DES-002",
+        "RC-DES-005",
+        "RC-DES-007",
+        "RC-DES-008",
+        "RC-BFLOW-003",
+        "RC-BFLOW-004",
+        "RC-ARCH-007",
+        "RC-ARCH-008"
+      ]
+    },
+    "design:TestDesignAgent": {
+      "purpose": "合并可测试性与可实现性检查，验证设计具有稳定 seam、失败语义和实现输入。",
+      "scopeSourceTypes": [
+        "design",
+        "traceability",
+        "codebase",
+        "implementation_contract"
+      ],
+      "axes": [
+        "verification_readiness",
+        "implementation_readiness"
+      ],
+      "criterionIds": [
+        "RC-DES-010",
+        "RC-DES-002",
+        "RC-DES-003",
+        "RC-DES-004",
+        "RC-DES-005",
+        "RC-DES-006",
+        "RC-DES-007",
+        "RC-DES-008",
+        "RC-DES-009",
+        "RC-DES-011",
+        "RC-ENG-001"
+      ]
+    },
+    "test_design:RequirementReviewAgent": {
+      "purpose": "验证 TestDesign 与 Requirement/Design invariant 对齐，不重新审查已通过的上游 artifact。",
+      "scopeSourceTypes": [
+        "requirement",
+        "test_case",
+        "traceability",
+        "design"
+      ],
+      "axes": [
+        "semantic_alignment"
+      ],
+      "criterionIds": [
+        "RC-REQ-003",
+        "RC-REQ-004",
+        "RC-TEST-001",
+        "RC-ACPT-001",
+        "RC-DES-001",
+        "RC-DES-005",
+        "RC-DES-006",
+        "RC-DES-007",
+        "RC-DES-008",
+        "RC-DES-010"
+      ]
+    },
+    "test_design:TestEvidenceReviewAgent": {
+      "purpose": "验证 Case 覆盖、可执行性和证据可采集性，并为 Development 内置 RED gate 准备稳定 seam。",
+      "scopeSourceTypes": [
+        "test_case",
+        "implementation_contract",
+        "business_flow",
+        "harness"
+      ],
+      "axes": [
+        "verification_readiness",
+        "evidence_readiness"
+      ],
+      "criterionIds": [
+        "RC-TDD-001",
+        "RC-TDD-004",
+        "RC-TDD-005",
+        "RC-TDD-006",
+        "RC-TEST-001",
+        "RC-TEST-002",
+        "RC-TEST-003",
+        "RC-TEST-004",
+        "RC-TEST-005",
+        "RC-TEST-006",
+        "RC-TEST-007",
+        "RC-TEST-008",
+        "RC-BFLOW-005",
+        "RC-TEST-009",
+        "RC-TEST-010",
+        "RC-EVID-001",
+        "RC-EVID-002",
+        "RC-EVID-003",
+        "RC-EVID-007"
+      ]
+    },
+    "implementation_plan:PlanReviewAgent": {
+      "purpose": "验证计划顺序、依赖、架构约束、验收映射和回滚边界。",
+      "scopeSourceTypes": [
+        "implementation_plan",
+        "traceability",
+        "business_flow",
+        "design"
+      ],
+      "axes": [
+        "plan_readiness",
+        "architecture_alignment"
+      ],
+      "criterionIds": [
+        "RC-PLAN-001",
+        "RC-PLAN-002",
+        "RC-PLAN-003",
+        "RC-PLAN-004",
+        "RC-PLAN-005",
+        "RC-PLAN-006",
+        "RC-PLAN-007",
+        "RC-PLAN-008",
+        "RC-ACPT-001",
+        "RC-BFLOW-002",
+        "RC-BFLOW-005",
+        "RC-ARCH-001",
+        "RC-ARCH-002",
+        "RC-ARCH-004",
+        "RC-ARCH-006"
+      ]
+    },
+    "implementation_plan:DevelopAgent": {
+      "purpose": "验证计划可实施、可验证并包含必要测试与失败路径。",
+      "scopeSourceTypes": [
+        "implementation_plan",
+        "test_case",
+        "codebase"
+      ],
+      "axes": [
+        "implementation_readiness",
+        "verification_readiness"
+      ],
+      "criterionIds": [
+        "RC-TEST-001",
+        "RC-TEST-002",
+        "RC-TEST-003",
+        "RC-TEST-004",
+        "RC-PLAN-006",
+        "RC-PLAN-008",
+        "RC-PLAN-002",
+        "RC-PLAN-003",
+        "RC-PLAN-004",
+        "RC-PLAN-005",
+        "RC-PLAN-007",
+        "RC-DES-011"
+      ]
+    },
+    "development:TDDReviewAgent": {
+      "purpose": "Development 内一次 TDD 轴同时验证 pre-implementation RED 与 post-implementation GREEN/REFACTOR；RED 必须早于对应 production change。",
+      "scopeSourceTypes": [
+        "tdd_evidence",
+        "test_diff",
+        "implementation_contract",
+        "implementation_diff",
+        "test_case",
+        "business_flow"
+      ],
+      "axes": [
+        "tdd_pre_implementation",
+        "tdd_post_implementation"
+      ],
+      "criterionIds": [
+        "RC-TDD-001",
+        "RC-TDD-004",
+        "RC-TDD-005",
+        "RC-TDD-006",
+        "RC-EVID-001",
+        "RC-EVID-002",
+        "RC-TDD-002",
+        "RC-TDD-003",
+        "RC-TEST-008",
+        "RC-BFLOW-005"
+      ]
+    },
+    "development:SpecComplianceReviewAgent": {
+      "purpose": "验证最终实现严格落在已批准 Design/Plan scope 内并满足实现边界。",
+      "scopeSourceTypes": [
+        "requirement",
+        "design",
+        "architecture_code",
+        "diff",
+        "traceability"
+      ],
+      "axes": [
+        "spec_compliance"
+      ],
+      "criterionIds": [
+        "RC-AR-001",
+        "RC-AR-002",
+        "RC-AR-003",
+        "RC-AR-005",
+        "RC-SPEC-001",
+        "RC-SPEC-002",
+        "RC-SPEC-003",
+        "RC-SPEC-007"
+      ]
+    },
+    "code_review:SpecComplianceReviewAgent": {
+      "purpose": "验证冻结实现对最终 Requirement/Design/TestDesign/Plan authority 的符合性。",
+      "scopeSourceTypes": [
+        "requirement",
+        "design",
+        "diff",
+        "traceability"
+      ],
+      "axes": [
+        "spec_compliance"
+      ],
+      "criterionIds": [
+        "RC-SPEC-001",
+        "RC-SPEC-002",
+        "RC-SPEC-003",
+        "RC-SPEC-004",
+        "RC-SPEC-005",
+        "RC-SPEC-006",
+        "RC-SPEC-007"
+      ]
+    },
+    "code_review:EngineeringStandardsReviewAgent": {
+      "purpose": "合并 Engineering Standards、Maintainability 与核心 Evidence 健康检查，避免重复质量管线。",
+      "scopeSourceTypes": [
+        "diff",
+        "codebase_standards",
+        "tests",
+        "codebase",
+        "test_results",
+        "harness"
+      ],
+      "axes": [
+        "engineering_quality",
+        "maintainability",
+        "evidence_health"
+      ],
+      "criterionIds": [
+        "RC-ENG-001",
+        "RC-ENG-002",
+        "RC-ENG-003",
+        "RC-ENG-004",
+        "RC-ENG-005",
+        "RC-ENG-006",
+        "RC-ENG-007",
+        "RC-ENG-008",
+        "RC-MAINT-001",
+        "RC-MAINT-002",
+        "RC-MAINT-003",
+        "RC-MAINT-004",
+        "RC-MAINT-005",
+        "RC-MAINT-006",
+        "RC-MAINT-007",
+        "RC-MAINT-008",
+        "RC-EVID-001",
+        "RC-EVID-002",
+        "RC-EVID-003",
+        "RC-EVID-004",
+        "RC-EVID-005",
+        "RC-EVID-006",
+        "RC-EVID-007",
+        "RC-TEST-008"
+      ]
+    },
+    "testing:TestEvidenceReviewAgent": {
+      "purpose": "验证最终测试环境、命令、真实数据/状态、覆盖结果与 Evidence 完整性。",
+      "scopeSourceTypes": [
+        "test_results",
+        "harness",
+        "traceability",
+        "business_flow"
+      ],
+      "axes": [
+        "test_evidence"
+      ],
+      "criterionIds": [
+        "RC-TEST-001",
+        "RC-TEST-002",
+        "RC-TEST-003",
+        "RC-TEST-004",
+        "RC-TEST-005",
+        "RC-TEST-006",
+        "RC-TEST-007",
+        "RC-EVID-001",
+        "RC-EVID-002",
+        "RC-EVID-003",
+        "RC-EVID-004",
+        "RC-EVID-005",
+        "RC-EVID-006",
+        "RC-EVID-007",
+        "RC-TEST-008",
+        "RC-BFLOW-005"
+      ]
+    }
+  },
+  "evidencePolicyDefaults": {
+    "minimumEvidenceCount": 1,
+    "allOfTypes": [],
+    "anyOfTypes": []
+  },
+  "criterionDefaults": {
+    "allowNotApplicable": false,
+    "failureSeverityFloor": "P1"
+  },
+  "reviewArchitecture": {
+    "model": "PHASE_GATE_CORE_BUNDLE_RISK_TEMPLATE_DELTA",
+    "coreProfileTarget": 17,
+    "principles": [
+      "SEPARATE_REVIEW_AXES",
+      "SHARED_REVIEW_EXECUTION_CONTEXT",
+      "RISK_REVIEW_ONLY_WHEN_APPLICABLE",
+      "NEW_EXACT_REVISION_REVIEW_RESULT",
+      "DELTA_CRITERION_REVALIDATION"
+    ]
+  },
+  "reviewAxes": {
+    "semantic_alignment": {
+      "description": "下游 artifact 不违反已通过上游 invariant。"
+    },
+    "semantic_model": {
+      "description": "业务语义、对象、关系和规则完整。"
+    },
+    "business_model_integrity": {
+      "description": "聚合、不变量、状态与语言一致。"
+    },
+    "design_readiness": {
+      "description": "输入足以进入设计。"
+    },
+    "architecture": {
+      "description": "边界、依赖、一致性和故障模型。"
+    },
+    "verification_readiness": {
+      "description": "验收、Case、seam 和失败路径可验证。"
+    },
+    "evidence_readiness": {
+      "description": "命令、环境和 Evidence 可采集。"
+    },
+    "plan_readiness": {
+      "description": "计划依赖、顺序、验收和回滚可执行。"
+    },
+    "architecture_alignment": {
+      "description": "实施计划保持设计架构边界。"
+    },
+    "implementation_readiness": {
+      "description": "实现输入完整且可落地。"
+    },
+    "tdd_pre_implementation": {
+      "description": "新行为/BUG 的真实 RED 在 production change 之前成立。"
+    },
+    "tdd_post_implementation": {
+      "description": "GREEN 最小、REFACTOR 受保护且 BUG 红绿完整。"
+    },
+    "spec_compliance": {
+      "description": "实现符合冻结 authority 和 scope。"
+    },
+    "engineering_quality": {
+      "description": "工程质量、错误处理、可读性与约束。"
+    },
+    "maintainability": {
+      "description": "职责、耦合、重复和可测试性可维护。"
+    },
+    "evidence_health": {
+      "description": "最终代码 Review 的 Evidence 新鲜且可回查。"
+    },
+    "test_evidence": {
+      "description": "测试环境/命令/真实结果 Evidence 完整。"
+    }
+  },
+  "reviewSessionPolicy": {
+    "schemaVersion": 1,
+    "idPrefix": "RS-",
+    "sharedFreeze": [
+      "phase",
+      "revision",
+      "inputDigest",
+      "evidenceSnapshot",
+      "riskDetection",
+      "impactPlan"
+    ],
+    "independentAxisResults": true,
+    "reviewResultPerAxisProfile": true,
+    "executionIsolationRequired": true,
+    "preferredExecutionContext": "ISOLATED_AGENT_SESSION",
+    "sameOwnerContextAgentSwitchAllowed": false,
+    "fallbackExecutionContext": "INDEPENDENT_HUMAN_REVIEW_WITH_LIMITATION",
+    "notApplicablePolicy": "APPLICABILITY_DECISION_ONLY",
+    "registryRule": "ReviewSession is orchestration context; canonical ReviewResult remains exact-revision and independently concluded per profile/axis.",
+    "aiOrchestration": {
+      "riskPolicyRef": "assets/runtime/runtime-contract.json#/aiOrchestration/riskPolicy",
+      "inheritExecutionContext": true,
+      "highRiskMaySkipReview": false,
+      "reviewConclusionsCacheable": false
+    }
+  },
+  "deltaReviewPolicy": {
+    "enabled": true,
+    "planner": "scripts/impact_analysis.py",
+    "unknownImpact": "CONSERVATIVE_FULL_PROFILE",
+    "reviewResultReuseAcrossExactRevision": false,
+    "unaffectedCriterionAction": "RECAPTURE_OR_REBIND_CURRENT_REVISION_EVIDENCE",
+    "affectedCriterionAction": "INDEPENDENT_REVIEW_REQUIRED"
+  },
+  "riskReviewTemplates": {
+    "security": {
+      "axis": "security",
+      "reviewerAgent": "SecurityReviewAgent",
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "templateRef": "PT-SECURITY",
+      "purpose": "仅在安全边界、权限、敏感数据或注入面风险被检测时执行。",
+      "scopeSourceTypes": [
+        "diff",
+        "security_design",
+        "tests"
+      ],
+      "emitNotApplicableReviewResult": false
+    },
+    "performance": {
+      "axis": "performance",
+      "reviewerAgent": "PerformanceReviewAgent",
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "templateRef": "PT-PERFORMANCE",
+      "purpose": "仅在热路径、批处理、缓存或资源放大风险被检测时执行。",
+      "scopeSourceTypes": [
+        "diff",
+        "performance_requirements",
+        "metrics"
+      ],
+      "emitNotApplicableReviewResult": false
+    },
+    "data_migration": {
+      "axis": "data_migration",
+      "reviewerAgent": "DataMigrationReviewAgent",
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "templateRef": "PT-DATA-MIGRATION",
+      "purpose": "仅在 schema/data migration/backfill/rollback 风险被检测时执行。",
+      "scopeSourceTypes": [
+        "design",
+        "db_contract",
+        "migration_plan",
+        "diff",
+        "migration_tests"
+      ],
+      "emitNotApplicableReviewResult": false
+    },
+    "api_contract": {
+      "axis": "api_contract",
+      "reviewerAgent": "ApiContractReviewAgent",
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "templateRef": "PT-API-CONTRACT",
+      "purpose": "仅在 API/错误/幂等/兼容契约变化时执行。",
+      "scopeSourceTypes": [
+        "design",
+        "api_contract",
+        "diff",
+        "contract_tests"
+      ],
+      "emitNotApplicableReviewResult": false
+    },
+    "concurrency": {
+      "axis": "concurrency",
+      "reviewerAgent": "ConcurrencyReviewAgent",
+      "allowedPhases": [
+        "design",
+        "code_review"
+      ],
+      "templateRef": "PT-CONCURRENCY",
+      "purpose": "仅在锁、竞态、异步/队列顺序或共享可变状态风险被检测时执行。",
+      "scopeSourceTypes": [
+        "design",
+        "concurrency_model",
+        "diff",
+        "concurrency_design",
+        "tests"
+      ],
+      "emitNotApplicableReviewResult": false
+    },
+    "architecture_change": {
+      "axis": "architecture",
+      "reviewerAgent": "ArchitectureReviewAgent",
+      "allowedPhases": [
+        "implementation_plan",
+        "development",
+        "code_review"
+      ],
+      "templateRef": "PT-ARCHITECTURE",
+      "purpose": "仅在模块边界、依赖方向或大结构调整风险存在时增加架构专项轴。",
+      "scopeSourceTypes": [
+        "implementation_plan",
+        "design",
+        "implementation_contract",
+        "architecture_code",
+        "diff",
+        "business_flow",
+        "architecture_design",
+        "tests"
+      ],
+      "emitNotApplicableReviewResult": false
+    },
+    "impact_analysis": {
+      "axis": "impact_analysis",
+      "reviewerAgent": "ImpactAnalysisReviewAgent",
+      "allowedPhases": [
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "code_review"
+      ],
+      "templateRef": "PT-IMPACT-ANALYSIS",
+      "purpose": "仅在删除/迁移/状态关联/依赖影响风险存在时执行。",
+      "scopeSourceTypes": [
+        "dependency_impact",
+        "traceability",
+        "business_flow",
+        "business_model",
+        "design",
+        "diff",
+        "tests"
+      ],
+      "emitNotApplicableReviewResult": false
+    },
+    "cross_module_integration": {
+      "axis": "cross_module_integration",
+      "reviewerAgent": "CrossModuleIntegrationReviewAgent",
+      "allowedPhases": [
+        "requirement_analysis",
+        "business_model",
+        "design",
+        "code_review"
+      ],
+      "templateRef": "PT-CROSS-MODULE-INTEGRATION",
+      "purpose": "仅在跨模块、外部系统、补偿或部分成功风险存在时执行。",
+      "scopeSourceTypes": [
+        "cross_module_integration",
+        "traceability",
+        "business_flow",
+        "business_model",
+        "design",
+        "diff",
+        "tests"
+      ],
+      "emitNotApplicableReviewResult": false
+    }
+  }
+}

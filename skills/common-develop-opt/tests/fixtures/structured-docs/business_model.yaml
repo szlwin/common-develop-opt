@@ -1,0 +1,19 @@
+schemaVersion: 1
+artifact: business_model
+module:
+  code: MOD
+  name: 示例模块
+revision: BM-R01@example
+baseRevision: ""
+terms: []
+scenarios: []
+entities: []
+valueObjects: []
+aggregates: []
+invariants: []
+stateMachines: []
+services: []
+policies: []
+events: []
+businessErrors: []
+traceability: []

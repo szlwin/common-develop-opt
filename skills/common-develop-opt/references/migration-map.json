@@ -1,0 +1,715 @@
+{
+  "schemaVersion": 2,
+  "kind": "RESOURCE_MIGRATION_MAP",
+  "authority": "FORMAL_RESOURCE_CATALOGS",
+  "rules": {
+    "formalTopicsAreAuthoritative": true,
+    "historicalSnapshotsOutsideRuntime": true,
+    "sourceRole": "HISTORICAL_IDENTIFIER_NOT_READ_PATH",
+    "targetRole": "CURRENT_PACKAGE_PATH"
+  },
+  "references": [
+    {
+      "source": "references/acceptance-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/git-delivery/acceptance-core.md"
+    },
+    {
+      "source": "references/architecture-review-development.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/architecture-review-development.md"
+    },
+    {
+      "source": "references/archive-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/archive-core.md"
+    },
+    {
+      "source": "references/archive-documentation.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/archive-documentation.md"
+    },
+    {
+      "source": "references/auto-mode-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/auto-mode-core.md"
+    },
+    {
+      "source": "references/backend-code-reference.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/backend-code-reference.md"
+    },
+    {
+      "source": "references/baseline-integrity.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/baseline-integrity.md"
+    },
+    {
+      "source": "references/business-flow.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/business-flow.md"
+    },
+    {
+      "source": "references/business-model.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/business-model.md"
+    },
+    {
+      "source": "references/code-comments.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/code-comments.md"
+    },
+    {
+      "source": "references/collaboration-review.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/collaboration-review.md"
+    },
+    {
+      "source": "references/completion-gate-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/completion-gate-core.md"
+    },
+    {
+      "source": "references/cross-module-impact.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/cross-module-impact.md"
+    },
+    {
+      "source": "references/debugging-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/debugging-core.md"
+    },
+    {
+      "source": "references/debugging.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/debugging.md"
+    },
+    {
+      "source": "references/delivery-readiness.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/git-delivery/delivery-readiness.md"
+    },
+    {
+      "source": "references/design-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/design-core.md"
+    },
+    {
+      "source": "references/develop.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/develop.md"
+    },
+    {
+      "source": "references/documentation-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/documentation-core.md"
+    },
+    {
+      "source": "references/domain-governance.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/domain-governance.md"
+    },
+    {
+      "source": "references/engineering-knowledge-graph.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/engineering-knowledge-graph.md"
+    },
+    {
+      "source": "references/enum.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/enum.md"
+    },
+    {
+      "source": "references/evidence-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/evidence-core.md"
+    },
+    {
+      "source": "references/execution-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/execution-core.md"
+    },
+    {
+      "source": "references/git-checkpoint-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/git-delivery/git-checkpoint-core.md"
+    },
+    {
+      "source": "references/git-checkpoint.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/git-delivery/git-checkpoint.md"
+    },
+    {
+      "source": "references/html-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/html-core.md"
+    },
+    {
+      "source": "references/implementation-contract.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/implementation-contract.md"
+    },
+    {
+      "source": "references/implementation-plan.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/implementation-plan.md"
+    },
+    {
+      "source": "references/implementation-strategy-example.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/implementation-strategy-example.md"
+    },
+    {
+      "source": "references/implementation-strategy.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/implementation-strategy.md"
+    },
+    {
+      "source": "references/integration-testing.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/integration-testing.md"
+    },
+    {
+      "source": "references/lifecycle-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/lifecycle-core.md"
+    },
+    {
+      "source": "references/long-task-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/long-task-core.md"
+    },
+    {
+      "source": "references/maintenance-entrypoints.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/maintenance-entrypoints.md"
+    },
+    {
+      "source": "references/manual-review-guide.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/manual-review-guide.md"
+    },
+    {
+      "source": "references/model-code-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/model-code-core.md"
+    },
+    {
+      "source": "references/onepage-html.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/onepage-html.md"
+    },
+    {
+      "source": "references/orchestration-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/orchestration-core.md"
+    },
+    {
+      "source": "references/page-design-example.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/page-design-example.md"
+    },
+    {
+      "source": "references/page-design.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/specialist/page-design.md"
+    },
+    {
+      "source": "references/platform-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/platform-core.md"
+    },
+    {
+      "source": "references/project-adoption.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/project-adoption.md"
+    },
+    {
+      "source": "references/red-green-refactor.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/red-green-refactor.md"
+    },
+    {
+      "source": "references/relationship-impact.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/relationship-impact.md"
+    },
+    {
+      "source": "references/request-intake.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/request-intake.md"
+    },
+    {
+      "source": "references/requirement-acceptance.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/requirement-acceptance.md"
+    },
+    {
+      "source": "references/requirement-analysis-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/requirement-analysis-core.md"
+    },
+    {
+      "source": "references/requirement-confirmation-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/requirement-confirmation-core.md"
+    },
+    {
+      "source": "references/requirement-traceability.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/requirement-design/requirement-traceability.md"
+    },
+    {
+      "source": "references/review-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/review-core.md"
+    },
+    {
+      "source": "references/review-evidence.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/review-evidence.md"
+    },
+    {
+      "source": "references/review-knowledge.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/review-knowledge.md"
+    },
+    {
+      "source": "references/review-result-contract.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/review-result-contract.md"
+    },
+    {
+      "source": "references/risk-verification.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/risk-verification.md"
+    },
+    {
+      "source": "references/roles.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/review-agents/roles.md"
+    },
+    {
+      "source": "references/runtime-contract.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/runtime-contract.md"
+    },
+    {
+      "source": "references/scope-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/scope-core.md"
+    },
+    {
+      "source": "references/scope.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/scope.md"
+    },
+    {
+      "source": "references/semantic-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/semantic-core.md"
+    },
+    {
+      "source": "references/task-context-optimization.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/task-context-optimization.md"
+    },
+    {
+      "source": "references/task-verification-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/task-verification-core.md"
+    },
+    {
+      "source": "references/tdd-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/tdd-core.md"
+    },
+    {
+      "source": "references/tdd-evidence.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/tdd-evidence.md"
+    },
+    {
+      "source": "references/tdd-role-boundary.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/tdd-role-boundary.md"
+    },
+    {
+      "source": "references/test-completion.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-completion.md"
+    },
+    {
+      "source": "references/test-coverage-complexity.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-coverage-complexity.md"
+    },
+    {
+      "source": "references/test-data-isolation.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-data-isolation.md"
+    },
+    {
+      "source": "references/test-environment.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-environment.md"
+    },
+    {
+      "source": "references/test-evidence.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-evidence.md"
+    },
+    {
+      "source": "references/test-matrix-design.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-matrix-design.md"
+    },
+    {
+      "source": "references/test-persistence.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-persistence.md"
+    },
+    {
+      "source": "references/test-seam.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/test-seam.md"
+    },
+    {
+      "source": "references/testing-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/testing-core.md"
+    },
+    {
+      "source": "references/verification-integration.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/verification-integration.md"
+    },
+    {
+      "source": "references/web-code-reference.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/implementation/web-code-reference.md"
+    },
+    {
+      "source": "references/wk-ar-state-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/wk-ar-state-core.md"
+    },
+    {
+      "source": "references/wk-cli.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/recovery-archive/wk-cli.md"
+    },
+    {
+      "source": "references/work-mode-core.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/core/work-mode-core.md"
+    },
+    {
+      "source": "references/workflow-verification.md",
+      "decision": "FORMAL_ATOMIC",
+      "target": "references/testing/workflow-verification.md"
+    }
+  ],
+  "assets": [
+    {
+      "source": "assets/acceptance-assertion.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/review/acceptance-assertion.schema.json"
+    },
+    {
+      "source": "assets/artifact-footprint-policy.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/artifact-footprint-policy.json"
+    },
+    {
+      "source": "assets/artifact-relation.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/artifact-relation.schema.json"
+    },
+    {
+      "source": "assets/capability-pack-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/capability-pack-contract.json"
+    },
+    {
+      "source": "assets/capability-result.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/capability-result.schema.json"
+    },
+    {
+      "source": "assets/current-manifest.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/current-manifest.schema.json"
+    },
+    {
+      "source": "assets/delivery-readiness-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/delivery-readiness-contract.json"
+    },
+    {
+      "source": "assets/development-task-plan.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/development-task-plan.schema.json"
+    },
+    {
+      "source": "assets/development-task-review.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/development-task-review.schema.json"
+    },
+    {
+      "source": "assets/doc-invariants.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/doc-invariants.json"
+    },
+    {
+      "source": "assets/domain-semantic-index.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/domain-semantic-index.schema.json"
+    },
+    {
+      "source": "assets/engineering-graph.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/engineering-graph.schema.json"
+    },
+    {
+      "source": "assets/evidence.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/review/evidence.schema.json"
+    },
+    {
+      "source": "assets/frontend-code-spec.template.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/frontend-code-spec.template.json"
+    },
+    {
+      "source": "assets/git-checkpoint.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/git-checkpoint.schema.json"
+    },
+    {
+      "source": "assets/git-connector-receipt.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/git-connector-receipt.schema.json"
+    },
+    {
+      "source": "assets/git-connector-request.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/git-connector-request.schema.json"
+    },
+    {
+      "source": "assets/incremental-validity-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/runtime/incremental-validity-contract.json"
+    },
+    {
+      "source": "assets/long-task/git_checkpoints.yaml",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/storage/long-task/git_checkpoints.yaml"
+    },
+    {
+      "source": "assets/long-task/record-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/storage/long-task/record-contract.json"
+    },
+    {
+      "source": "assets/manual-review-guides.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/review/manual-review-guides.json"
+    },
+    {
+      "source": "assets/project-constraints.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/runtime/project-constraints.schema.json"
+    },
+    {
+      "source": "assets/project-governance.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/runtime/project-governance.schema.json"
+    },
+    {
+      "source": "assets/release-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/release-contract.json"
+    },
+    {
+      "source": "assets/request-intake.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/request-intake.schema.json"
+    },
+    {
+      "source": "assets/review-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/review/review-contract.json"
+    },
+    {
+      "source": "assets/review-result.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/review/review-result.schema.json"
+    },
+    {
+      "source": "assets/review-session.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/review/review-session.schema.json"
+    },
+    {
+      "source": "assets/risk-detection-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/runtime/risk-detection-contract.json"
+    },
+    {
+      "source": "assets/runtime-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/runtime/runtime-contract.json"
+    },
+    {
+      "source": "assets/semantic-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/runtime/semantic-contract.json"
+    },
+    {
+      "source": "assets/stage-result.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/review/stage-result.schema.json"
+    },
+    {
+      "source": "assets/storage-contract.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/storage/storage-contract.json"
+    },
+    {
+      "source": "assets/structured-docs/api.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/api.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/archive-audit.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/archive-audit.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/archive-gate-result.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/archive-gate-result.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/archive-manifest.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/archive-manifest.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/business-flow.changeset.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/business-flow.changeset.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/business-flow.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/business-flow.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/business-model.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/business-model.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/changeset.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/changeset.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/db.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/db.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/dependency-impact.changeset.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/dependency-impact.changeset.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/dependency-impact.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/dependency-impact.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/design-topic.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/design-topic.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/design.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/design.template.md"
+    },
+    {
+      "source": "assets/structured-docs/domain-context-map.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/domain-context-map.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/knowledge-archive.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/knowledge-archive.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/merge-plan.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/merge-plan.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/module_desc.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/module_desc.template.md"
+    },
+    {
+      "source": "assets/structured-docs/page_design.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/page_design.template.md"
+    },
+    {
+      "source": "assets/structured-docs/project-index.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/project-index.template.md"
+    },
+    {
+      "source": "assets/structured-docs/requirement.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/requirement.template.md"
+    },
+    {
+      "source": "assets/structured-docs/requirement_list.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/requirement_list.template.md"
+    },
+    {
+      "source": "assets/structured-docs/test_case.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/test_case.template.md"
+    },
+    {
+      "source": "assets/structured-docs/version-delta.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/version-delta.schema.json"
+    },
+    {
+      "source": "assets/structured-docs/version-summary.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/documents/structured-docs/version-summary.template.md"
+    },
+    {
+      "source": "assets/task-verification-result.schema.json",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/development/task-verification-result.schema.json"
+    },
+    {
+      "source": "assets/work.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/work.template.md"
+    },
+    {
+      "source": "assets/work_record.template.md",
+      "decision": "FORMAL_CLASSIFIED",
+      "target": "assets/package/work_record.template.md"
+    }
+  ]
+}

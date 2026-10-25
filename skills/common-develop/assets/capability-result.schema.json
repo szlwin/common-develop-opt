@@ -1,0 +1,420 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/common-develop/capability-result.schema.json",
+  "title": "Common Develop Internal Capability Result",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/artifactRef"
+    },
+    {
+      "$ref": "#/$defs/documentValidationResult"
+    },
+    {
+      "$ref": "#/$defs/reviewGateResult"
+    },
+    {
+      "$ref": "#/$defs/lifecycleDecision"
+    },
+    {
+      "$ref": "#/$defs/aiExecutionPackage"
+    },
+    {
+      "$ref": "#/$defs/commandResultRegistration"
+    }
+  ],
+  "$defs": {
+    "artifactRef": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "revision"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ARTIFACT_REF"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "documentValidationResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "status",
+        "artifact",
+        "errors",
+        "warnings"
+      ],
+      "properties": {
+        "kind": {
+          "const": "DOCUMENT_VALIDATION_RESULT"
+        },
+        "status": {
+          "enum": [
+            "PASSED",
+            "FAILED",
+            "BLOCKED"
+          ]
+        },
+        "artifact": {
+          "$ref": "#/$defs/artifactRef"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "reviewGateResult": {
+      "type": "object",
+      "required": [
+        "kind",
+        "status",
+        "phase",
+        "revision",
+        "evidenceIds",
+        "reasonCodes"
+      ],
+      "properties": {
+        "kind": {
+          "const": "REVIEW_GATE_RESULT"
+        },
+        "status": {
+          "enum": [
+            "PASSED",
+            "FAILED",
+            "BLOCKED"
+          ]
+        },
+        "phase": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "reasonCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycleDecision": {
+      "type": "object",
+      "required": [
+        "kind",
+        "decision",
+        "reasonCodes",
+        "recommendedCommand"
+      ],
+      "properties": {
+        "kind": {
+          "const": "LIFECYCLE_DECISION"
+        },
+        "decision": {
+          "enum": [
+            "EXECUTION_REQUIRED",
+            "PUBLISH_READY",
+            "REVIEW_REQUIRED",
+            "VALIDATION_REQUIRED",
+            "RECONCILIATION_REQUIRED",
+            "CLOSURE_ONLY",
+            "ADVANCE_READY",
+            "COMPLETED",
+            "BLOCKED"
+          ]
+        },
+        "reasonCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "recommendedCommand": {
+          "type": "string"
+        },
+        "actionPlan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actionPlanEntry"
+          }
+        },
+        "blockingReasons": {
+          "type": "array"
+        },
+        "requiredInputs": {
+          "type": "array"
+        },
+        "stopConditions": {
+          "type": "array"
+        },
+        "repairPlan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/repairPlanEntry"
+          }
+        },
+        "requiresUserDecision": {
+          "type": "boolean"
+        },
+        "nextReviewer": {
+          "type": "string"
+        },
+        "riskLevel": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "governanceProfile": {
+          "type": "string"
+        },
+        "planDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "executionContext": {
+          "enum": [
+            "OWNER_SESSION",
+            "CURRENT_SESSION_ALLOWED",
+            "ISOLATED_REVIEW_SESSION_REQUIRED"
+          ]
+        },
+        "reasonCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "actionPlanEntry": {
+      "type": "object",
+      "required": [
+        "action",
+        "command",
+        "reason"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[<{][A-Z][A-Z0-9_ -]*[>}]"
+          }
+        },
+        "reason": {
+          "type": "string"
+        },
+        "atomic": {
+          "type": "boolean"
+        },
+        "requiredAgent": {
+          "type": "string"
+        },
+        "executionContext": {
+          "enum": [
+            "OWNER_SESSION",
+            "CURRENT_SESSION_ALLOWED",
+            "ISOLATED_REVIEW_SESSION_REQUIRED"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "repairPlanEntry": {
+      "type": "object",
+      "required": [
+        "command",
+        "reason"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[<{][A-Z][A-Z0-9_ -]*[>}]"
+          }
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "aiExecutionPackage": {
+      "type": "object",
+      "required": [
+        "kind",
+        "action",
+        "status",
+        "actionPlan",
+        "executionContext",
+        "requiresUserDecision"
+      ],
+      "properties": {
+        "kind": {
+          "const": "AI_EXECUTION_PACKAGE"
+        },
+        "action": {
+          "enum": [
+            "begin",
+            "next",
+            "progress",
+            "finish"
+          ]
+        },
+        "status": {
+          "enum": [
+            "READY",
+            "BLOCKED",
+            "PARTIAL",
+            "DONE"
+          ]
+        },
+        "actionPlan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actionPlanEntry"
+          }
+        },
+        "repairPlan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/repairPlanEntry"
+          }
+        },
+        "planDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "executionContext": {
+          "enum": [
+            "OWNER_SESSION",
+            "CURRENT_SESSION_ALLOWED",
+            "ISOLATED_REVIEW_SESSION_REQUIRED"
+          ]
+        },
+        "reasonCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "requiresUserDecision": {
+          "type": "boolean"
+        },
+        "requiredInputs": {
+          "type": "array"
+        },
+        "blockingReasons": {
+          "type": "array"
+        },
+        "stopConditions": {
+          "type": "array"
+        },
+        "nextReviewer": {
+          "type": "string"
+        },
+        "validationCwd": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "commandResultRegistration": {
+      "type": "object",
+      "required": [
+        "kind",
+        "status",
+        "attemptId",
+        "commandId",
+        "evidence",
+        "gate"
+      ],
+      "properties": {
+        "kind": {
+          "const": "COMMAND_RESULT_REGISTRATION"
+        },
+        "status": {
+          "const": "RECORDED"
+        },
+        "attemptId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commandId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "acceptance": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "gate": {
+          "type": "object"
+        },
+        "idempotent": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

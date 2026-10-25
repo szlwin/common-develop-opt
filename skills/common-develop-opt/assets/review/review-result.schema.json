@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/review-result.schema.json",
+  "title": "Common Develop Compact Review Result Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_id",
+    "assertion_id",
+    "acceptance_id",
+    "profile_id",
+    "reviewer",
+    "review_phase",
+    "review_revision",
+    "assertion_phase",
+    "assertion_revision",
+    "result",
+    "conclusion_mode",
+    "confirmed_at",
+    "confirmed_by",
+    "confirmation_mode",
+    "conclusion",
+    "evidence_ids",
+    "default_answer"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "review_id": {
+      "type": "string",
+      "pattern": "^REV-[0-9]{6}$"
+    },
+    "assertion_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acceptance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_phase": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assertion_phase": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assertion_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conclusion_mode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confirmed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confirmed_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confirmation_mode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conclusion": {
+      "type": "object"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^EVD-[0-9]{6}$"
+      },
+      "uniqueItems": true
+    },
+    "default_answer": {
+      "type": "string"
+    },
+    "drafted_by_agent": {
+      "type": "string"
+    },
+    "issue_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "answer_exceptions": {
+      "type": "object"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

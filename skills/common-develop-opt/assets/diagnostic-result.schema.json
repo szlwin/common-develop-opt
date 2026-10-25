@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:common-develop-opt:diagnostic-result",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "toolVersion": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "status": {
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "UNKNOWN",
+        "STALE",
+        "CURRENT",
+        "CHANGED",
+        "CONSISTENT"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "artifact": {
+      "$ref": "urn:common-develop-opt:artifact-identity#/$defs/record"
+    },
+    "classification": {
+      "enum": [
+        "CONSISTENT",
+        "NEW_BLOCKER",
+        "CANDIDATE_MORE_PERMISSIVE",
+        "BEHAVIOR_UNKNOWN"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "toolVersion",
+    "status"
+  ]
+}

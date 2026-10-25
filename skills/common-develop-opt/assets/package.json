@@ -1,0 +1,7 @@
+{
+  "name": "common-develop-opt",
+  "version": "0.3.0",
+  "python": ">=3.9",
+  "protocolVersion": 1,
+  "digestAlgorithm": "sha256-path-bytes-manifest-v1"
+}

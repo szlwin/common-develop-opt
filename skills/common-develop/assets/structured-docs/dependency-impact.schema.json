@@ -1,0 +1,562 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/dependency-impact.schema.json",
+  "title": "需求关联、影响策略与跨模块实现映射",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifact",
+    "scope",
+    "revision",
+    "nodes",
+    "relationships",
+    "impactPolicies",
+    "crossModuleImplementations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "artifact": {
+      "const": "dependency_impact"
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseRevision": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    },
+    "impactPolicies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/impactPolicy"
+      }
+    },
+    "crossModuleImplementations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/crossModuleImplementation"
+      }
+    }
+  },
+  "$defs": {
+    "stringArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project",
+        "version"
+      ],
+      "properties": {
+        "project": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string"
+        },
+        "targetIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "name",
+        "module",
+        "refs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_-]+$"
+        },
+        "type": {
+          "enum": [
+            "REQUIREMENT",
+            "FEATURE",
+            "BUSINESS_RULE",
+            "ACCEPTANCE_CRITERION",
+            "MODULE",
+            "PROCESS",
+            "DATA_OBJECT",
+            "API",
+            "EVENT",
+            "TEST_CASE",
+            "SYSTEM",
+            "DOMAIN",
+            "BOUNDED_CONTEXT",
+            "TERM",
+            "ENTITY",
+            "VALUE_OBJECT",
+            "AGGREGATE",
+            "INVARIANT",
+            "STATE_MACHINE",
+            "DOMAIN_SERVICE",
+            "COMPONENT"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ACTIVE",
+            "PROPOSED",
+            "STALE",
+            "SUPERSEDED",
+            "DEPRECATED"
+          ]
+        },
+        "refs": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "from",
+        "to",
+        "type",
+        "direction",
+        "rationale",
+        "conditions",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^REL-[A-Z0-9_-]+$"
+        },
+        "from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "REFINES",
+            "DEPENDS_ON",
+            "CONFLICTS_WITH",
+            "SUPERSEDES",
+            "IMPLEMENTED_BY",
+            "VERIFIED_BY",
+            "AFFECTS",
+            "TRIGGERS",
+            "PRECONDITION_OF",
+            "COMPENSATES",
+            "CANCELS",
+            "SHARES_INVARIANT_WITH",
+            "MUTUALLY_EXCLUSIVE",
+            "CONTAINS",
+            "OWNS",
+            "CONSUMES",
+            "TRANSLATES_TO",
+            "PROTECTED_BY",
+            "USES_TERM",
+            "EXPOSES",
+            "PROVIDES_TO",
+            "CONSUMES_FROM",
+            "COLLABORATES_WITH",
+            "UPSTREAM_OF",
+            "DOWNSTREAM_OF"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "DIRECTED",
+            "BIDIRECTIONAL"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conditions": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "evidenceRefs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "status": {
+          "enum": ["ACTIVE", "DEPRECATED", "SUPERSEDED"]
+        }
+      }
+    },
+    "impactPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sourceRef",
+        "sourceAction",
+        "targetRefs",
+        "policy",
+        "conditions",
+        "consistency",
+        "transactionBoundary",
+        "idempotency",
+        "failureHandling",
+        "compensation",
+        "traceIds",
+        "testCaseIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^IMP-[A-Z0-9_-]+$"
+        },
+        "sourceRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceAction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetRefs": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "policy": {
+          "enum": [
+            "REJECT_OPERATION",
+            "CASCADE_HARD_DELETE",
+            "CASCADE_SOFT_DELETE",
+            "DETACH_RELATION",
+            "TRANSFER_OWNERSHIP",
+            "RETAIN_UNCHANGED",
+            "RETAIN_FOR_AUDIT",
+            "CANCEL_DEPENDENT",
+            "TRIGGER_COMPENSATION",
+            "TRIGGER_FOLLOWUP",
+            "MANUAL_DECISION",
+            "NO_ACTION"
+          ]
+        },
+        "conditions": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "consistency": {
+          "enum": [
+            "ATOMIC",
+            "EVENTUAL",
+            "BEST_EFFORT",
+            "MANUAL"
+          ]
+        },
+        "transactionBoundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "idempotency": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failureHandling": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compensation": {
+          "type": "string"
+        },
+        "historyHandling": {
+          "type": "string"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "testCaseIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "evidenceRefs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "status": {
+          "enum": ["ACTIVE", "DEPRECATED", "SUPERSEDED"]
+        }
+      }
+    },
+    "crossModuleImplementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "businessStepRefs",
+        "businessFlowRef",
+        "id",
+        "name",
+        "trigger",
+        "participants",
+        "steps",
+        "successCriteria",
+        "failurePaths",
+        "traceIds",
+        "testCaseIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CMI-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trigger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "participants": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/crossModuleParticipant"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/crossModuleImplementationStep"
+          }
+        },
+        "successCriteria": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "failurePaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/crossModuleImplementationFailurePath"
+          }
+        },
+        "traceIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "testCaseIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "diagramRef": {
+          "type": "string"
+        },
+        "status": {
+          "enum": ["ACTIVE", "DEPRECATED", "SUPERSEDED"]
+        },
+        "businessFlowRef": {
+          "type": "string",
+          "pattern": "^FLOW-[A-Z0-9_-]+$"
+        },
+        "businessStepRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^STEP-[A-Z0-9_-]+$"
+          }
+        }
+      }
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "crossModuleParticipant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "module",
+        "responsibility"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CMPART-[A-Z0-9_-]+$"
+        },
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "responsibility": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contractRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "crossModuleImplementationStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "order",
+        "from",
+        "to",
+        "interactionType",
+        "action",
+        "preconditions",
+        "postconditions",
+        "idempotency",
+        "failureHandling",
+        "compensation",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CMSTEP-[A-Z0-9_-]+$"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interactionType": {
+          "enum": [
+            "COMMAND",
+            "QUERY",
+            "SYNC_API",
+            "ASYNC_EVENT",
+            "CALLBACK",
+            "SCHEDULED",
+            "DATA_READ",
+            "DATA_WRITE"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contractRef": {
+          "type": "string"
+        },
+        "preconditions": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "postconditions": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "idempotency": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timeout": {
+          "type": "string"
+        },
+        "failureHandling": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compensation": {
+          "type": "string"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "crossModuleImplementationFailurePath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "atStep",
+        "condition",
+        "result",
+        "compensationSteps",
+        "manualRecovery",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CMFAIL-[A-Z0-9_-]+$"
+        },
+        "atStep": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^CMSTEP-[A-Z0-9_-]+$"
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compensationSteps": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "manualRecovery": {
+          "type": "string"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/git-connector-request.schema.json",
+  "title": "common-develop GitHub Connector checkpoint request",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "provider",
+    "operation",
+    "repository",
+    "remote",
+    "remoteUrl",
+    "branch",
+    "checkpointId",
+    "localCheckpoint",
+    "localBase",
+    "treeChanges",
+    "constraints",
+    "requestDigest",
+    "requestId"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "provider": {
+      "const": "GITHUB_CONNECTOR"
+    },
+    "operation": {
+      "const": "PUBLISH_OR_VERIFY_CHECKPOINT"
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[^/\\s]+/[^/\\s]+$"
+    },
+    "remote": {
+      "type": "string",
+      "minLength": 1
+    },
+    "remoteUrl": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checkpointId": {
+      "type": "string",
+      "pattern": "^CP-"
+    },
+    "knownRemoteParentSha": {
+      "type": "string"
+    },
+    "localCheckpoint": {
+      "type": "object",
+      "required": [
+        "commitSha",
+        "treeSha",
+        "normalizedMessage",
+        "normalizedMessageSha256"
+      ],
+      "properties": {
+        "commitSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "treeSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "normalizedMessage": {
+          "type": "string"
+        },
+        "normalizedMessageSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "localBase": {
+      "type": "object",
+      "required": [
+        "commitSha",
+        "treeSha",
+        "normalizedMessageSha256"
+      ],
+      "properties": {
+        "commitSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "treeSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40,64}$"
+        },
+        "normalizedMessageSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "treeChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "operation",
+          "connectorTreeElement"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operation": {
+            "enum": [
+              "UPSERT",
+              "DELETE"
+            ]
+          },
+          "mode": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "blob",
+              "commit"
+            ]
+          },
+          "localObjectSha": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "contentSha256": {
+            "type": "string"
+          },
+          "contentBase64": {
+            "type": "string"
+          },
+          "connectorCreateBlob": {
+            "type": "object"
+          },
+          "connectorTreeElement": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "constraints": {
+      "type": "object"
+    },
+    "connectorProcedure": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "requestDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "requestId": {
+      "type": "string",
+      "pattern": "^GCR-"
+    }
+  },
+  "additionalProperties": false
+}

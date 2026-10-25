@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "kind": "DOCUMENTATION_AUTHORITY_MAP",
+  "authority": "common-develop-opt",
+  "rules": {
+    "parameters": "scripts --help",
+    "machineShapes": "assets/**/*.schema.json",
+    "identity": "scripts/artifact_identity.py",
+    "dependencies": "scripts/discover_dependencies.py",
+    "candidateInputs": "scripts/candidate_inputs.py",
+    "reviewInputs": "scripts/review_lifecycle.py",
+    "faultGuidance": "references/diagnostics/fault-codes.md",
+    "migrationInventory": "references/migration-map.json"
+  },
+  "topics": {
+    "lifecycle": "references/core/lifecycle-core.md",
+    "requirementDesign": "references/requirement-and-design.md",
+    "developmentTesting": "references/tdd-and-testing.md",
+    "reviewEvidence": "references/review-agents/review-evidence.md",
+    "archiveCompatibility": "references/core/compatibility-boundary.md",
+    "gitCheckpoint": "references/git-and-delivery.md"
+  },
+  "manuals": {
+    "zh-CN": "SKILL.md",
+    "en": "README.md"
+  },
+  "authoritativeSources": {
+    "assetCatalog": "assets/asset-catalog.json"
+  }
+}

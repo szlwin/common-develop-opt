@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://common-develop.local/schemas/project-governance.schema.json",
+  "title": "common-develop advisory project governance profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "signals",
+    "recommendedWorkflow",
+    "recommendedMode",
+    "confidence",
+    "advisory",
+    "overridable",
+    "overrideAllowed",
+    "overrideReasonRequired"
+  ],
+  "properties": {
+    "profile": {
+      "enum": [
+        "SMALL",
+        "PRODUCT",
+        "HIGH_RISK"
+      ]
+    },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "recommendedWorkflow": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommendedMode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confidence": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "advisory": {
+      "const": true
+    },
+    "overridable": {
+      "const": true
+    },
+    "projectRoot": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "string"
+    },
+    "inferredSignals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "explicitSignals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "impactSignals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "overrideAllowed": {
+      "const": true
+    },
+    "overrideReasonRequired": {
+      "const": true
+    },
+    "currentFacts": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actualRisk": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommendedChoice": {
+      "type": "string",
+      "minLength": 1
+    },
+    "why": {
+      "type": "string",
+      "minLength": 1
+    },
+    "whatWillHappen": {
+      "type": "string",
+      "minLength": 1
+    },
+    "whatWillNotChange": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nextCommand": {
+      "$ref": "#/$defs/nextCommand"
+    },
+    "decisionGuide": {
+      "$ref": "#/$defs/decisionGuide"
+    }
+  },
+  "$defs": {
+    "nextCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command",
+        "reason",
+        "requiredAgent",
+        "requiresConfirmation",
+        "readOnly"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requiredAgent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requiresConfirmation": {
+          "type": "boolean"
+        },
+        "readOnly": {
+          "type": "boolean"
+        }
+      }
+    },
+    "decisionGuide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currentFacts",
+        "actualRisk",
+        "recommendedChoice",
+        "why",
+        "whatWillHappen",
+        "whatWillNotChange",
+        "nextCommand",
+        "advisory",
+        "overrideAllowed",
+        "overrideReasonRequired"
+      ],
+      "properties": {
+        "currentFacts": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actualRisk": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recommendedChoice": {
+          "type": "string",
+          "minLength": 1
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whatWillHappen": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whatWillNotChange": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextCommand": {
+          "$ref": "#/$defs/nextCommand"
+        },
+        "advisory": {
+          "const": true
+        },
+        "overrideAllowed": {
+          "const": true
+        },
+        "overrideReasonRequired": {
+          "const": true
+        }
+      }
+    }
+  }
+}

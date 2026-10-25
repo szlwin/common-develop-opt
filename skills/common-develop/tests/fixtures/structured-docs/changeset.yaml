@@ -1,0 +1,37 @@
+schemaVersion: 1
+changeSet:
+  id: "CHG-V_1.0-MOD-MOD0001"
+  version: "V_1.0"
+  module: "MOD"
+  featureCode: "MOD0001"
+  reason: "新增已确认业务术语"
+  baseRevisions:
+    business_model: "BM-R01@example"
+  resultRevisions:
+    business_model: "BM-R02@example"
+  affectedTraceIds:
+    - "TR-MOD0001-001"
+operations:
+  -
+    artifact: "business_model"
+    operation: "add"
+    collection: "terms"
+    targetId: "TERM-ORDER"
+    after:
+      id: "TERM-ORDER"
+      name: "订单"
+      definition: "用户提交并由系统持续跟踪状态的交易对象。"
+      forbiddenSynonyms: []
+      sourceRefs:
+        - "requirement.md#TERM-ORDER"
+    reason: "补充已确认领域术语"
+  -
+    artifact: "business_model"
+    operation: "add"
+    collection: "traceability"
+    targetId: "TR-MOD0001-001"
+    after:
+      traceId: "TR-MOD0001-001"
+      modelRefs:
+        - "TERM-ORDER"
+    reason: "建立版本增量与业务模型项的追踪关系"

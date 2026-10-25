@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/design-topic.schema.json",
+  "title": "稳定设计主题或独立页面快照归档记录",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifactType",
+    "stableId",
+    "module",
+    "sourceRef",
+    "targetRef",
+    "baseRevision",
+    "sourceRevision",
+    "resultRevision",
+    "sourceDigest",
+    "targetDigest",
+    "resultDigest",
+    "affectedStableIds",
+    "status"
+  ],
+  "properties": {
+    "artifactType": {
+      "enum": [
+        "design_topic",
+        "page_behavior"
+      ]
+    },
+    "stableId": {
+      "type": "string",
+      "pattern": "^(DESIGN|PAGE)-[A-Z0-9_-]+$"
+    },
+    "module": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_]+$"
+    },
+    "sourceRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseRevision": {
+      "type": "string"
+    },
+    "sourceRevision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resultRevision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "targetDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "resultDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "affectedStableIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "status": {
+      "const": "READY"
+    }
+  }
+}

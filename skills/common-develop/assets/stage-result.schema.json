@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/common-develop/stage-result.schema.json",
+  "title": "common-develop Agent Stage Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "phase",
+    "produced_by_agent",
+    "input_revisions",
+    "output_revision",
+    "evidence_ids",
+    "trace_refs",
+    "changed_files",
+    "open_issue_ids",
+    "risks",
+    "next_action",
+    "next_agent"
+  ],
+  "properties": {
+    "phase": {
+      "type": "string",
+      "minLength": 1
+    },
+    "produced_by_agent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_revisions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "output_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "trace_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "changed_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "open_issue_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "next_agent": {
+      "type": "string"
+    },
+    "actionPlan": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/actionPlanEntry"
+      }
+    },
+    "blockingReasons": {
+      "type": "array"
+    },
+    "requiredInputs": {
+      "type": "array"
+    },
+    "stopConditions": {
+      "type": "array"
+    },
+    "repairPlan": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/repairPlanEntry"
+      }
+    },
+    "requiresUserDecision": {
+      "type": "boolean"
+    },
+    "nextReviewer": {
+      "type": "string"
+    },
+    "riskLevel": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "governanceProfile": {
+      "type": "string"
+    },
+    "planDigest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "executionContext": {
+      "enum": [
+        "OWNER_SESSION",
+        "CURRENT_SESSION_ALLOWED",
+        "ISOLATED_REVIEW_SESSION_REQUIRED"
+      ]
+    },
+    "reasonCode": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "actionPlanEntry": {
+      "type": "object",
+      "required": [
+        "action",
+        "command",
+        "reason"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[<{][A-Z][A-Z0-9_ -]*[>}]"
+          }
+        },
+        "reason": {
+          "type": "string"
+        },
+        "atomic": {
+          "type": "boolean"
+        },
+        "executionContext": {
+          "enum": [
+            "OWNER_SESSION",
+            "CURRENT_SESSION_ALLOWED",
+            "ISOLATED_REVIEW_SESSION_REQUIRED"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "repairPlanEntry": {
+      "type": "object",
+      "required": [
+        "command",
+        "reason"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[<{][A-Z][A-Z0-9_ -]*[>}]"
+          }
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

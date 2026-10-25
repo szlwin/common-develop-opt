@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 2,
+  "kind": "INTERNAL_CAPABILITY_PACKS",
+  "singleAuthoritySkill": "common-develop",
+  "releaseUnit": "ATOMIC",
+  "rule": "Capability packs are internal modules of common-develop, not independently installable, triggerable, or versioned Skills.",
+  "entryLayer": {
+    "skillEntrypoint": "SKILL.md",
+    "cliEntrypoints": [
+      "scripts/wk.py",
+      "scripts/ai_context.py",
+      "scripts/cli_help.py"
+    ],
+    "supportCliEntrypoints": [
+      "scripts/artifact_footprint.py",
+      "scripts/auto_remediation.py",
+      "scripts/baseline_guard.py",
+      "scripts/capability_packs.py",
+      "scripts/check_skill.py",
+      "scripts/context_resolver.py",
+      "scripts/context_routing.py",
+      "scripts/execution_evidence.py",
+      "scripts/git_checkpoint.py",
+      "scripts/independent_test_environment.py",
+      "scripts/project_environment.py",
+      "scripts/quality_gate.py",
+      "scripts/reference_reader.py",
+      "scripts/render_relationships.py",
+      "scripts/request_intake.py",
+      "scripts/review_session.py",
+      "scripts/runtime_contract.py",
+      "scripts/semantic_audit.py",
+      "scripts/task_layout.py",
+      "scripts/governance_profile.py",
+      "scripts/project_constraints.py"
+    ],
+    "moduleInterfaces": [],
+    "responsibilities": [
+      "request_intake",
+      "capability_pack_resolution",
+      "context_routing",
+      "cross_pack_orchestration",
+      "bounded_result_reporting"
+    ],
+    "lifecycleEventMutation": "FORBIDDEN"
+  },
+  "sharedKernel": {
+    "authorityRefs": [
+      "assets/runtime-contract.json",
+      "assets/review-contract.json",
+      "context-routing.json",
+      "assets/semantic-contract.json",
+      "assets/long-task/record-contract.json",
+      "assets/release-contract.json",
+      "ai/source-map.json"
+    ],
+    "implementationPaths": [
+      "scripts/_core",
+      "scripts/agent_context.py",
+      "scripts/contract_normalization.py",
+      "scripts/common_utils.py"
+    ],
+    "interfaceContracts": {
+      "artifactRef": "assets/capability-result.schema.json#/$defs/artifactRef",
+      "documentValidationResult": "assets/capability-result.schema.json#/$defs/documentValidationResult",
+      "reviewGateResult": "assets/capability-result.schema.json#/$defs/reviewGateResult",
+      "lifecycleDecision": "assets/capability-result.schema.json#/$defs/lifecycleDecision"
+    }
+  },
+  "packs": [
+    {
+      "id": "document-facts",
+      "name": "文档事实",
+      "purpose": "Produce and validate current requirement, design, model, and flow facts plus version-local API/DB contract deltas without advancing lifecycle state.",
+      "cliEntrypoints": [
+        "scripts/requirement_doc.py",
+        "scripts/design_doc.py",
+        "scripts/case_doc.py",
+        "scripts/doc_layout.py",
+        "scripts/document_portal.py",
+        "scripts/artifact_relations.py",
+        "scripts/business_flow.py",
+        "scripts/merge_docs.py"
+      ],
+      "moduleInterfaces": [
+        "scripts/document_facts.py"
+      ],
+      "implementationPaths": [
+        "scripts/_merge_docs",
+        "assets/structured-docs"
+      ],
+      "dependencies": [
+        {
+          "target": "shared-kernel",
+          "access": "READ"
+        }
+      ],
+      "mutationAuthorities": {
+        "documentFacts": "SOLE_WRITER_BY_DECLARED_OWNER",
+        "lifecycleEvents": "FORBIDDEN",
+        "evidenceRegistry": "FORBIDDEN",
+        "reviewRegistry": "FORBIDDEN"
+      },
+      "outputs": [
+        "artifactRef",
+        "documentValidationResult",
+        "traceSourceDelta",
+        "archivePreview"
+      ]
+    },
+    {
+      "id": "task-runtime",
+      "name": "长任务运行时",
+      "purpose": "Own the event ledger, reducer, lifecycle decision, attempts, StageOutcome, stale propagation, recovery, and phase transitions.",
+      "cliEntrypoints": [
+        "scripts/long_task.py",
+        "scripts/task_plan.py",
+        "scripts/work_mode.py"
+      ],
+      "moduleInterfaces": [
+        "scripts/work_record.py"
+      ],
+      "implementationPaths": [
+        "scripts/_long_task"
+      ],
+      "dependencies": [
+        {
+          "target": "shared-kernel",
+          "access": "READ"
+        },
+        {
+          "target": "document-facts",
+          "access": "VALIDATION_RESULT_ONLY"
+        },
+        {
+          "target": "review-verification",
+          "access": "GATE_RESULT_ONLY"
+        }
+      ],
+      "mutationAuthorities": {
+        "documentFacts": "FORBIDDEN",
+        "lifecycleEvents": "SOLE_WRITER",
+        "evidenceRegistry": "REFERENCE_ONLY",
+        "reviewRegistry": "REFERENCE_ONLY"
+      },
+      "outputs": [
+        "lifecycleDecision",
+        "taskContext",
+        "taskContextRef",
+        "stageOutcomeRef",
+        "nextLegalCommand"
+      ]
+    },
+    {
+      "id": "review-verification",
+      "name": "Review/验证",
+      "purpose": "Own Evidence, Review, risk, acceptance, test verification, and completion gate results without directly advancing a phase.",
+      "cliEntrypoints": [
+        "scripts/evidence.py",
+        "scripts/review_contract.py",
+        "scripts/manual_review.py",
+        "scripts/risk_detect.py",
+        "scripts/acceptance.py",
+        "scripts/task_verify.py"
+      ],
+      "moduleInterfaces": [],
+      "implementationPaths": [
+        "scripts/_evidence",
+        "scripts/review_store.py",
+        "scripts/review_session.py"
+      ],
+      "dependencies": [
+        {
+          "target": "shared-kernel",
+          "access": "READ"
+        },
+        {
+          "target": "task-runtime",
+          "access": "READ_ONLY_STATE"
+        }
+      ],
+      "mutationAuthorities": {
+        "documentFacts": "FORBIDDEN",
+        "lifecycleEvents": "FORBIDDEN",
+        "evidenceRegistry": "SOLE_WRITER_BY_DECLARED_AGENT",
+        "reviewRegistry": "SOLE_WRITER_BY_DECLARED_REVIEWER"
+      },
+      "outputs": [
+        "reviewGateResult",
+        "evidenceValidationResult",
+        "riskRegistration",
+        "acceptanceResult",
+        "completionGateResult"
+      ]
+    }
+  ],
+  "defaultActivation": [
+    {
+      "packId": "task-runtime",
+      "mode": "ORCHESTRATE"
+    }
+  ],
+  "routingRules": [
+    {
+      "id": "canonical-lifecycle-gates",
+      "match": {
+        "phases": [
+          "requirement_confirmation",
+          "requirement_analysis",
+          "business_model",
+          "design",
+          "test_design",
+          "implementation_plan",
+          "tdd",
+          "development",
+          "code_review",
+          "testing",
+          "completion_verification"
+        ]
+      },
+      "activate": [
+        {
+          "packId": "task-runtime",
+          "mode": "ORCHESTRATE"
+        },
+        {
+          "packId": "review-verification",
+          "mode": "GATE"
+        }
+      ]
+    },
+    {
+      "id": "document-fact-production",
+      "match": {
+        "taskTypes": [
+          "requirement_confirmation",
+          "requirement_analysis",
+          "business_flow",
+          "business_flow_impact",
+          "business_model",
+          "design",
+          "implementation_contract",
+          "backend_design",
+          "frontend_design",
+          "test_design",
+          "implementation_plan",
+          "task_planning",
+          "wk_tp"
+        ],
+        "phases": [
+          "requirement_confirmation",
+          "requirement_analysis",
+          "business_model",
+          "design",
+          "test_design",
+          "implementation_plan"
+        ]
+      },
+      "activate": [
+        {
+          "packId": "document-facts",
+          "mode": "PRODUCE"
+        }
+      ]
+    },
+    {
+      "id": "document-fact-consumption",
+      "match": {
+        "taskTypes": [
+          "backend_development",
+          "frontend_development",
+          "tdd",
+          "development",
+          "debugging",
+          "bug",
+          "code_review",
+          "review",
+          "testing",
+          "completion_verification"
+        ],
+        "phases": [
+          "tdd",
+          "development",
+          "code_review",
+          "testing",
+          "completion_verification"
+        ]
+      },
+      "activate": [
+        {
+          "packId": "document-facts",
+          "mode": "READ_ONLY"
+        }
+      ]
+    },
+    {
+      "id": "document-actions",
+      "match": {
+        "taskTypes": [
+          "html_document",
+          "wk_l",
+          "incremental_archive",
+          "wk_d",
+          "wk_mc",
+          "wk_v"
+        ]
+      },
+      "activate": [
+        {
+          "packId": "document-facts",
+          "mode": "PRODUCE"
+        },
+        {
+          "packId": "review-verification",
+          "mode": "GATE"
+        }
+      ]
+    },
+    {
+      "id": "verification-actions",
+      "match": {
+        "taskTypes": [
+          "task_verify",
+          "task_layout",
+          "context_optimization",
+          "wk_impact"
+        ]
+      },
+      "activate": [
+        {
+          "packId": "review-verification",
+          "mode": "GATE"
+        }
+      ]
+    }
+  ],
+  "boundaryRules": [
+    "Only task-runtime may append lifecycle events or advance/reopen/finalize phases.",
+    "Document-facts returns artifact and validation results; it never marks a phase PASSED.",
+    "Review-verification returns evidence and gate results; it never advances a phase.",
+    "All packs share the same Runtime, Review, Routing, Semantic, Record, and Release contracts.",
+    "All packs are released atomically with common-develop and must not declare independent versions."
+  ]
+}

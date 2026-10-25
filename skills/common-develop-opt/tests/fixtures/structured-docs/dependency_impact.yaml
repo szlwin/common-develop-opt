@@ -1,0 +1,341 @@
+schemaVersion: 1
+artifact: dependency_impact
+scope:
+  project: DEMO
+  version: V_1.0
+  module: CROSS_MODULE
+  targetIds:
+    - ORD0001
+    - PAY0001
+    - ORD0002
+revision: DEP-R01@example
+baseRevision: ''
+nodes:
+  - id: ORD0001
+    type: REQUIREMENT
+    name: 取消订单
+    module: ORDER
+    status: ACTIVE
+    refs:
+      - requirement.md#ORD0001
+    traceIds:
+      - TR-ORD0001-001
+  - id: PAY0001
+    type: REQUIREMENT
+    name: 支付退款要求
+    module: PAYMENT
+    status: ACTIVE
+    refs:
+      - version/V_1.0/requirement/PAY0001/requirement.md#PAY0001
+    traceIds:
+      - TR-ORD0001-001
+  - id: ORD0001-F01
+    type: FEATURE
+    name: 取消订单功能
+    module: ORDER
+    status: ACTIVE
+    refs:
+      - order_design.md#ORD0001-F01
+    traceIds:
+      - TR-ORD0001-001
+  - id: PAY0001-F01
+    type: FEATURE
+    name: 支付退款
+    module: PAYMENT
+    status: ACTIVE
+    refs:
+      - docs/module/PAY/PAY_desc.md#PAY0001-F01
+    traceIds:
+      - TR-ORD0001-001
+  - id: ORD0002
+    type: REQUIREMENT
+    name: 创建订单
+    module: ORDER
+    status: ACTIVE
+    refs:
+      - requirement.md#ORD0002
+    traceIds:
+      - TR-ORD0002-001
+  - id: ORD0002-F01
+    type: FEATURE
+    name: 创建订单功能
+    module: ORDER
+    status: ACTIVE
+    refs:
+      - order_design.md#ORD0002-F01
+    traceIds:
+      - TR-ORD0002-001
+  - id: ORD0002-F02
+    type: FEATURE
+    name: 预占库存
+    module: INVENTORY
+    status: ACTIVE
+    refs:
+      - docs/module/INV/INV_desc.md#ORD0002-F02
+    traceIds:
+      - TR-ORD0002-001
+relationships:
+  - id: REL-REQ-CANCEL-REFUND
+    from: ORD0001
+    to: PAY0001
+    type: DEPENDS_ON
+    direction: DIRECTED
+    rationale: 已扣款订单的取消要求依赖支付退款要求定义资金补偿语义。
+    conditions:
+      - paymentStatus == CAPTURED
+    traceIds:
+      - TR-ORD0001-001
+    evidenceRefs:
+      - requirement.md#BR-ORD0001-001
+  - id: REL-REQ-CANCEL-FEATURE
+    from: ORD0001
+    to: ORD0001-F01
+    type: IMPLEMENTED_BY
+    direction: DIRECTED
+    rationale: 取消订单需求由订单模块取消功能实现。
+    conditions: []
+    traceIds:
+      - TR-ORD0001-001
+    evidenceRefs:
+      - order_design.md#ORD0001-F01
+  - id: REL-ORDER-CANCEL-REFUND
+    from: ORD0001-F01
+    to: PAY0001-F01
+    type: TRIGGERS
+    direction: DIRECTED
+    rationale: 取消订单功能在已扣款条件下触发支付退款功能。
+    conditions:
+      - paymentStatus == CAPTURED
+    traceIds:
+      - TR-ORD0001-001
+    evidenceRefs:
+      - design.md#订单取消与退款
+  - id: REL-REQ-REFUND-FEATURE
+    from: PAY0001
+    to: PAY0001-F01
+    type: IMPLEMENTED_BY
+    direction: DIRECTED
+    rationale: 支付退款要求由幂等退款功能实现。
+    conditions: []
+    traceIds:
+      - TR-ORD0001-001
+    evidenceRefs:
+      - payment_design.md#PAY0001-F01
+  - id: REL-REQ-CREATE-FEATURE
+    from: ORD0002
+    to: ORD0002-F01
+    type: IMPLEMENTED_BY
+    direction: DIRECTED
+    rationale: 创建订单需求由订购编排功能实现。
+    conditions: []
+    traceIds:
+      - TR-ORD0002-001
+    evidenceRefs:
+      - order_design.md#ORD0002-F01
+  - id: REL-ORDER-CREATE-INVENTORY
+    from: ORD0002-F01
+    to: ORD0002-F02
+    type: DEPENDS_ON
+    direction: DIRECTED
+    rationale: 订购功能在确认订单前依赖有效库存预占。
+    conditions:
+      - 商品为库存管理商品
+    traceIds:
+      - TR-ORD0002-001
+    evidenceRefs:
+      - requirement.md#BR-ORD0002-001
+impactPolicies:
+  - id: IMP-ORDER-CANCEL-REFUND
+    sourceRef: ORD0001-F01
+    sourceAction: cancelOrder
+    targetRefs:
+      - PAY0001-F01
+    policy: TRIGGER_COMPENSATION
+    conditions:
+      - paymentStatus == CAPTURED
+    consistency: EVENTUAL
+    transactionBoundary: 订单取消本地事务提交后，以 OrderCancelled 事件触发支付退款。
+    idempotency: orderId + captureId 作为退款任务唯一键。
+    failureHandling: 退款失败进入可重试状态；超过阈值转人工处理，不能伪报取消资金已完成。
+    compensation: 退款成功后更新订单资金补偿状态。
+    historyHandling: 保留订单、支付和退款审计记录。
+    traceIds:
+      - TR-ORD0001-001
+    testCaseIds:
+      - CASE-ORDER-CANCEL-CAPTURED-001
+    evidenceRefs:
+      - design.md#订单取消与退款
+crossModuleImplementations:
+  - id: CMI-ORDER-CREATE
+    businessFlowRef: FLOW-ORDER-E2E
+    businessStepRefs:
+      - STEP-ORDER-E2E-03
+      - STEP-ORDER-E2E-04
+    name: 跨模块订购实现映射
+    trigger: 用户提交有效订购命令
+    participants:
+      - id: CMPART-CLIENT
+        module: CLIENT
+        responsibility: 提交订购命令并接收结果
+        contractRefs:
+          - API-ORDER-CREATE
+      - id: CMPART-ORDER
+        module: ORDER
+        responsibility: 编排订购业务并维护订单状态
+        contractRefs:
+          - API-ORDER-CREATE
+      - id: CMPART-PRODUCT
+        module: PRODUCT
+        responsibility: 校验商品可售并提供价格快照
+        contractRefs:
+          - API-PRODUCT-SNAPSHOT
+      - id: CMPART-INVENTORY
+        module: INVENTORY
+        responsibility: 预占和释放库存
+        contractRefs:
+          - API-INVENTORY-RESERVE
+      - id: CMPART-PAYMENT
+        module: PAYMENT
+        responsibility: 创建支付或授权
+        contractRefs:
+          - API-PAYMENT-CREATE
+      - id: CMPART-MATERIAL
+        module: MATERIAL
+        responsibility: 创建物料需求或预占
+        contractRefs:
+          - API-MATERIAL-RESERVE
+    steps:
+      - id: CMSTEP-ORDER-01
+        order: 1
+        from: CMPART-CLIENT
+        to: CMPART-ORDER
+        interactionType: COMMAND
+        action: 提交订购命令
+        contractRef: API-ORDER-CREATE
+        preconditions:
+          - 用户已认证且具有订购权限
+        postconditions:
+          - 建立处理中的订单请求
+        idempotency: clientRequestId 唯一
+        timeout: 30s
+        failureHandling: 返回明确业务错误，不产生订单副作用。
+        compensation: ''
+        traceIds:
+          - TR-ORD0002-001
+      - id: CMSTEP-ORDER-02
+        order: 2
+        from: CMPART-ORDER
+        to: CMPART-PRODUCT
+        interactionType: SYNC_API
+        action: 读取商品可售状态和价格快照
+        contractRef: API-PRODUCT-SNAPSHOT
+        preconditions:
+          - 商品 ID 已通过格式校验
+        postconditions:
+          - 获得不可变价格快照或明确拒绝原因
+        idempotency: 只读查询
+        timeout: 3s
+        failureHandling: 超时或不可售时停止流程。
+        compensation: ''
+        traceIds:
+          - TR-ORD0002-001
+      - id: CMSTEP-ORDER-03
+        order: 3
+        from: CMPART-ORDER
+        to: CMPART-INVENTORY
+        interactionType: SYNC_API
+        action: 预占库存
+        contractRef: API-INVENTORY-RESERVE
+        preconditions:
+          - 商品快照有效
+        postconditions:
+          - 获得库存预占 ID
+        idempotency: orderRequestId + skuId 唯一
+        timeout: 3s
+        failureHandling: 库存不足时终止订购。
+        compensation: 后续失败时释放库存预占。
+        traceIds:
+          - TR-ORD0002-001
+      - id: CMSTEP-ORDER-04
+        order: 4
+        from: CMPART-ORDER
+        to: CMPART-PAYMENT
+        interactionType: SYNC_API
+        action: 创建支付授权
+        contractRef: API-PAYMENT-CREATE
+        preconditions:
+          - 库存已预占
+        postconditions:
+          - 获得支付授权 ID
+        idempotency: orderRequestId 唯一
+        timeout: 5s
+        failureHandling: 失败时释放库存预占。
+        compensation: 撤销支付授权。
+        traceIds:
+          - TR-ORD0002-001
+      - id: CMSTEP-ORDER-05
+        order: 5
+        from: CMPART-ORDER
+        to: CMPART-MATERIAL
+        interactionType: SYNC_API
+        action: 创建物料需求
+        contractRef: API-MATERIAL-RESERVE
+        preconditions:
+          - 支付授权有效
+        postconditions:
+          - 获得物料需求 ID
+        idempotency: orderRequestId + materialPlanId 唯一
+        timeout: 5s
+        failureHandling: 失败时撤销支付授权并释放库存。
+        compensation: 撤销支付授权并释放库存预占。
+        traceIds:
+          - TR-ORD0002-001
+      - id: CMSTEP-ORDER-06
+        order: 6
+        from: CMPART-ORDER
+        to: CMPART-ORDER
+        interactionType: DATA_WRITE
+        action: 确认订单并保存跨模块引用
+        contractRef: ORDER-STATE-CONFIRM
+        preconditions:
+          - 库存预占、支付授权和物料需求均有效
+        postconditions:
+          - 订单状态为 CONFIRMED
+          - 保存库存、支付和物料引用
+        idempotency: 同一 orderRequestId 重复确认返回相同订单结果
+        timeout: 本地事务超时
+        failureHandling: 本地提交失败时不得返回成功，并启动已完成外部动作的补偿。
+        compensation: 撤销物料需求、支付授权并释放库存预占。
+        traceIds:
+          - TR-ORD0002-001
+    successCriteria:
+      - 订单、库存预占、支付授权和物料需求均可通过同一 traceId 查询
+      - 订单状态为 CONFIRMED
+    failurePaths:
+      - id: CMFAIL-ORDER-MATERIAL
+        atStep: CMSTEP-ORDER-05
+        condition: 物料模块拒绝或超时
+        result: 订单不得进入 CONFIRMED
+        compensationSteps:
+          - 撤销支付授权
+          - 释放库存预占
+        manualRecovery: 补偿连续失败时进入订单异常处理队列。
+        traceIds:
+          - TR-ORD0002-001
+      - id: CMFAIL-ORDER-CONFIRM
+        atStep: CMSTEP-ORDER-06
+        condition: 订单本地确认事务失败
+        result: 订单不得对外表现为 CONFIRMED
+        compensationSteps:
+          - 撤销物料需求
+          - 撤销支付授权
+          - 释放库存预占
+        manualRecovery: 补偿失败时保留关联引用并进入订单异常处理队列。
+        traceIds:
+          - TR-ORD0002-001
+    traceIds:
+      - TR-ORD0002-001
+    testCaseIds:
+      - CASE-ORDER-CREATE-SUCCESS-001
+      - CASE-ORDER-CREATE-MATERIAL-FAIL-001
+    diagramRef: docs/_relations/dependency_graph.md#CMI-ORDER-CREATE

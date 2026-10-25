@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "packageVersion": "1.0",
+  "kind": "SEMANTIC_AND_NAMING_CONTRACT",
+  "purpose": "Provide one machine-readable vocabulary for artifact ownership and ID namespaces so AI and static checks do not infer aliases.",
+  "canonicalTerms": {
+    "developmentWorkflow": {
+      "term": "研发生命周期",
+      "source": "assets/runtime-contract.json#canonicalPhases"
+    },
+    "businessFlow": {
+      "term": "项目业务流程",
+      "source": "docs/_flows/{FLOW_GROUP}_flow.yaml",
+      "idNamespaces": [
+        "FLOW",
+        "STEP",
+        "FVAR",
+        "FAIL"
+      ]
+    },
+    "crossModuleImplementation": {
+      "term": "跨模块实现映射",
+      "source": "docs/_relations/dependency_impact.yaml#crossModuleImplementations",
+      "idNamespaces": [
+        "CMI",
+        "CMPART",
+        "CMSTEP",
+        "CMFAIL"
+      ]
+    },
+    "requirement": {
+      "term": "需求事实",
+      "source": "version/{VERSION}/doc/{TARGET_ID}/requirement.md"
+    },
+    "traceability": {
+      "term": "跨阶段追踪",
+      "source": "version/{VERSION}/task/{TARGET_ID}/traceability.json"
+    },
+    "documentationViews": {
+      "term": "三层研发文档视图",
+      "humanEntry": "docs/README.md and version/{VERSION}/version_summary.md",
+      "factRoots": [
+        "docs/**",
+        "version/{VERSION}/doc/**"
+      ],
+      "runtimeRoot": "version/{VERSION}/task/**",
+      "rule": "Human portals and Markdown reading copies are DERIVED navigation; they never replace document facts or runtime authority."
+    },
+    "execution_mode": {
+      "canonical": "SEQUENTIAL",
+      "meaning": "Only one target or plan task may execute at a time; multiple requirements follow the declared order.",
+      "source": "assets/runtime-contract.json#/executionPolicy"
+    },
+    "developmentTaskPlan": {
+      "term": "大需求开发任务计划",
+      "source": "version/{VERSION}/task/{TARGET_ID}/development_task_plan.json",
+      "reviewSource": "version/{VERSION}/task/{TARGET_ID}/evidence/reviews.jsonl",
+      "idNamespaces": [
+        "TP",
+        "TPR",
+        "TPF"
+      ],
+      "dependencyField": "depends_on",
+      "statusDomain": "assets/runtime-contract.json#/statuses/review",
+      "resultDomain": "assets/runtime-contract.json#/statuses/reviewConclusion"
+    },
+    "implementationStrategyDecision": {
+      "term": "实现策略决策契约",
+      "source": "references/implementation-strategy.md",
+      "contractVersion": 1,
+      "decisionOrder": [
+        "REUSE",
+        "COMPATIBLE_EXTEND",
+        "MODIFY",
+        "CREATE"
+      ],
+      "sharedLogicDispositions": [
+        "REUSE_SHARED",
+        "EXTRACT_EXISTING",
+        "EXTRACT_NEW",
+        "KEEP_LOCAL",
+        "SEPARATE_REFACTOR"
+      ],
+      "rule": "Every implementation object follows the ordered decision; CREATE requires rejection evidence for all earlier strategies plus an explicit shared-logic owner and disposition."
+    },
+    "domainContextGovernance": {
+      "term": "领域与限界上下文治理",
+      "source": "docs/_domain/domain_context_map.yaml",
+      "idNamespaces": [
+        "SYSTEM",
+        "DOMAIN",
+        "BC",
+        "CTXREL",
+        "CTXMAP"
+      ],
+      "rule": "Optional for simple projects; presence activates strict domain/context reference validation."
+    },
+    "domainSemanticModel": {
+      "term": "领域语义模型",
+      "source": "business_model.yaml",
+      "members": [
+        "TERM",
+        "ENT",
+        "VO",
+        "AGG",
+        "INV",
+        "SM",
+        "SVC",
+        "POL",
+        "EVT"
+      ],
+      "rule": "Business Model remains authority; indexes and graphs are derived projections."
+    }
+  },
+  "idNamespaces": [
+    {
+      "kind": "requirement",
+      "format": "{REQUIREMENT_ID}",
+      "example": "PRD0013",
+      "note": "Project-defined stable ID."
+    },
+    {
+      "kind": "moduleCapability",
+      "format": "CAP-{MODULE_CODE}-*",
+      "pattern": "^CAP-[A-Z0-9_]+-[A-Z0-9_-]+$",
+      "example": "CAP-PRD-CATALOG"
+    },
+    {
+      "kind": "moduleBusinessInformation",
+      "format": "INFO-{MODULE_CODE}-*",
+      "pattern": "^INFO-[A-Z0-9_]+-[A-Z0-9_-]+$",
+      "example": "INFO-PRD-PRODUCT"
+    },
+    {
+      "kind": "feature",
+      "format": "{REQUIREMENT_ID}-F{NN}",
+      "pattern": "^[A-Z][A-Z0-9_-]*-F[0-9]{2,}$",
+      "example": "PRD0013-F01"
+    },
+    {
+      "kind": "designTopic",
+      "format": "DESIGN-{MODULE_CODE}-{TOPIC}",
+      "pattern": "^DESIGN-[A-Z0-9_]+-[A-Z0-9_-]+$",
+      "example": "DESIGN-ORDER-LIFECYCLE",
+      "note": "Stable across versions; review rounds and release numbers belong to revision, not the topic ID."
+    },
+    {
+      "kind": "implementationDecision",
+      "prefix": "IMPL-DEC-",
+      "pattern": "^IMPL-DEC-[A-Z0-9_-]+$",
+      "example": "IMPL-DEC-ORDER-CREATE",
+      "note": "Stable within the reviewed Design topic; referenced by code blueprints, development tasks, source comments, tests, and Review Evidence."
+    },
+    {
+      "kind": "page",
+      "format": "PAGE-{MODULE_CODE}-{PAGE}",
+      "pattern": "^PAGE-[A-Z0-9_]+-[A-Z0-9_-]+$",
+      "example": "PAGE-ORDER-DETAIL"
+    },
+    {
+      "kind": "pageAction",
+      "format": "PAGEACT-{MODULE_CODE}-{ACTION}",
+      "pattern": "^PAGEACT-[A-Z0-9_]+-[A-Z0-9_-]+$",
+      "example": "PAGEACT-ORDER-CANCEL"
+    },
+    {
+      "kind": "businessRule",
+      "prefix": "BR-",
+      "pattern": "^BR-[A-Z0-9_-]+-[0-9]{3,}$",
+      "example": "BR-PRD0013-001"
+    },
+    {
+      "kind": "crossFeatureRule",
+      "prefix": "CR-",
+      "pattern": "^CR-[A-Z0-9_-]+-[0-9]{3,}$",
+      "example": "CR-PRD0013-001"
+    },
+    {
+      "kind": "exceptionScenario",
+      "prefix": "EX-",
+      "pattern": "^EX-[A-Z0-9_-]+-[0-9]{3,}$",
+      "example": "EX-PRD0013-001"
+    },
+    {
+      "kind": "acceptanceCriterion",
+      "prefix": "AC-",
+      "pattern": "^AC-[A-Z0-9_-]+-[0-9]{3,}$",
+      "example": "AC-PRD0013-001"
+    },
+    {
+      "kind": "trace",
+      "prefix": "TR-",
+      "pattern": "^TR-[A-Z0-9_-]+-[0-9]{3,}$",
+      "example": "TR-PRD0013-001"
+    },
+    {
+      "kind": "testCase",
+      "prefix": "CASE-",
+      "pattern": "^CASE-[A-Z0-9_-]+$",
+      "example": "CASE-ORDER-PAY-001"
+    },
+    {
+      "kind": "businessFlow",
+      "prefix": "FLOW-",
+      "pattern": "^FLOW-[A-Z0-9_-]+$",
+      "example": "FLOW-ORDER-E2E"
+    },
+    {
+      "kind": "businessFlowStep",
+      "prefix": "STEP-",
+      "pattern": "^STEP-[A-Z0-9_-]+$",
+      "example": "STEP-ORDER-E2E-03"
+    },
+    {
+      "kind": "businessFlowVariant",
+      "prefix": "FVAR-",
+      "pattern": "^FVAR-[A-Z0-9_-]+$",
+      "example": "FVAR-REGISTER-MOBILE"
+    },
+    {
+      "kind": "businessFlowFailure",
+      "prefix": "FAIL-",
+      "pattern": "^FAIL-[A-Z0-9_-]+$",
+      "example": "FAIL-PAYMENT-TIMEOUT"
+    },
+    {
+      "kind": "crossModuleImplementation",
+      "prefix": "CMI-",
+      "pattern": "^CMI-[A-Z0-9_-]+$",
+      "example": "CMI-ORDER-CREATE"
+    },
+    {
+      "kind": "crossModuleParticipant",
+      "prefix": "CMPART-",
+      "pattern": "^CMPART-[A-Z0-9_-]+$",
+      "example": "CMPART-INVENTORY"
+    },
+    {
+      "kind": "crossModuleImplementationStep",
+      "prefix": "CMSTEP-",
+      "pattern": "^CMSTEP-[A-Z0-9_-]+$",
+      "example": "CMSTEP-ORDER-03"
+    },
+    {
+      "kind": "crossModuleImplementationFailure",
+      "prefix": "CMFAIL-",
+      "pattern": "^CMFAIL-[A-Z0-9_-]+$",
+      "example": "CMFAIL-ORDER-MATERIAL"
+    },
+    {
+      "kind": "reviewCriterion",
+      "format": "RC-{AXIS}-{NNN}",
+      "pattern": "^RC-[A-Z]+-[0-9]{3,}$",
+      "example": "RC-SEC-002",
+      "note": "Review-only namespace; never reuse business artifact IDs."
+    },
+    {
+      "kind": "gitCheckpoint",
+      "prefix": "CP-",
+      "pattern": "^CP-[A-Za-z0-9_.-]+$",
+      "example": "CP-V_2.0-PRD0021-DESIGN-001",
+      "note": "Sequential local Git phase checkpoint; commit SHA is resolved by WK-Checkpoint trailer."
+    },
+    {
+      "kind": "developmentTaskPlan",
+      "prefix": "TP-",
+      "pattern": "^TP-[A-Z0-9_.-]+-R[0-9]{2,}@[0-9a-f]{12}$",
+      "example": "TP-P1-COMPILER-F01-R01@012345abcdef",
+      "note": "Large-requirement task-plan revision created by wk -tp."
+    },
+    {
+      "kind": "developmentTaskPlanReview",
+      "prefix": "TPR-",
+      "pattern": "^TPR-[0-9]{6}$",
+      "example": "TPR-000001"
+    },
+    {
+      "kind": "developmentTaskPlanFinding",
+      "prefix": "TPF-",
+      "pattern": "^TPF-[0-9]{6}-[0-9]{2}$",
+      "example": "TPF-000001-01"
+    },
+    {
+      "kind": "system",
+      "prefix": "SYSTEM-",
+      "pattern": "^SYSTEM-[A-Z0-9_-]+$",
+      "example": "SYSTEM-CORE"
+    },
+    {
+      "kind": "domain",
+      "prefix": "DOMAIN-",
+      "pattern": "^DOMAIN-[A-Z0-9_-]+$",
+      "example": "DOMAIN-SALES"
+    },
+    {
+      "kind": "boundedContext",
+      "prefix": "BC-",
+      "pattern": "^BC-[A-Z0-9_-]+$",
+      "example": "BC-ORDER"
+    },
+    {
+      "kind": "contextRelationship",
+      "prefix": "CTXREL-",
+      "pattern": "^CTXREL-[A-Z0-9_-]+$",
+      "example": "CTXREL-ORDER-PRICING"
+    },
+    {
+      "kind": "contextTranslation",
+      "prefix": "CTXMAP-",
+      "pattern": "^CTXMAP-[A-Z0-9_-]+$",
+      "example": "CTXMAP-ORDER-FULFILLMENT"
+    }
+  ],
+  "semanticSeparation": [
+    {
+      "left": "FLOW/STEP/FVAR/FAIL",
+      "right": "CMI/CMPART/CMSTEP/CMFAIL",
+      "rule": "Business semantics and cross-module technical interactions must use separate IDs, fields, generated views, and Review evidence."
+    },
+    {
+      "left": "business_flow_required/business_flow_refs",
+      "right": "cross_module_implementation_required/cross_module_implementation_refs",
+      "rule": "Traceability flags and references must not be reused across the two artifact types."
+    },
+    {
+      "left": "requirement.md",
+      "right": "design/dependency_impact",
+      "rule": "Requirements describe observable business behavior; API, DB, transaction, retry, and compensation implementation details belong downstream."
+    }
+  ],
+  "scanRoots": [
+    "SKILL.md",
+    "ai",
+    "references",
+    "assets"
+  ],
+  "scanExclusions": [
+    "assets/semantic-contract.json",
+    "FILE_MANIFEST.sha256"
+  ],
+  "artifactOwnership": {
+    "moduleDescription": {
+      "capabilities": "CAP-{MODULE_CODE}-* is module-scoped.",
+      "businessInformation": "INFO-{MODULE_CODE}-* is module-scoped.",
+      "features": "Reuse {REQUIREMENT_ID}-F{NN}; do not create module-private feature aliases.",
+      "rules": "Reuse BR-*/CR-*; do not create module-private rule aliases."
+    },
+    "dependencyImpact": {
+      "impactPolicies": "IMP-* describes affected-data handling policy.",
+      "crossModuleImplementations": "CMI/CMPART/CMSTEP/CMFAIL describes technical interactions and must reference business FLOW/STEP."
+    },
+    "reviewCriterion": {
+      "source": "assets/review-contract.json#criteriaCatalog",
+      "rule": "All criterion IDs use RC-* and appear only in criterion/profile/evidence context."
+    },
+    "gitCheckpoint": {
+      "source": "version/{VERSION}/task/{TARGET_ID}/git_checkpoints.yaml",
+      "owns": "Phase checkpoint declaration, Git commit locator and supersession relation.",
+      "doesNotOwn": "Stage gate decision, Review evidence, push, merge, Release or deployment state."
+    },
+    "domainContextMap": {
+      "source": "docs/_domain/domain_context_map.yaml",
+      "owns": "System/Domain/Bounded Context boundaries, context relationships and term translations.",
+      "doesNotOwn": "Aggregate, invariant, state, implementation, API or test content."
+    },
+    "businessModelSemantic": {
+      "source": "business_model.yaml",
+      "owns": "Ubiquitous language and domain model facts including context-scoped terms and invariants.",
+      "doesNotOwn": "Derived graph/index topology."
+    }
+  }
+}

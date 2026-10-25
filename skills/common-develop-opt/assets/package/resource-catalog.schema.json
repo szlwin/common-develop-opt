@@ -1,0 +1,421 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:common-develop-opt:resource-catalog",
+  "title": "Canonical Resource Catalog",
+  "description": "Catalogs own mappings and retirement records. Target files own schema and contract metadata. resource-index is derived; FILE_MANIFEST.sha256 only proves package integrity.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "kind",
+    "catalogSchema",
+    "authorityPolicy",
+    "categories",
+    "entries",
+    "retirements"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "kind": {
+      "enum": [
+        "ASSET_CATALOG",
+        "REFERENCE_CATALOG"
+      ]
+    },
+    "catalogSchema": {
+      "const": "assets/package/resource-catalog.schema.json"
+    },
+    "authorityPolicy": {
+      "const": {
+        "catalogs": "CANONICAL_RESOURCE_MAPPING",
+        "resourceMetadata": "READ_FROM_TARGET",
+        "resourceIndex": "DERIVED",
+        "manifest": "INTEGRITY_ONLY"
+      }
+    },
+    "authority": {
+      "type": "string",
+      "minLength": 1
+    },
+    "categories": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      ]
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document"
+      }
+    },
+    "retirements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/retirement"
+      }
+    },
+    "rules": {
+      "type": "object"
+    },
+    "pathPolicy": {
+      "type": "object"
+    },
+    "commandSurfaceSource": {
+      "type": "string",
+      "minLength": 1
+    },
+    "readingPolicy": {
+      "type": "object"
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "index",
+          "detail",
+          "originalLines"
+        ],
+        "properties": {
+          "index": {
+            "type": "string",
+            "minLength": 1
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1
+          },
+          "originalLines": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "ASSET_CATALOG"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "entries": {
+            "items": {
+              "required": [
+                "logicalPath",
+                "kind"
+              ]
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "REFERENCE_CATALOG"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "documents",
+          "readingPolicy"
+        ],
+        "properties": {
+          "entries": {
+            "items": {
+              "required": [
+                "source",
+                "role",
+                "requires",
+                "nextOn",
+                "maxReadBytes",
+                "machineAuthority",
+                "deprecatedBy"
+              ]
+            }
+          },
+          "categories": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "target",
+        "category"
+      ],
+      "properties": {
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "logicalPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schemaAliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "role": {
+          "enum": [
+            "quick",
+            "core",
+            "detail",
+            "example"
+          ]
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "nextOn": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "when",
+              "target"
+            ],
+            "properties": {
+              "when": {
+                "enum": [
+                  "DETAIL_REQUIRED",
+                  "REVIEW_OR_VALIDATION_REQUIRED",
+                  "TOPIC_SELECTED",
+                  "EXAMPLE_REQUESTED"
+                ]
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "maxReadBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32768
+        },
+        "machineAuthority": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "deprecatedBy": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "document": {
+      "type": "object",
+      "required": [
+        "target",
+        "role",
+        "requires",
+        "nextOn",
+        "maxReadBytes",
+        "machineAuthority",
+        "deprecatedBy"
+      ],
+      "properties": {
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "quick",
+            "core",
+            "detail",
+            "example"
+          ]
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "nextOn": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "when",
+              "target"
+            ],
+            "properties": {
+              "when": {
+                "enum": [
+                  "DETAIL_REQUIRED",
+                  "REVIEW_OR_VALIDATION_REQUIRED",
+                  "TOPIC_SELECTED",
+                  "EXAMPLE_REQUESTED"
+                ]
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "maxReadBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32768
+        },
+        "machineAuthority": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "deprecatedBy": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "retirement": {
+      "type": "object",
+      "required": [
+        "logicalPath",
+        "target",
+        "retiredAt",
+        "replacement",
+        "reason",
+        "historyRefs"
+      ],
+      "properties": {
+        "logicalPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retiredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "replacement": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "historyRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/knowledge-archive.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "archiveId",
+    "archiveType",
+    "version",
+    "module",
+    "documents",
+    "documentDigests",
+    "sourceRevisions",
+    "resultDigest",
+    "auditScope",
+    "auditRefs",
+    "gate"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "archiveId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "archiveType": {
+      "const": "KNOWLEDGE"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "documentDigests": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "sourceRevisions": {
+      "type": "object"
+    },
+    "resultDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "auditScope": {
+      "const": "VERSION"
+    },
+    "auditRefs": {
+      "type": "object"
+    },
+    "gate": {
+      "type": "object"
+    }
+  }
+}

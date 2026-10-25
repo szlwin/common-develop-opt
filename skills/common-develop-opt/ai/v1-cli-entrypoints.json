@@ -1,0 +1,667 @@
+{
+  "schemaVersion": 1,
+  "entrypoints": [
+    {
+      "id": "wk",
+      "path": "scripts/wk.py",
+      "kind": "CLI",
+      "scope": "ENTRY"
+    },
+    {
+      "id": "ai_context",
+      "path": "scripts/ai_context.py",
+      "kind": "CLI",
+      "scope": "ENTRY"
+    },
+    {
+      "id": "cli_help",
+      "path": "scripts/cli_help.py",
+      "kind": "CLI",
+      "scope": "ENTRY"
+    },
+    {
+      "id": "service_cli",
+      "path": "scripts/service_cli.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "artifact_footprint",
+      "path": "scripts/document_core/artifact_footprint.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "auto_remediation",
+      "path": "scripts/auto_remediation.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "baseline_guard",
+      "path": "scripts/baseline_guard.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "check_skill",
+      "path": "scripts/check_skill.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "context_routing",
+      "path": "scripts/context_routing.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "execution_evidence",
+      "path": "scripts/execution_evidence.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "git_checkpoint",
+      "path": "scripts/git_checkpoint.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "independent_test_environment",
+      "path": "scripts/independent_test_environment.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "project_environment",
+      "path": "scripts/project_environment.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "quality_gate",
+      "path": "scripts/quality_gate.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "reference_reader",
+      "path": "scripts/reference_reader.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "render_relationships",
+      "path": "scripts/render_relationships.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "request_intake",
+      "path": "scripts/request_intake.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "review_session",
+      "path": "scripts/review_session.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "runtime_contract",
+      "path": "scripts/runtime_contract.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "semantic_audit",
+      "path": "scripts/semantic_audit.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "task_layout",
+      "path": "scripts/task_layout.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "governance_profile",
+      "path": "scripts/governance_profile.py",
+      "kind": "CLI",
+      "scope": "SUPPORT"
+    },
+    {
+      "id": "requirement_doc",
+      "path": "scripts/requirement_doc.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "design_doc",
+      "path": "scripts/design_doc.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "case_doc",
+      "path": "scripts/case_doc.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "doc_layout",
+      "path": "scripts/doc_layout.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "document_portal",
+      "path": "scripts/document_portal.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "artifact_relations",
+      "path": "scripts/artifact_relations.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "business_flow",
+      "path": "scripts/business_flow.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "merge_docs",
+      "path": "scripts/merge_docs.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "document-facts"
+    },
+    {
+      "id": "long_task",
+      "path": "scripts/long_task.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "task-runtime"
+    },
+    {
+      "id": "task_plan",
+      "path": "scripts/task_plan.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "task-runtime"
+    },
+    {
+      "id": "work_mode",
+      "path": "scripts/work_mode.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "task-runtime"
+    },
+    {
+      "id": "evidence",
+      "path": "scripts/evidence.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "review-verification"
+    },
+    {
+      "id": "review_contract",
+      "path": "scripts/review_contract.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "review-verification"
+    },
+    {
+      "id": "manual_review",
+      "path": "scripts/manual_review.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "review-verification"
+    },
+    {
+      "id": "risk_detect",
+      "path": "scripts/risk_detect.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "review-verification"
+    },
+    {
+      "id": "acceptance",
+      "path": "scripts/acceptance.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "review-verification"
+    },
+    {
+      "id": "task_verify",
+      "path": "scripts/task_verify.py",
+      "kind": "CLI",
+      "scope": "CAPABILITY_PACK",
+      "capabilityPack": "review-verification"
+    }
+  ],
+  "commandSurface": {
+    "version": 1,
+    "counts": {
+      "KEEP": 39,
+      "INTERNAL": 25,
+      "MERGE": 8
+    },
+    "entries": [
+      {
+        "script": "acceptance",
+        "v1Decision": "KEEP",
+        "path": "scripts/acceptance.py",
+        "sourcePointer": "/packs/2/cliEntrypoints"
+      },
+      {
+        "script": "action_plan",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "ai_context",
+        "v1Decision": "KEEP",
+        "path": "scripts/ai_context.py",
+        "sourcePointer": "/entryLayer/cliEntrypoints"
+      },
+      {
+        "script": "application_services",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "artifact_footprint",
+        "v1Decision": "KEEP",
+        "path": "scripts/document_core/artifact_footprint.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "artifact_identity",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "artifact_relations",
+        "v1Decision": "KEEP",
+        "path": "scripts/artifact_relations.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "auto_remediation",
+        "v1Decision": "KEEP",
+        "path": "scripts/auto_remediation.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "baseline_guard",
+        "v1Decision": "KEEP",
+        "path": "scripts/baseline_guard.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "business_flow",
+        "v1Decision": "KEEP",
+        "path": "scripts/business_flow.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "c06_readonly_services",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "c07_state_services",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "candidate_inputs",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "capability_packs",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "case_doc",
+        "v1Decision": "KEEP",
+        "path": "scripts/case_doc.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "check_skill",
+        "v1Decision": "KEEP",
+        "path": "scripts/check_skill.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "cli_help",
+        "v1Decision": "KEEP",
+        "path": "scripts/cli_help.py",
+        "sourcePointer": "/entryLayer/cliEntrypoints"
+      },
+      {
+        "script": "cli_reference",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "compare_observations",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "compat_adapter",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "context_resolver",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "context_routing",
+        "v1Decision": "KEEP",
+        "path": "scripts/context_routing.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "dependency_graph",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "design_doc",
+        "v1Decision": "KEEP",
+        "path": "scripts/design_doc.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "diagnostic_io",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "diagnostics",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "discover_dependencies",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "doc_layout",
+        "v1Decision": "KEEP",
+        "path": "scripts/doc_layout.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "document_facts",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "document_portal",
+        "v1Decision": "KEEP",
+        "path": "scripts/document_portal.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "evidence",
+        "v1Decision": "KEEP",
+        "path": "scripts/evidence.py",
+        "sourcePointer": "/packs/2/cliEntrypoints"
+      },
+      {
+        "script": "evidence_validity",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "execution_evidence",
+        "v1Decision": "KEEP",
+        "path": "scripts/execution_evidence.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "generate_resource_index",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "git_checkpoint",
+        "v1Decision": "KEEP",
+        "path": "scripts/git_checkpoint.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "governance_profile",
+        "v1Decision": "KEEP",
+        "path": "scripts/governance_profile.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "impact_adapter",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "independent_test_environment",
+        "v1Decision": "KEEP",
+        "path": "scripts/independent_test_environment.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "long_task",
+        "v1Decision": "KEEP",
+        "path": "scripts/long_task.py",
+        "sourcePointer": "/packs/1/cliEntrypoints"
+      },
+      {
+        "script": "manual_review",
+        "v1Decision": "KEEP",
+        "path": "scripts/manual_review.py",
+        "sourcePointer": "/packs/2/cliEntrypoints"
+      },
+      {
+        "script": "merge_docs",
+        "v1Decision": "KEEP",
+        "path": "scripts/merge_docs.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "migration_preview",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "project_constraints",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "project_environment",
+        "v1Decision": "KEEP",
+        "path": "scripts/project_environment.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "publish_candidate",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "pure_readonly",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "quality_gate",
+        "v1Decision": "KEEP",
+        "path": "scripts/quality_gate.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "read_session",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "reference_reader",
+        "v1Decision": "KEEP",
+        "path": "scripts/reference_reader.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "reference_resolver",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "render_relationships",
+        "v1Decision": "KEEP",
+        "path": "scripts/render_relationships.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "request_intake",
+        "v1Decision": "KEEP",
+        "path": "scripts/request_intake.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "requirement_doc",
+        "v1Decision": "KEEP",
+        "path": "scripts/requirement_doc.py",
+        "sourcePointer": "/packs/0/cliEntrypoints"
+      },
+      {
+        "script": "resource_catalog",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "resource_paths",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "review_contract",
+        "v1Decision": "KEEP",
+        "path": "scripts/review_contract.py",
+        "sourcePointer": "/packs/2/cliEntrypoints"
+      },
+      {
+        "script": "review_lifecycle",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "review_session",
+        "v1Decision": "KEEP",
+        "path": "scripts/review_session.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "review_submit",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "risk_detect",
+        "v1Decision": "KEEP",
+        "path": "scripts/risk_detect.py",
+        "sourcePointer": "/packs/2/cliEntrypoints"
+      },
+      {
+        "script": "runtime_contract",
+        "v1Decision": "KEEP",
+        "path": "scripts/runtime_contract.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "schema_protocol",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "semantic_audit",
+        "v1Decision": "KEEP",
+        "path": "scripts/semantic_audit.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "service_cli",
+        "v1Decision": "KEEP",
+        "path": "scripts/service_cli.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "service_permissions",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "state_safety",
+        "v1Decision": "MERGE",
+        "sourcePointer": "/commandSurface/mergedScriptIds"
+      },
+      {
+        "script": "task_layout",
+        "v1Decision": "KEEP",
+        "path": "scripts/task_layout.py",
+        "sourcePointer": "/entryLayer/supportCliEntrypoints"
+      },
+      {
+        "script": "task_plan",
+        "v1Decision": "KEEP",
+        "path": "scripts/task_plan.py",
+        "sourcePointer": "/packs/1/cliEntrypoints"
+      },
+      {
+        "script": "task_verify",
+        "v1Decision": "KEEP",
+        "path": "scripts/task_verify.py",
+        "sourcePointer": "/packs/2/cliEntrypoints"
+      },
+      {
+        "script": "usage_evaluation",
+        "v1Decision": "INTERNAL",
+        "sourcePointer": "/commandSurface/internalScriptIds"
+      },
+      {
+        "script": "wk",
+        "v1Decision": "KEEP",
+        "path": "scripts/wk.py",
+        "sourcePointer": "/entryLayer/cliEntrypoints"
+      },
+      {
+        "script": "work_mode",
+        "v1Decision": "KEEP",
+        "path": "scripts/work_mode.py",
+        "sourcePointer": "/packs/1/cliEntrypoints"
+      }
+    ],
+    "source": "assets/development/capability-pack-contract.json",
+    "digest": "0151878d5cf1443d3a09dc49e1c2ba1ce60d64eebc7ac4bd467a8675e533e776"
+  }
+}

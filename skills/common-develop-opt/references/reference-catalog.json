@@ -1,0 +1,2204 @@
+{
+  "schemaVersion": 2,
+  "kind": "REFERENCE_CATALOG",
+  "commandSurfaceSource": "assets/development/capability-pack-contract.json#/commandSurface",
+  "categories": {
+    "core": [
+      "auto-mode-core.md",
+      "completion-gate-core.md",
+      "enum.md",
+      "execution-core.md",
+      "lifecycle-core.md",
+      "maintenance-entrypoints.md",
+      "request-intake.md",
+      "runtime-contract.md",
+      "scope-core.md",
+      "scope.md",
+      "semantic-core.md",
+      "work-mode-core.md",
+      "compatibility-boundary.md"
+    ],
+    "requirement-design": [
+      "business-flow.md",
+      "business-model.md",
+      "cross-module-impact.md",
+      "design-core.md",
+      "implementation-contract.md",
+      "implementation-plan.md",
+      "implementation-strategy-example.md",
+      "implementation-strategy.md",
+      "relationship-impact.md",
+      "requirement-acceptance.md",
+      "requirement-analysis-core.md",
+      "requirement-confirmation-core.md",
+      "requirement-traceability.md"
+    ],
+    "implementation": [
+      "backend-code-reference.md",
+      "code-comments.md",
+      "debugging-core.md",
+      "debugging.md",
+      "develop.md",
+      "model-code-core.md",
+      "platform-core.md",
+      "web-code-reference.md"
+    ],
+    "testing": [
+      "integration-testing.md",
+      "red-green-refactor.md",
+      "tdd-core.md",
+      "tdd-evidence.md",
+      "tdd-role-boundary.md",
+      "test-completion.md",
+      "test-coverage-complexity.md",
+      "test-data-isolation.md",
+      "test-environment.md",
+      "test-evidence.md",
+      "test-matrix-design.md",
+      "test-persistence.md",
+      "test-seam.md",
+      "testing-core.md",
+      "verification-integration.md",
+      "workflow-verification.md"
+    ],
+    "review-agents": [
+      "architecture-review-development.md",
+      "collaboration-review.md",
+      "manual-review-guide.md",
+      "orchestration-core.md",
+      "review-core.md",
+      "review-evidence.md",
+      "review-knowledge.md",
+      "review-result-contract.md",
+      "risk-verification.md",
+      "roles.md"
+    ],
+    "git-delivery": [
+      "acceptance-core.md",
+      "delivery-readiness.md",
+      "git-checkpoint-core.md",
+      "git-checkpoint.md"
+    ],
+    "recovery-archive": [
+      "archive-core.md",
+      "archive-documentation.md",
+      "baseline-integrity.md",
+      "long-task-core.md",
+      "project-adoption.md",
+      "task-context-optimization.md",
+      "task-verification-core.md",
+      "wk-ar-state-core.md",
+      "wk-cli.md"
+    ],
+    "specialist": [
+      "documentation-core.md",
+      "domain-governance.md",
+      "engineering-knowledge-graph.md",
+      "evidence-core.md",
+      "html-core.md",
+      "onepage-html.md",
+      "page-design-example.md",
+      "page-design.md",
+      "union-language.md",
+      "document-style.md"
+    ]
+  },
+  "entries": [
+    {
+      "source": "references/auto-mode-core.md",
+      "target": "references/core/auto-mode-core.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/completion-gate-core.md",
+      "target": "references/core/completion-gate-core.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/enum.md",
+      "target": "references/core/enum.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/execution-core.md",
+      "target": "references/core/execution-core.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/lifecycle-core.md",
+      "target": "references/core/lifecycle-core.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/core/lifecycle-core.detail.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/maintenance-entrypoints.md",
+      "target": "references/core/maintenance-entrypoints.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/request-intake.md",
+      "target": "references/core/request-intake.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/runtime-contract.md",
+      "target": "references/core/runtime-contract.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/scope-core.md",
+      "target": "references/core/scope-core.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/scope.md",
+      "target": "references/core/scope.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/semantic-core.md",
+      "target": "references/core/semantic-core.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/work-mode-core.md",
+      "target": "references/core/work-mode-core.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/business-flow.md",
+      "target": "references/requirement-design/business-flow.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/requirement-design/business-flow.detail.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/documents/structured-docs/business-flow.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/business-model.md",
+      "target": "references/requirement-design/business-model.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/requirement-design/business-model.detail.md"
+        },
+        {
+          "when": "REVIEW_OR_VALIDATION_REQUIRED",
+          "target": "references/requirement-design/business-model.detail.part-2.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/documents/structured-docs/business-model.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/cross-module-impact.md",
+      "target": "references/requirement-design/cross-module-impact.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/design-core.md",
+      "target": "references/requirement-design/design-core.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "scripts/design_doc.py"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/implementation-contract.md",
+      "target": "references/requirement-design/implementation-contract.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/requirement-design/implementation-contract.detail.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/implementation-plan.md",
+      "target": "references/requirement-design/implementation-plan.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/requirement-design/implementation-plan.detail.md"
+        },
+        {
+          "when": "REVIEW_OR_VALIDATION_REQUIRED",
+          "target": "references/requirement-design/implementation-plan.detail.part-2.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/development/development-task-plan.schema.json",
+        "assets/development/development-task-review.schema.json",
+        "assets/review/review-contract.json",
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/implementation-strategy-example.md",
+      "target": "references/requirement-design/implementation-strategy-example.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "example",
+      "requires": [
+        "references/requirement-design/implementation-strategy.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 16384,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/implementation-strategy.md",
+      "target": "references/requirement-design/implementation-strategy.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "EXAMPLE_REQUESTED",
+          "target": "references/requirement-design/implementation-strategy-example.md"
+        }
+      ],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/relationship-impact.md",
+      "target": "references/requirement-design/relationship-impact.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/requirement-acceptance.md",
+      "target": "references/requirement-design/requirement-acceptance.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/requirement-analysis-core.md",
+      "target": "references/requirement-design/requirement-analysis-core.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/requirement-confirmation-core.md",
+      "target": "references/requirement-design/requirement-confirmation-core.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/requirement-traceability.md",
+      "target": "references/requirement-design/requirement-traceability.md",
+      "category": "requirement-design",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/backend-code-reference.md",
+      "target": "references/implementation/backend-code-reference.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/implementation/backend-code-reference.detail.md"
+        },
+        {
+          "when": "REVIEW_OR_VALIDATION_REQUIRED",
+          "target": "references/implementation/backend-code-reference.detail.part-2.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/code-comments.md",
+      "target": "references/implementation/code-comments.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/implementation/code-comments.detail.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/debugging-core.md",
+      "target": "references/implementation/debugging-core.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/debugging.md",
+      "target": "references/implementation/debugging.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/develop.md",
+      "target": "references/implementation/develop.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/implementation/develop.detail.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/model-code-core.md",
+      "target": "references/implementation/model-code-core.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/platform-core.md",
+      "target": "references/implementation/platform-core.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/web-code-reference.md",
+      "target": "references/implementation/web-code-reference.md",
+      "category": "implementation",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/implementation/web-code-reference.detail.md"
+        },
+        {
+          "when": "REVIEW_OR_VALIDATION_REQUIRED",
+          "target": "references/implementation/web-code-reference.detail.part-2.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/integration-testing.md",
+      "target": "references/testing/integration-testing.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/red-green-refactor.md",
+      "target": "references/testing/red-green-refactor.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/tdd-core.md",
+      "target": "references/testing/tdd-core.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/tdd-evidence.md",
+      "target": "references/testing/tdd-evidence.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/tdd-role-boundary.md",
+      "target": "references/testing/tdd-role-boundary.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-completion.md",
+      "target": "references/testing/test-completion.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-coverage-complexity.md",
+      "target": "references/testing/test-coverage-complexity.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-data-isolation.md",
+      "target": "references/testing/test-data-isolation.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-environment.md",
+      "target": "references/testing/test-environment.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-evidence.md",
+      "target": "references/testing/test-evidence.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-matrix-design.md",
+      "target": "references/testing/test-matrix-design.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-persistence.md",
+      "target": "references/testing/test-persistence.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/test-seam.md",
+      "target": "references/testing/test-seam.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/testing-core.md",
+      "target": "references/testing/testing-core.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/verification-integration.md",
+      "target": "references/testing/verification-integration.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/workflow-verification.md",
+      "target": "references/testing/workflow-verification.md",
+      "category": "testing",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/architecture-review-development.md",
+      "target": "references/review-agents/architecture-review-development.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/collaboration-review.md",
+      "target": "references/review-agents/collaboration-review.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/review-agents/collaboration-review.detail.md"
+        },
+        {
+          "when": "REVIEW_OR_VALIDATION_REQUIRED",
+          "target": "references/review-agents/collaboration-review.detail.part-2.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/manual-review-guide.md",
+      "target": "references/review-agents/manual-review-guide.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/orchestration-core.md",
+      "target": "references/review-agents/orchestration-core.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/review-core.md",
+      "target": "references/review-agents/review-core.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/review-evidence.md",
+      "target": "references/review-agents/review-evidence.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/review-knowledge.md",
+      "target": "references/review-agents/review-knowledge.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/review-result-contract.md",
+      "target": "references/review-agents/review-result-contract.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/risk-verification.md",
+      "target": "references/review-agents/risk-verification.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/roles.md",
+      "target": "references/review-agents/roles.md",
+      "category": "review-agents",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/acceptance-core.md",
+      "target": "references/git-delivery/acceptance-core.md",
+      "category": "git-delivery",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/delivery-readiness.md",
+      "target": "references/git-delivery/delivery-readiness.md",
+      "category": "git-delivery",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/git-checkpoint-core.md",
+      "target": "references/git-delivery/git-checkpoint-core.md",
+      "category": "git-delivery",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/git-checkpoint.md",
+      "target": "references/git-delivery/git-checkpoint.md",
+      "category": "git-delivery",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/archive-core.md",
+      "target": "references/recovery-archive/archive-core.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/archive-documentation.md",
+      "target": "references/recovery-archive/archive-documentation.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/baseline-integrity.md",
+      "target": "references/recovery-archive/baseline-integrity.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/long-task-core.md",
+      "target": "references/recovery-archive/long-task-core.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/recovery-archive/long-task-core.detail.md"
+        },
+        {
+          "when": "REVIEW_OR_VALIDATION_REQUIRED",
+          "target": "references/recovery-archive/long-task-core.detail.part-2.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/project-adoption.md",
+      "target": "references/recovery-archive/project-adoption.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/task-context-optimization.md",
+      "target": "references/recovery-archive/task-context-optimization.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/recovery-archive/task-context-optimization.detail.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/task-verification-core.md",
+      "target": "references/recovery-archive/task-verification-core.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/wk-ar-state-core.md",
+      "target": "references/recovery-archive/wk-ar-state-core.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/wk-cli.md",
+      "target": "references/recovery-archive/wk-cli.md",
+      "category": "recovery-archive",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/recovery-archive/wk-cli.detail.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/documentation-core.md",
+      "target": "references/specialist/documentation-core.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "DETAIL_REQUIRED",
+          "target": "references/specialist/documentation-core.detail.md"
+        },
+        {
+          "when": "REVIEW_OR_VALIDATION_REQUIRED",
+          "target": "references/specialist/documentation-core.detail.part-2.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/domain-governance.md",
+      "target": "references/specialist/domain-governance.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/engineering-knowledge-graph.md",
+      "target": "references/specialist/engineering-knowledge-graph.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/evidence-core.md",
+      "target": "references/specialist/evidence-core.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/html-core.md",
+      "target": "references/specialist/html-core.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/onepage-html.md",
+      "target": "references/specialist/onepage-html.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/page-design-example.md",
+      "target": "references/specialist/page-design-example.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "example",
+      "requires": [
+        "references/specialist/page-design.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 16384,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/page-design.md",
+      "target": "references/specialist/page-design.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "EXAMPLE_REQUESTED",
+          "target": "references/specialist/page-design-example.md"
+        }
+      ],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/compatibility-boundary.md",
+      "target": "references/core/compatibility-boundary.md",
+      "category": "core",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/discovery-profile.schema.json",
+        "assets/runtime/runtime-contract.json",
+        "assets/asset-catalog.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/union-language.md",
+      "target": "references/specialist/union-language.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "source": "references/document-style.md",
+      "target": "references/specialist/document-style.md",
+      "category": "specialist",
+      "status": "FORMAL_ATOMIC",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    }
+  ],
+  "details": [
+    {
+      "index": "references/core/lifecycle-core.md",
+      "detail": "references/core/lifecycle-core.detail.md",
+      "originalLines": 228
+    },
+    {
+      "index": "references/implementation/backend-code-reference.md",
+      "detail": "references/implementation/backend-code-reference.detail.md",
+      "originalLines": 402
+    },
+    {
+      "index": "references/implementation/code-comments.md",
+      "detail": "references/implementation/code-comments.detail.md",
+      "originalLines": 182
+    },
+    {
+      "index": "references/implementation/develop.md",
+      "detail": "references/implementation/develop.detail.md",
+      "originalLines": 212
+    },
+    {
+      "index": "references/implementation/web-code-reference.md",
+      "detail": "references/implementation/web-code-reference.detail.md",
+      "originalLines": 263
+    },
+    {
+      "index": "references/recovery-archive/long-task-core.md",
+      "detail": "references/recovery-archive/long-task-core.detail.md",
+      "originalLines": 419
+    },
+    {
+      "index": "references/recovery-archive/task-context-optimization.md",
+      "detail": "references/recovery-archive/task-context-optimization.detail.md",
+      "originalLines": 185
+    },
+    {
+      "index": "references/recovery-archive/wk-cli.md",
+      "detail": "references/recovery-archive/wk-cli.detail.md",
+      "originalLines": 243
+    },
+    {
+      "index": "references/requirement-design/business-flow.md",
+      "detail": "references/requirement-design/business-flow.detail.md",
+      "originalLines": 229
+    },
+    {
+      "index": "references/requirement-design/business-model.md",
+      "detail": "references/requirement-design/business-model.detail.md",
+      "originalLines": 333
+    },
+    {
+      "index": "references/requirement-design/implementation-contract.md",
+      "detail": "references/requirement-design/implementation-contract.detail.md",
+      "originalLines": 230
+    },
+    {
+      "index": "references/requirement-design/implementation-plan.md",
+      "detail": "references/requirement-design/implementation-plan.detail.md",
+      "originalLines": 341
+    },
+    {
+      "index": "references/review-agents/collaboration-review.md",
+      "detail": "references/review-agents/collaboration-review.detail.md",
+      "originalLines": 338
+    },
+    {
+      "index": "references/specialist/documentation-core.md",
+      "detail": "references/specialist/documentation-core.detail.md",
+      "originalLines": 432
+    }
+  ],
+  "documents": [
+    {
+      "target": "references/collaboration.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/review-agents/orchestration-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/review-agents/review-core.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/core/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/core/auto-mode-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/core/completion-gate-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/core/enum.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/core/lifecycle-core.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/core/lifecycle-core.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/core/machine-boundaries.md",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/diagnostics/artifact-consistency.md",
+      "role": "core",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/diagnostics/dependency-discovery.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/core/compatibility-boundary.md"
+        }
+      ],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/artifact-identity.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/diagnostics/candidate-service-boundary.md",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/artifact-identity.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/diagnostics/dependency-discovery.md",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/artifact-identity.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/diagnostics/fault-codes.md",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/artifact-identity.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/fault-codes.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/getting-started.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/recovery-archive/wk-cli.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/core/request-intake.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/core/compatibility-boundary.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/git-and-delivery.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/git-delivery/git-checkpoint-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/recovery-archive/archive-core.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/git-delivery/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/git-delivery/acceptance-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/git-delivery/delivery-readiness.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/git-delivery/git-checkpoint-core.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/implementation/backend-code-reference.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/implementation/code-comments.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/implementation/debugging-core.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation/backend-code-reference.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/implementation/backend-code-reference.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation/backend-code-reference.detail.part-2.md",
+      "role": "detail",
+      "requires": [
+        "references/implementation/backend-code-reference.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation/code-comments.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/implementation/code-comments.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation/develop.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/implementation/develop.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation/web-code-reference.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/implementation/web-code-reference.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation/web-code-reference.detail.part-2.md",
+      "role": "detail",
+      "requires": [
+        "references/implementation/web-code-reference.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/implementation.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/implementation-plan.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/implementation-contract.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/implementation/develop.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/maintenance/protocols.md",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/package/release-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/maintenance/source-inspection.md",
+      "role": "core",
+      "requires": [],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/package/release-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/recovery-archive/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/recovery-archive/archive-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/recovery-archive/archive-documentation.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/recovery-archive/baseline-integrity.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/recovery-archive/long-task-core.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/recovery-archive/long-task-core.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/recovery-archive/long-task-core.detail.part-2.md",
+      "role": "detail",
+      "requires": [
+        "references/recovery-archive/long-task-core.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/recovery-archive/task-context-optimization.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/recovery-archive/task-context-optimization.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/recovery-archive/wk-cli.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/recovery-archive/wk-cli.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/storage/long-task/record-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-and-design.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/requirement-analysis-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/design-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/business-model.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-design/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/requirement-analysis-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/design-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/requirement-design/implementation-plan.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "scripts/design_doc.py"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-design/business-flow.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/requirement-design/business-flow.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/documents/structured-docs/business-flow.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-design/business-model.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/requirement-design/business-model.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/documents/structured-docs/business-model.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-design/business-model.detail.part-2.md",
+      "role": "detail",
+      "requires": [
+        "references/requirement-design/business-model.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/documents/structured-docs/business-model.schema.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-design/implementation-contract.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/requirement-design/implementation-contract.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "scripts/design_doc.py"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-design/implementation-plan.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/requirement-design/implementation-plan.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/development/development-task-plan.schema.json",
+        "assets/development/development-task-review.schema.json",
+        "assets/review/review-contract.json",
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/requirement-design/implementation-plan.detail.part-2.md",
+      "role": "detail",
+      "requires": [
+        "references/requirement-design/implementation-plan.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/development/development-task-plan.schema.json",
+        "assets/development/development-task-review.schema.json",
+        "assets/review/review-contract.json",
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/review-agents/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/review-agents/review-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/review-agents/orchestration-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/review-agents/review-evidence.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/review-agents/collaboration-review.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/review-agents/collaboration-review.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/review-agents/collaboration-review.detail.part-2.md",
+      "role": "detail",
+      "requires": [
+        "references/review-agents/collaboration-review.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/review/review-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/specialist/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/specialist/documentation-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/specialist/domain-governance.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/specialist/engineering-knowledge-graph.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/specialist/documentation-core.detail.md",
+      "role": "detail",
+      "requires": [
+        "references/specialist/documentation-core.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/specialist/documentation-core.detail.part-2.md",
+      "role": "detail",
+      "requires": [
+        "references/specialist/documentation-core.md"
+      ],
+      "nextOn": [],
+      "maxReadBytes": 24576,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/tdd-and-testing.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/testing/tdd-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/testing/testing-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/testing/test-evidence.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/runtime/runtime-contract.json"
+      ],
+      "deprecatedBy": null
+    },
+    {
+      "target": "references/testing/README.md",
+      "role": "quick",
+      "requires": [],
+      "nextOn": [
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/testing/testing-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/testing/tdd-core.md"
+        },
+        {
+          "when": "TOPIC_SELECTED",
+          "target": "references/testing/integration-testing.md"
+        }
+      ],
+      "maxReadBytes": 4096,
+      "machineAuthority": [
+        "assets/review/evidence.schema.json",
+        "assets/review/acceptance-assertion.schema.json"
+      ],
+      "deprecatedBy": null
+    }
+  ],
+  "readingPolicy": {
+    "maxUpgradeSteps": 3,
+    "defaultPrimary": "references/getting-started.md",
+    "selection": "FIRST_SELECTED_TASK_ROUTE_REFERENCE",
+    "supportingResources": "RETAIN_ROUTED_GATES_AND_MODE_CONSTRAINTS",
+    "conditions": [
+      "DETAIL_REQUIRED",
+      "REVIEW_OR_VALIDATION_REQUIRED",
+      "TOPIC_SELECTED",
+      "EXAMPLE_REQUESTED"
+    ],
+    "budgetSemantics": "UTF8_CONTENT_BYTES_PER_READ",
+    "parametersAuthority": "scripts/cli_help.py"
+  },
+  "catalogSchema": "assets/package/resource-catalog.schema.json",
+  "authorityPolicy": {
+    "catalogs": "CANONICAL_RESOURCE_MAPPING",
+    "resourceMetadata": "READ_FROM_TARGET",
+    "resourceIndex": "DERIVED",
+    "manifest": "INTEGRITY_ONLY"
+  },
+  "retirements": []
+}

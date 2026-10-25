@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:common-develop-opt:discovery-profile",
+  "title": "Bounded artifact declaration discovery",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "roots",
+    "requiredArtifactIds"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "roots": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "requiredArtifactIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "maxDeclarations": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100000,
+      "default": 10000
+    }
+  }
+}

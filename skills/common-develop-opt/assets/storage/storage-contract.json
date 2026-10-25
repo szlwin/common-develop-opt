@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "storageModel": "NEW_PROJECT_CANONICAL_V1",
+  "projectMarker": ".common-develop/project.json",
+  "versionFiles": {
+    "work": "work.md",
+    "documents": "doc/",
+    "workModeEvents": "work_mode_events.jsonl",
+    "workModeEventsSchema": {
+      "schemaVersion": 1,
+      "type": "WORK_MODE_CHANGED",
+      "requiredFields": [
+        "schemaVersion",
+        "type",
+        "eventId",
+        "version",
+        "timestamp",
+        "agent",
+        "source",
+        "before",
+        "after",
+        "previousDigest",
+        "digest"
+      ],
+      "sources": [
+        "work_mode.apply",
+        "work_mode.init"
+      ],
+      "digest": "sha256(canonical_json(event_without_digest))",
+      "chain": "previousDigest equals prior event digest"
+    },
+    "archiveManifest": "archive_manifest.yaml",
+    "archivePlan": "version/{VERSION}/module/{MODULE}/generated/merge_plan.yaml"
+  },
+  "taskFiles": {
+    "identity": "task.json",
+    "events": "task_events.jsonl",
+    "plan": "task_plan.json",
+    "developmentTaskPlan": "development_task_plan.json",
+    "traceability": "traceability.json",
+    "acceptance": "acceptance.json",
+    "risk": "risk.json",
+    "requestIntake": "request_intake.json",
+    "eventsPolicy": {
+      "appendOnly": true,
+      "authority": "task-runtime reducer",
+      "authorizationEvents": [
+        "AUTHORIZATION_BATCH_CONFIRMED",
+        "AUTHORIZATION_BATCH_CONSUMED"
+      ],
+      "amendmentEvents": [
+        "ARTIFACT_AMENDED"
+      ],
+      "transactionalWith": [
+        "cache/current_manifest.json",
+        "canonical amendment Markdown",
+        "history/amendments/<amendment-id>.impact.json"
+      ],
+      "statePatchFormat": "INITIAL_TOP_LEVEL_SEED_THEN_JSON_POINTER_PATH_PATCH",
+      "rollover": {
+        "command": "long_task.compact-events",
+        "defaultThresholdBytes": 262144,
+        "archiveDirectory": "history/",
+        "activeAnchorEvent": "TASK_REDUCER_SNAPSHOT",
+        "previewBeforeApply": true,
+        "archiveFormat": "DETERMINISTIC_GZIP_JSONL",
+        "historyReadMode": "EXPLICIT_ONLY"
+      },
+      "reopenArtifactPolicy": "STALE_ONLY_CANONICAL_FILES_PRESERVED",
+      "amendArtifactPolicy": "CURRENT_PHASE_APPEND_IN_PLACE_UNAFFECTED_FACTS_PRESERVED",
+      "revisionPolicy": {
+        "versionDirectoryIsStable": true,
+        "appendCanonicalChanges": true,
+        "sameVersionChangeDomains": [
+          "requirement",
+          "flow",
+          "business_model",
+          "design",
+          "development",
+          "testing"
+        ],
+        "newVersionRequiresExplicitUserRequest": true,
+        "reopenBoundaryDiscovery": {
+          "direction": "UPSTREAM",
+          "readOnly": true,
+          "userConfirmationBeforeExpansion": true,
+          "mutationsBeforeBoundaryFixed": false,
+          "singleReopenFromEarliestAffectedPhase": true,
+          "implementationDirection": "DOWNSTREAM"
+        },
+        "logicalRevisionSequence": true,
+        "neverReuseRetiredRevisionNumbers": true
+      },
+      "historicalEvidencePolicy": {
+        "ordinaryGateScope": "CURRENT_ITERATION_CURRENT_REVISION",
+        "historicalRecords": "RETAIN_METADATA_ONLY_UNTIL_EXPLICIT_AUDIT",
+        "bulkStatusMigrationOnReopen": false,
+        "historicalDigestFailureBlocksCurrentAttempt": false
+      },
+      "notes": "Authorization and amendment records are audit events in task_events.jsonl; they never replace lifecycle gates or become a second state authority. A bounded amendment appends to the same canonical file and preserves unaffected task and Evidence facts. Reopen invalidates revisions logically and never deletes canonical requirement, design, test_case, or implementation-plan files. Event rollover is explicit maintenance: it preserves the reduced state and hash chain in TASK_REDUCER_SNAPSHOT and stores the immutable prior segment under history/."
+    }
+  },
+  "derivedFiles": {
+    "manifest": "cache/current_manifest.json",
+    "impact": "cache/current_impact.json"
+  },
+  "evidence": {
+    "registry": "evidence/registry.jsonl",
+    "reviews": "evidence/reviews.jsonl",
+    "objects": "evidence/objects/",
+    "runs": "evidence/runs/"
+  },
+  "directReadExceptions": [
+    "cache/current_manifest.json"
+  ],
+  "modelIdentity": "NEW_PROJECT_CANONICAL_V1",
+  "modelVersion": 6,
+  "compatibility": {
+    "runtimeStorageModelVersion": 6,
+    "releaseStorageModelVersion": 6,
+    "runtimeContractRef": "assets/runtime/runtime-contract.json#/storageModelVersion",
+    "releaseContractRef": "assets/package/release-contract.json#/storageModelVersion"
+  },
+  "conditionalReadSet": [
+    "cache/current_manifest.json"
+  ],
+  "indirectReadSet": [
+    "cache/current_impact.json"
+  ],
+  "cacheCompatibilityRule": "Reject incompatible derived cache and rebuild it from canonical events and current contract versions."
+}

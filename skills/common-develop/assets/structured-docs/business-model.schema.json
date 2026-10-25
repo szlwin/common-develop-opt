@@ -1,0 +1,537 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/business-model.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifact",
+    "module",
+    "revision",
+    "terms",
+    "scenarios",
+    "entities",
+    "valueObjects",
+    "aggregates",
+    "invariants",
+    "stateMachines",
+    "businessErrors",
+    "traceability"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "artifact": {
+      "const": "business_model"
+    },
+    "module": {
+      "$ref": "#/$defs/module"
+    },
+    "revision": {
+      "$ref": "#/$defs/revision"
+    },
+    "baseRevision": {
+      "type": "string"
+    },
+    "terms": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/term"
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scenario"
+      }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domainObject"
+      }
+    },
+    "valueObjects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/domainObject"
+      }
+    },
+    "aggregates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/aggregate"
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/invariant"
+      }
+    },
+    "stateMachines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stateMachine"
+      }
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/namedBehavior"
+      }
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/namedBehavior"
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/namedBehavior"
+      }
+    },
+    "businessErrors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/businessError"
+      }
+    },
+    "traceability": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trace"
+      }
+    }
+  },
+  "$defs": {
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domainRef": {
+          "type": "string",
+          "pattern": "^DOMAIN-[A-Z0-9_-]+$"
+        },
+        "boundedContextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        }
+      }
+    },
+    "term": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "definition"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TERM-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "forbiddenSynonyms": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "sourceRefs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "contextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "required": [
+        "id",
+        "given",
+        "when",
+        "then",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SCN-[A-Z0-9_-]+$"
+        },
+        "given": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "when": {
+          "type": "string",
+          "minLength": 1
+        },
+        "then": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "attribute": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "required"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "constraints": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "domainObject": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "identity",
+        "attributes",
+        "behaviors",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(ENT|VO)-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "identity": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attribute"
+          }
+        },
+        "behaviors": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "contextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "root",
+        "members",
+        "invariantIds",
+        "transactionBoundary",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^AGG-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "members": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "invariantIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "transactionBoundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consistency": {
+          "type": "string"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "contextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        }
+      }
+    },
+    "invariant": {
+      "type": "object",
+      "required": [
+        "id",
+        "statement",
+        "trigger",
+        "failure",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^INV-[A-Z0-9_-]+$"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trigger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "traceIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "contextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        },
+        "termRefs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "appliesToRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "required": [
+        "id",
+        "from",
+        "command",
+        "to",
+        "preconditions",
+        "failure"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preconditions": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "sideEffects": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "failure": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "stateMachine": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "initialState",
+        "states",
+        "transitions",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SM-[A-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "initialState": {
+          "type": "string",
+          "minLength": 1
+        },
+        "states": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "terminalStates": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/transition"
+          }
+        },
+        "traceIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "contextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        }
+      }
+    },
+    "namedBehavior": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "reason",
+        "inputs",
+        "outputs",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inputs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "outputs": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "contextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        }
+      }
+    },
+    "businessError": {
+      "type": "object",
+      "required": [
+        "id",
+        "condition",
+        "meaning",
+        "retryable",
+        "stateChanged",
+        "traceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ERR-[A-Z0-9_-]+$"
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "stateChanged": {
+          "type": "boolean"
+        },
+        "traceIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "contextRef": {
+          "type": "string",
+          "pattern": "^BC-[A-Z0-9_-]+$"
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "required": [
+        "traceId",
+        "modelRefs"
+      ],
+      "properties": {
+        "traceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "modelRefs": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    }
+  }
+}

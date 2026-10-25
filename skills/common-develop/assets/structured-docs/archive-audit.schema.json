@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/archive-audit.schema.json",
+  "title": "common-develop 归档审计包",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "archiveType", "version", "module", "resultDigest", "archiveGate", "auditRefs"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "archiveType": {"const": "AUDIT"},
+    "version": {"type": "string", "minLength": 1},
+    "module": {"type": "string", "minLength": 1},
+    "resultDigest": {"type": "string"},
+    "baseRevisions": {"type": "object"},
+    "resultRevisions": {"type": "object"},
+    "affectedTraceIds": {"type": "array", "items": {"type": "string"}},
+    "artifactMerges": {"type": "array"},
+    "archiveGate": {"type": "object"},
+    "auditRefs": {"type": "object", "required": ["archiveManifest", "mergePlan"]}
+  }
+}

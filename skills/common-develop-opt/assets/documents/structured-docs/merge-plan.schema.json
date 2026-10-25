@@ -1,0 +1,789 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/merge-plan.schema.json",
+  "title": "common-develop 版本增量合并计划",
+  "description": "由 wk -d preview 生成的单一归档计划；同时绑定增量内容、工作模式、门禁证据和授权结论。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "mergeMode",
+    "version",
+    "module",
+    "changeSetIds",
+    "baseRevisions",
+    "resultRevisions",
+    "structuredArtifacts",
+    "projectFactArtifacts",
+    "versionDeltaArtifacts",
+    "documentArtifacts",
+    "artifactMerges",
+    "conflictDecisions",
+    "businessFlowMerges",
+    "affectedTraceIds",
+    "workMode",
+    "resultDigest",
+    "archiveGate",
+    "generatedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "mergeMode": {
+      "const": "VERSION_DELTA_ARCHIVE"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "changeSetIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "baseRevisions": {
+      "$ref": "#/$defs/revisionMap"
+    },
+    "resultRevisions": {
+      "$ref": "#/$defs/revisionMap"
+    },
+    "structuredArtifacts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "business_model",
+          "api",
+          "db",
+          "business_flow",
+          "dependency_impact"
+        ]
+      }
+    },
+    "projectFactArtifacts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "business_model",
+          "business_flow",
+          "dependency_impact"
+        ]
+      }
+    },
+    "versionDeltaArtifacts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "api",
+          "db"
+        ]
+      }
+    },
+    "documentArtifacts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "requirement_list",
+          "module_desc",
+          "union_language",
+          "design_topic",
+          "page_behavior"
+        ]
+      }
+    },
+    "artifactMerges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifactMerge"
+      }
+    },
+    "conflictDecisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/conflictDecision"
+      }
+    },
+    "affectedTraceIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "resultDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "generatedAt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workMode": {
+      "$ref": "#/$defs/workMode"
+    },
+    "archiveGate": {
+      "$ref": "#/$defs/archiveGate"
+    },
+    "businessFlowMerges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/businessFlowMerge"
+      }
+    }
+  },
+  "$defs": {
+    "revisionValue": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "revisionMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/revisionValue"
+      }
+    },
+    "artifactMerge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactType",
+        "sourceRef",
+        "targetRef",
+        "sourceRevision",
+        "resultRevision",
+        "sourceDigest",
+        "targetDigest",
+        "resultDigest",
+        "status",
+        "evidenceRefs"
+      ],
+      "properties": {
+        "artifactType": {
+          "enum": [
+            "requirement_list",
+            "module_desc",
+            "union_language",
+            "design_topic",
+            "page_behavior"
+          ]
+        },
+        "sourceRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mergeMode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stableId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseRevision": {
+          "type": "string"
+        },
+        "affectedStableIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "sourceRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "const": "READY"
+        },
+        "sourceDigest": {
+          "type": "string"
+        },
+        "targetDigest": {
+          "type": "string"
+        },
+        "resultDigest": {
+          "type": "string"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "conflictDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stableId",
+        "conflictType",
+        "decision",
+        "decidedBy",
+        "decisionRef"
+      ],
+      "properties": {
+        "stableId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conflictType": {
+          "enum": [
+            "BASE_REVISION",
+            "CONCURRENT_STABLE_ID",
+            "AMBIGUOUS_REPLACEMENT",
+            "DEPRECATION_WITHOUT_SUCCESSOR"
+          ]
+        },
+        "decision": {
+          "enum": [
+            "REBASE_REQUIRED",
+            "SUPERSEDE",
+            "KEEP_CURRENT",
+            "REJECT_ARCHIVE"
+          ]
+        },
+        "decidedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decisionRef": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "workMode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelCode",
+        "pageDesign",
+        "minimal",
+        "auto",
+        "architectureReview",
+        "gitCheckpoint",
+        "gitPush",
+        "reviewOnly",
+        "lightweight",
+        "lightweightWaived",
+        "skippedPhases",
+        "workRef",
+        "workDigest"
+      ],
+      "properties": {
+        "modelCode": {
+          "type": "boolean"
+        },
+        "pageDesign": {
+          "type": "boolean"
+        },
+        "minimal": {
+          "type": "boolean"
+        },
+        "auto": {
+          "type": "boolean"
+        },
+        "architectureReview": {
+          "type": "boolean"
+        },
+        "gitCheckpoint": {
+          "type": "boolean"
+        },
+        "gitPush": {
+          "type": "boolean"
+        },
+        "reviewOnly": {
+          "type": "boolean"
+        },
+        "lightweight": {
+          "type": "boolean"
+        },
+        "lightweightWaived": {
+          "type": "boolean"
+        },
+        "skippedPhases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "test_design",
+              "tdd",
+              "code_review",
+              "testing"
+            ]
+          }
+        },
+        "workRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "minimal": {
+                    "const": true
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "lightweight": {
+                    "const": false
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "lightweightWaived": {
+                    "const": false
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "skippedPhases": {
+                "const": [
+                  "test_design",
+                  "testing"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "lightweight": {
+                    "const": true
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "lightweightWaived": {
+                    "const": false
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "skippedPhases": {
+                "const": [
+                  "test_design",
+                  "tdd",
+                  "code_review",
+                  "testing"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "lightweightWaived": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "skippedPhases": {
+                "const": [
+                  "test_design",
+                  "tdd",
+                  "code_review",
+                  "testing"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              {
+                "properties": {
+                  "minimal": {
+                    "const": false
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "lightweight": {
+                    "const": false
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "lightweightWaived": {
+                    "const": false
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "skippedPhases": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "gateOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "revision",
+        "stageOutcomeRefs",
+        "evidenceIds",
+        "reviewerAgents",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "BLOCKED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "revision": {
+          "type": "string"
+        },
+        "stageOutcomeRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reviewerAgents": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string"
+        },
+        "evidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "PASSED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "revision": {
+                "minLength": 1
+              },
+              "stageOutcomeRefs": {
+                "minItems": 1
+              },
+              "reviewerAgents": {
+                "minItems": 1
+              },
+              "evidenceIds": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "NOT_APPLICABLE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reason": {
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "archiveGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "gates",
+        "openIssueIds",
+        "authorizedBy",
+        "authorizedAt",
+        "decisionRef",
+        "userConfirmed",
+        "notes"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "DRAFT",
+            "READY",
+            "REJECTED"
+          ]
+        },
+        "gates": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requirementConfirmation",
+            "requirementAnalysis",
+            "businessModel",
+            "design",
+            "testDesign",
+            "implementationPlan",
+            "development",
+            "codeReview",
+            "testing",
+            "completionVerification"
+          ],
+          "properties": {
+            "requirementConfirmation": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "requirementAnalysis": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "businessModel": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "design": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "testDesign": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "implementationPlan": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "development": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "codeReview": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "testing": {
+              "$ref": "#/$defs/gateOutcome"
+            },
+            "completionVerification": {
+              "$ref": "#/$defs/gateOutcome"
+            }
+          }
+        },
+        "openIssueIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "authorizedBy": {
+          "type": "string"
+        },
+        "authorizedAt": {
+          "type": "string"
+        },
+        "decisionRef": {
+          "type": "string"
+        },
+        "userConfirmed": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "READY"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "authorizedBy": {
+                "minLength": 1
+              },
+              "authorizedAt": {
+                "minLength": 1
+              },
+              "decisionRef": {
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "businessFlowMerge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "flowGroup",
+        "baseRevision",
+        "resultRevision",
+        "changeSetIds",
+        "affectedFlowIds",
+        "sourceRefs",
+        "targetYamlRef",
+        "targetMarkdownRef",
+        "previewYamlRef",
+        "previewMarkdownRef",
+        "yamlDigest",
+        "markdownDigest"
+      ],
+      "properties": {
+        "flowGroup": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "baseRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "changeSetIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "affectedFlowIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^FLOW-[A-Z0-9_-]+$"
+          }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "targetYamlRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetMarkdownRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "previewYamlRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "previewMarkdownRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "yamlDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "markdownDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

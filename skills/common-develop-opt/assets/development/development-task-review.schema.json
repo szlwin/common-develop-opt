@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/development-task-review.schema.json",
+  "title": "Common Develop Development Task Plan Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_id",
+    "plan_revision",
+    "review_round",
+    "reviewer_agent",
+    "task_ids",
+    "result",
+    "findings",
+    "summary",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "review_id": {
+      "type": "string",
+      "pattern": "^TPR-[0-9]{6}$"
+    },
+    "plan_revision": {
+      "type": "string",
+      "pattern": "^TP-[A-Z0-9_.-]+-R[0-9]{2,}@[0-9a-f]{12}$"
+    },
+    "review_round": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "reviewer_agent": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z]+Agent$"
+    },
+    "task_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "result": {
+      "enum": [
+        "PASSED",
+        "NEEDS_CHANGES",
+        "BLOCKED"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "finding_id",
+          "severity",
+          "task_id",
+          "field",
+          "description",
+          "required_change"
+        ],
+        "properties": {
+          "finding_id": {
+            "type": "string",
+            "pattern": "^TPF-[0-9]{6}-[0-9]{2}$"
+          },
+          "severity": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ]
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "field": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_change": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

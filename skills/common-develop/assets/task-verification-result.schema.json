@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://common-develop.local/schemas/task-verification-result.schema.json",
+  "title": "common-develop task verification result",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "validatorVersion",
+    "profile",
+    "targetId",
+    "overall",
+    "inputDigest",
+    "counts",
+    "next"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "validatorVersion": {"type": "string", "minLength": 1},
+    "profile": {"type": "string", "minLength": 1},
+    "targetId": {"type": "string", "minLength": 1},
+    "version": {"type": "string"},
+    "currentPhase": {"type": "string"},
+    "taskStatus": {"type": "string"},
+    "overall": {"enum": ["PASSED", "FAILED"]},
+    "inputDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "cacheHit": {"type": "boolean"},
+    "counts": {"type": "object"},
+    "checks": {"type": "array"},
+    "failures": {"type": "array"},
+    "next": {
+      "type": "object",
+      "required": ["allowed", "phase", "agent"],
+      "properties": {
+        "allowed": {"type": "boolean"},
+        "phase": {"type": "string"},
+        "agent": {"type": "string"},
+        "blockingCount": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

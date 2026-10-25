@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "authority": "assets/runtime/incremental-validity-contract.json",
+  "changeClasses": [
+    "PROCESS_ONLY",
+    "DOCUMENTATION_ONLY",
+    "TEST_ONLY",
+    "CONFIG",
+    "PRODUCTION",
+    "SEMANTIC_AUTHORITY",
+    "COMPOSITE",
+    "UNKNOWN"
+  ],
+  "unknownImpactPolicy": "CONSERVATIVE_FULL_PROFILE",
+  "processOnlyPolicy": {
+    "semanticArtifactChanged": false,
+    "productionChanged": false,
+    "semanticRevalidationRequiredByDefault": false,
+    "rule": "Process-only lifecycle metadata does not create a new semantic Review revision and cannot invalidate unchanged semantic Evidence by itself."
+  },
+  "reviewPolicy": {
+    "reviewResultReuseAcrossExactRevision": false,
+    "newIndependentConclusionRequiredWhenReviewRevisionChanges": true,
+    "lowOrUnknownConfidenceFallback": "ALL_SELECTED_PROFILE_CRITERIA",
+    "criterionEvidenceIdReuseAcrossExactRevision": false,
+    "unaffectedEvidenceSourceReuse": "CONDITIONAL_RECAPTURE_OR_REBIND"
+  },
+  "versionRevisionPolicy": {
+    "stableVersionDirectory": true,
+    "appendOnlyCanonicalChanges": true,
+    "sameVersionChangeDomains": [
+      "requirement",
+      "flow",
+      "business_model",
+      "design",
+      "development",
+      "testing"
+    ],
+    "newVersionRequiresExplicitUserRequest": true,
+    "reopenBoundaryDiscovery": {
+      "direction": "UPSTREAM",
+      "readOnly": true,
+      "userConfirmationBeforeExpansion": true,
+      "mutationsBeforeBoundaryFixed": false,
+      "singleReopenFromEarliestAffectedPhase": true,
+      "implementationDirection": "DOWNSTREAM"
+    },
+    "neverReuseRetiredRevisionNumbers": true
+  },
+  "historicalEvidencePolicy": {
+    "ordinaryGateScope": "CURRENT_ITERATION_CURRENT_REVISION",
+    "retainHistoricalMetadata": true,
+    "bulkStatusMigrationOnReopen": false,
+    "historicalDigestFailureBlocksCurrentAttempt": false,
+    "expandHistoricalObjectsOnlyFor": [
+      "EXPLICIT_AUDIT",
+      "ARCHIVE"
+    ]
+  },
+  "adapterProtocol": {
+    "schemaVersion": 1,
+    "technologyNeutral": true,
+    "optional": true,
+    "fields": [
+      "baseRevision",
+      "revision",
+      "confidence",
+      "affectedScopes",
+      "affectedArtifacts",
+      "affectedReviewCriteria",
+      "affectedProfiles",
+      "affectedTaskIds",
+      "affectedTraceIds",
+      "affectedAcceptanceIds",
+      "requiredCapabilities",
+      "notes"
+    ],
+    "confidenceDomain": [
+      "HIGH",
+      "MEDIUM",
+      "LOW",
+      "UNKNOWN"
+    ],
+    "rule": "Project adapters may report project-specific impact facts using generic scopes, Review criterion IDs, profile IDs, and capability names; the Skill core does not infer technology semantics."
+  },
+  "derivedPlan": {
+    "kind": "incremental_revalidation_plan",
+    "authority": "DERIVED",
+    "mayTightenLifecycleDecision": true,
+    "mayAuthorizeLifecycleGate": false,
+    "mayBecomeTaskAuthority": false
+  },
+  "amendmentPolicy": {
+    "command": "long_task.amend-phase",
+    "executorAgent": "ProjectManagerAgent",
+    "currentPhaseOnly": true,
+    "requiresExplicitAffectedTasks": true,
+    "requiresDependencyClosedTaskSet": true,
+    "requiresExactTraceAcceptanceClosure": true,
+    "requiresPassedBoundImpactPlan": true,
+    "acceptedScopingPolicies": [
+      "ADAPTER_SCOPED_HIGH_OR_MEDIUM",
+      "GRAPH_SCOPED_HIGH"
+    ],
+    "processOnlyHandling": "REJECT_AMEND_PHASE; PROCESS_ONLY changes only lifecycle or storage metadata and do not append canonical content or create a semantic revision",
+    "rejectWhen": [
+      "unknown_or_conservative_impact",
+      "cross_bounded_context_impact",
+      "permission_security_transaction_or_trust_boundary_impact",
+      "running_attempt_exists",
+      "downstream_passed_stage_outcome_exists",
+      "affected_task_dependency_closure_is_incomplete"
+    ],
+    "fallbackCommand": "long_task.reopen-phase",
+    "canonicalDocumentPolicy": "APPEND_AMENDMENT_IN_PLACE",
+    "canonicalOwnershipPolicy": "FAIL_CLOSED_UNLESS_CURRENT_TASK_PHASE_OWNERSHIP_IS_PROVEN",
+    "canonicalLedgerConsistency": "BIDIRECTIONAL_EXACT_EVENT_BLOCK_MATCH",
+    "writerConcurrencyPolicy": "TASK_SCOPED_NONBLOCKING_EXCLUSIVE_LOCK",
+    "unaffectedFactsPolicy": "PRESERVE"
+  },
+  "graphImpactPolicy": {
+    "enabled": true,
+    "authority": "DERIVED",
+    "graphKind": "engineering_knowledge_graph",
+    "maxDepthDefault": 8,
+    "propagation": {
+      "IMPLEMENTED_BY": "PROPAGATE",
+      "VERIFIED_BY": "PROPAGATE",
+      "AFFECTS": "PROPAGATE",
+      "TRIGGERS": "PROPAGATE",
+      "PROTECTED_BY": "PROPAGATE",
+      "USES_TERM": "PROPAGATE",
+      "OWNS": "BOUNDARY",
+      "CONTAINS": "BOUNDARY",
+      "CONSUMES": "BOUNDARY",
+      "TRANSLATES_TO": "BOUNDARY",
+      "PROVIDES_TO": "BOUNDARY",
+      "CONSUMES_FROM": "BOUNDARY",
+      "COLLABORATES_WITH": "BOUNDARY",
+      "UPSTREAM_OF": "BOUNDARY",
+      "DOWNSTREAM_OF": "BOUNDARY",
+      "DEPENDS_ON": "CONDITIONAL"
+    },
+    "riskMapping": {
+      "API": [
+        "api_contract",
+        "impact_analysis"
+      ],
+      "EVENT": [
+        "api_contract",
+        "cross_module_integration",
+        "impact_analysis"
+      ],
+      "BOUNDED_CONTEXT": [
+        "architecture_change",
+        "cross_module_integration",
+        "impact_analysis"
+      ],
+      "MODULE": [
+        "architecture_change",
+        "impact_analysis"
+      ],
+      "COMPONENT": [
+        "architecture_change",
+        "impact_analysis"
+      ],
+      "DOMAIN": [
+        "architecture_change",
+        "impact_analysis"
+      ],
+      "INVARIANT": [
+        "impact_analysis"
+      ],
+      "AGGREGATE": [
+        "impact_analysis"
+      ],
+      "DATA_OBJECT": [
+        "impact_analysis"
+      ],
+      "PROCESS": [
+        "impact_analysis"
+      ],
+      "TEST_CASE": []
+    },
+    "crossContextRiskTemplates": [
+      "cross_module_integration",
+      "impact_analysis"
+    ],
+    "rule": "Graph impact may scope/restrict revalidation only when the graph is valid and the propagation path is explicit; low/unknown graph confidence falls back to conservative full selected profiles."
+  }
+}

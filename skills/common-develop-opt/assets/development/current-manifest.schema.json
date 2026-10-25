@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://common-develop.local/schemas/current-manifest.schema.json",
+  "title": "common-develop current task manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "kind",
+    "authority",
+    "sourceInputDigest",
+    "state",
+    "recoveryPolicy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "kind": {
+      "const": "CURRENT_MANIFEST"
+    },
+    "authority": {
+      "const": "DERIVED"
+    },
+    "sourceInputDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "taskStatus",
+        "currentPhase",
+        "eventSeq",
+        "eventDigest"
+      ],
+      "properties": {
+        "taskStatus": {
+          "type": "string"
+        },
+        "currentPhase": {
+          "type": "string"
+        },
+        "currentRound": {
+          "type": "string"
+        },
+        "eventSeq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eventDigest": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "activeRevisions": {
+      "type": "object"
+    },
+    "traceabilitySummary": {
+      "type": "object",
+      "required": [
+        "path",
+        "authority",
+        "status",
+        "sourceDigest",
+        "total",
+        "byStatus"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "authority": {
+          "const": "CANONICAL"
+        },
+        "readMode": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "sourceDigest": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "byStatus": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "workPolicy": {
+      "type": "object"
+    },
+    "recoveryPolicy": {
+      "type": "object",
+      "required": [
+        "sourceOfTruth",
+        "defaultReadSet",
+        "historyRequiresExplicitRead"
+      ],
+      "properties": {
+        "sourceOfTruth": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultReadSet": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "historyRequiresExplicitRead": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

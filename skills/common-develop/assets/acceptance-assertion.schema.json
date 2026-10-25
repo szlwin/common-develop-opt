@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/acceptance-assertion.schema.json",
+  "title": "Common Develop Acceptance Assertions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "target_id",
+    "version",
+    "assertions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assertion_id",
+          "acceptance_id",
+          "statement",
+          "type",
+          "phase",
+          "revision",
+          "blocking",
+          "status",
+          "parameters",
+          "source_refs",
+          "evidence_ids",
+          "verified_by_agent",
+          "verified_at",
+          "reason"
+        ],
+        "properties": {
+          "assertion_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "acceptance_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "TEST_CASE",
+              "COMMAND_EXIT",
+              "JSON_PATH",
+              "SQL_VALUE",
+              "METRIC_THRESHOLD",
+              "FILE_PATTERN",
+              "FILE_DIGEST",
+              "MANUAL_REVIEW",
+              "SET_EQUALS"
+            ]
+          },
+          "phase": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "PENDING",
+              "VERIFIED",
+              "FAILED",
+              "BLOCKED",
+              "UNRESOLVED",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "parameters": {
+            "type": "object"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "verified_by_agent": {
+            "type": "string"
+          },
+          "verified_at": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

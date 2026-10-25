@@ -1,0 +1,493 @@
+{
+  "schemaVersion": 1,
+  "kind": "ASSET_CATALOG",
+  "authority": "common-develop-opt",
+  "categories": [
+    "development",
+    "documents",
+    "package",
+    "review",
+    "runtime",
+    "storage"
+  ],
+  "entries": [
+    {
+      "target": "assets/review/acceptance-assertion.schema.json",
+      "category": "review",
+      "kind": "schema",
+      "logicalPath": "assets/acceptance-assertion.schema.json",
+      "schemaAliases": [
+        "review__acceptance-assertion"
+      ]
+    },
+    {
+      "target": "assets/development/artifact-footprint-policy.json",
+      "category": "development",
+      "kind": "contract/template",
+      "logicalPath": "assets/artifact-footprint-policy.json"
+    },
+    {
+      "target": "assets/documents/artifact-relation.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/artifact-relation.schema.json",
+      "schemaAliases": [
+        "documents__artifact-relation"
+      ]
+    },
+    {
+      "target": "assets/development/capability-pack-contract.json",
+      "category": "development",
+      "kind": "contract/template",
+      "logicalPath": "assets/capability-pack-contract.json"
+    },
+    {
+      "target": "assets/development/capability-result.schema.json",
+      "category": "development",
+      "kind": "schema",
+      "logicalPath": "assets/capability-result.schema.json",
+      "schemaAliases": [
+        "development__capability-result"
+      ]
+    },
+    {
+      "target": "assets/development/current-manifest.schema.json",
+      "category": "development",
+      "kind": "schema",
+      "logicalPath": "assets/current-manifest.schema.json",
+      "schemaAliases": [
+        "development__current-manifest"
+      ]
+    },
+    {
+      "target": "assets/package/delivery-readiness-contract.json",
+      "category": "package",
+      "kind": "contract/template",
+      "logicalPath": "assets/delivery-readiness-contract.json"
+    },
+    {
+      "target": "assets/development/development-task-plan.schema.json",
+      "category": "development",
+      "kind": "schema",
+      "logicalPath": "assets/development-task-plan.schema.json"
+    },
+    {
+      "target": "assets/development/development-task-review.schema.json",
+      "category": "development",
+      "kind": "schema",
+      "logicalPath": "assets/development-task-review.schema.json"
+    },
+    {
+      "target": "assets/package/doc-invariants.json",
+      "category": "package",
+      "kind": "contract/template",
+      "logicalPath": "assets/doc-invariants.json"
+    },
+    {
+      "target": "assets/package/domain-semantic-index.schema.json",
+      "category": "package",
+      "kind": "schema",
+      "logicalPath": "assets/domain-semantic-index.schema.json",
+      "schemaAliases": [
+        "package__domain-semantic-index"
+      ]
+    },
+    {
+      "target": "assets/package/engineering-graph.schema.json",
+      "category": "package",
+      "kind": "schema",
+      "logicalPath": "assets/engineering-graph.schema.json",
+      "schemaAliases": [
+        "package__engineering-graph"
+      ]
+    },
+    {
+      "target": "assets/review/evidence.schema.json",
+      "category": "review",
+      "kind": "schema",
+      "logicalPath": "assets/evidence.schema.json",
+      "schemaAliases": [
+        "review__evidence"
+      ]
+    },
+    {
+      "target": "assets/package/frontend-code-spec.template.json",
+      "category": "package",
+      "kind": "contract/template",
+      "logicalPath": "assets/frontend-code-spec.template.json"
+    },
+    {
+      "target": "assets/package/git-checkpoint.schema.json",
+      "category": "package",
+      "kind": "schema",
+      "logicalPath": "assets/git-checkpoint.schema.json",
+      "schemaAliases": [
+        "package__git-checkpoint"
+      ]
+    },
+    {
+      "target": "assets/package/git-connector-receipt.schema.json",
+      "category": "package",
+      "kind": "schema",
+      "logicalPath": "assets/git-connector-receipt.schema.json",
+      "schemaAliases": [
+        "package__git-connector-receipt"
+      ]
+    },
+    {
+      "target": "assets/package/git-connector-request.schema.json",
+      "category": "package",
+      "kind": "schema",
+      "logicalPath": "assets/git-connector-request.schema.json",
+      "schemaAliases": [
+        "package__git-connector-request"
+      ]
+    },
+    {
+      "target": "assets/runtime/incremental-validity-contract.json",
+      "category": "runtime",
+      "kind": "contract/template",
+      "logicalPath": "assets/incremental-validity-contract.json"
+    },
+    {
+      "target": "assets/storage/long-task/git_checkpoints.yaml",
+      "category": "storage",
+      "kind": "contract/template",
+      "logicalPath": "assets/long-task/git_checkpoints.yaml"
+    },
+    {
+      "target": "assets/storage/long-task/record-contract.json",
+      "category": "storage",
+      "kind": "contract/template",
+      "logicalPath": "assets/long-task/record-contract.json"
+    },
+    {
+      "target": "assets/review/manual-review-guides.json",
+      "category": "review",
+      "kind": "contract/template",
+      "logicalPath": "assets/manual-review-guides.json"
+    },
+    {
+      "target": "assets/runtime/project-constraints.schema.json",
+      "category": "runtime",
+      "kind": "schema",
+      "logicalPath": "assets/project-constraints.schema.json",
+      "schemaAliases": [
+        "runtime__project-constraints"
+      ]
+    },
+    {
+      "target": "assets/runtime/project-governance.schema.json",
+      "category": "runtime",
+      "kind": "schema",
+      "logicalPath": "assets/project-governance.schema.json",
+      "schemaAliases": [
+        "runtime__project-governance"
+      ]
+    },
+    {
+      "target": "assets/package/release-contract.json",
+      "category": "package",
+      "kind": "contract/template",
+      "logicalPath": "assets/release-contract.json"
+    },
+    {
+      "target": "assets/development/request-intake.schema.json",
+      "category": "development",
+      "kind": "schema",
+      "logicalPath": "assets/request-intake.schema.json"
+    },
+    {
+      "target": "assets/review/review-contract.json",
+      "category": "review",
+      "kind": "contract/template",
+      "logicalPath": "assets/review-contract.json"
+    },
+    {
+      "target": "assets/review/review-result.schema.json",
+      "category": "review",
+      "kind": "schema",
+      "logicalPath": "assets/review-result.schema.json"
+    },
+    {
+      "target": "assets/review/review-session.schema.json",
+      "category": "review",
+      "kind": "schema",
+      "logicalPath": "assets/review-session.schema.json"
+    },
+    {
+      "target": "assets/runtime/risk-detection-contract.json",
+      "category": "runtime",
+      "kind": "contract/template",
+      "logicalPath": "assets/risk-detection-contract.json"
+    },
+    {
+      "target": "assets/runtime/runtime-contract.json",
+      "category": "runtime",
+      "kind": "contract/template",
+      "logicalPath": "assets/runtime-contract.json"
+    },
+    {
+      "target": "assets/runtime/semantic-contract.json",
+      "category": "runtime",
+      "kind": "contract/template",
+      "logicalPath": "assets/semantic-contract.json"
+    },
+    {
+      "target": "assets/review/stage-result.schema.json",
+      "category": "review",
+      "kind": "schema",
+      "logicalPath": "assets/stage-result.schema.json"
+    },
+    {
+      "target": "assets/storage/storage-contract.json",
+      "category": "storage",
+      "kind": "contract/template",
+      "logicalPath": "assets/storage-contract.json"
+    },
+    {
+      "target": "assets/documents/structured-docs/api.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/api.schema.json",
+      "schemaAliases": [
+        "structured-docs__api"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/archive-audit.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/archive-audit.schema.json",
+      "schemaAliases": [
+        "structured-docs__archive-audit"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/archive-gate-result.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/archive-gate-result.schema.json",
+      "schemaAliases": [
+        "structured-docs__archive-gate-result"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/archive-manifest.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/archive-manifest.schema.json",
+      "schemaAliases": [
+        "structured-docs__archive-manifest"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/business-flow.changeset.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/business-flow.changeset.schema.json",
+      "schemaAliases": [
+        "structured-docs__business-flow.changeset"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/business-flow.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/business-flow.schema.json",
+      "schemaAliases": [
+        "structured-docs__business-flow"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/business-model.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/business-model.schema.json",
+      "schemaAliases": [
+        "structured-docs__business-model"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/changeset.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/changeset.schema.json",
+      "schemaAliases": [
+        "structured-docs__changeset"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/db.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/db.schema.json",
+      "schemaAliases": [
+        "structured-docs__db"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/dependency-impact.changeset.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/dependency-impact.changeset.schema.json",
+      "schemaAliases": [
+        "structured-docs__dependency-impact.changeset"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/dependency-impact.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/dependency-impact.schema.json",
+      "schemaAliases": [
+        "structured-docs__dependency-impact"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/design-topic.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/design-topic.schema.json",
+      "schemaAliases": [
+        "structured-docs__design-topic"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/design.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/design.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/domain-context-map.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/domain-context-map.schema.json",
+      "schemaAliases": [
+        "structured-docs__domain-context-map"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/knowledge-archive.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/knowledge-archive.schema.json",
+      "schemaAliases": [
+        "structured-docs__knowledge-archive"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/merge-plan.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/merge-plan.schema.json",
+      "schemaAliases": [
+        "structured-docs__merge-plan"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/module_desc.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/module_desc.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/page_design.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/page_design.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/project-index.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/project-index.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/requirement.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/requirement.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/requirement_list.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/requirement_list.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/test_case.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/test_case.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/version-delta.schema.json",
+      "category": "documents",
+      "kind": "schema",
+      "logicalPath": "assets/structured-docs/version-delta.schema.json",
+      "schemaAliases": [
+        "structured-docs__version-delta"
+      ]
+    },
+    {
+      "target": "assets/documents/structured-docs/version-summary.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/version-summary.template.md"
+    },
+    {
+      "target": "assets/development/task-verification-result.schema.json",
+      "category": "development",
+      "kind": "schema",
+      "logicalPath": "assets/task-verification-result.schema.json"
+    },
+    {
+      "target": "assets/package/work.template.md",
+      "category": "package",
+      "kind": "contract/template",
+      "logicalPath": "assets/work.template.md"
+    },
+    {
+      "target": "assets/package/work_record.template.md",
+      "category": "package",
+      "kind": "contract/template",
+      "logicalPath": "assets/work_record.template.md"
+    },
+    {
+      "target": "assets/package/resource-catalog.schema.json",
+      "category": "package",
+      "kind": "schema",
+      "logicalPath": "assets/resource-catalog.schema.json"
+    },
+    {
+      "target": "assets/documents/structured-docs/union_language.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/union_language.template.md"
+    },
+    {
+      "target": "assets/documents/structured-docs/union_language_changes.template.md",
+      "category": "documents",
+      "kind": "contract/template",
+      "logicalPath": "assets/structured-docs/union_language_changes.template.md"
+    }
+  ],
+  "rules": {
+    "formalAssetsAreAuthoritative": true,
+    "schemaIdPolicy": "all formal *.schema.json have deterministic $id"
+  },
+  "pathPolicy": {
+    "logicalPath": "Compatibility input address, resolved through this catalog; not a physical file.",
+    "target": "Current formal entity"
+  },
+  "catalogSchema": "assets/package/resource-catalog.schema.json",
+  "authorityPolicy": {
+    "catalogs": "CANONICAL_RESOURCE_MAPPING",
+    "resourceMetadata": "READ_FROM_TARGET",
+    "resourceIndex": "DERIVED",
+    "manifest": "INTEGRITY_ONLY"
+  },
+  "retirements": []
+}

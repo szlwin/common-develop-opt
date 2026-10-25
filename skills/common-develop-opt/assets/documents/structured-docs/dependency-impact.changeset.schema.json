@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/dependency-impact.changeset.schema.json",
+  "title": "Dependency impact 版本增量",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifact",
+    "changeSet",
+    "operations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "artifact": {
+      "const": "dependency_impact_changeset"
+    },
+    "changeSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "module",
+        "reason",
+        "baseRevision",
+        "resultRevision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DICHG-[A-Za-z0-9_.-]+$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultRevision": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "operation",
+          "collection",
+          "targetId",
+          "reason"
+        ],
+        "properties": {
+          "operation": {
+            "enum": [
+              "add",
+              "update",
+              "deprecate"
+            ]
+          },
+          "collection": {
+            "enum": [
+              "nodes",
+              "relationships",
+              "impactPolicies",
+              "crossModuleImplementations"
+            ]
+          },
+          "targetId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "after": {
+            "type": "object"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "operation": {
+                  "enum": [
+                    "add",
+                    "update"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "after"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

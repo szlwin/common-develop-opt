@@ -1,0 +1,10 @@
+# 后端实现契约语法
+
+## 快速规则
+
+- 适用：处理本主题的研发任务。
+- 通用输入、状态、权限和停止条件见 [机器字段与状态边界](../core/machine-boundaries.md)；这里仅选择本主题所需的具体规则。
+
+## 详细规则
+
+完整规则见 [backend-code-reference.detail.md](backend-code-reference.detail.md)。需要执行具体流程时按章节读取，不要全文加载。

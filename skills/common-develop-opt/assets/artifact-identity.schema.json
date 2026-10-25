@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:common-develop-opt:artifact-identity",
+  "title": "Artifact identity declaration and observation",
+  "description": "Shape only; paths, source bytes, identity uniqueness and digest consistency are validated by services.",
+  "$defs": {
+    "kind": {
+      "enum": [
+        "consumes",
+        "generatedFrom",
+        "verifies",
+        "implements",
+        "supersedes",
+        "contextual"
+      ]
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dependency": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "kind": {
+          "enum": [
+            "consumes",
+            "generatedFrom",
+            "verifies",
+            "implements",
+            "supersedes",
+            "contextual"
+          ]
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "artifactId",
+        "kind",
+        "revision",
+        "contentDigest"
+      ]
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "artifactType": {
+          "enum": [
+            "requirement",
+            "model",
+            "flow",
+            "impact",
+            "design",
+            "testCase",
+            "review",
+            "evidence"
+          ]
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "category": {
+          "enum": [
+            "WORKING_SOURCE",
+            "SEALED_ARTIFACT",
+            "AUDIT_RECORD",
+            "DERIVED",
+            "CACHE"
+          ]
+        },
+        "schemaVersion": {
+          "const": 1,
+          "type": "integer"
+        },
+        "artifactStatus": {
+          "enum": [
+            "CANDIDATE",
+            "PUBLISHED",
+            "STALE",
+            "SUPERSEDED"
+          ]
+        },
+        "lifecycleBinding": {
+          "type": "object",
+          "properties": {
+            "task": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "phase": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "iteration": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "task",
+            "phase",
+            "iteration"
+          ]
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            },
+            "required": [
+              "path"
+            ]
+          },
+          "minItems": 1
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:common-develop-opt:artifact-identity#/$defs/dependency"
+          }
+        }
+      },
+      "required": [
+        "artifactId",
+        "artifactType",
+        "revision",
+        "category",
+        "lifecycleBinding"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "inputs"
+          ]
+        },
+        {
+          "required": [
+            "sourceLocator"
+          ]
+        }
+      ]
+    },
+    "record": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "artifactType": {
+          "enum": [
+            "requirement",
+            "model",
+            "flow",
+            "impact",
+            "design",
+            "testCase",
+            "review",
+            "evidence"
+          ]
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "category": {
+          "enum": [
+            "WORKING_SOURCE",
+            "SEALED_ARTIFACT",
+            "AUDIT_RECORD",
+            "DERIVED",
+            "CACHE"
+          ]
+        },
+        "schemaVersion": {
+          "const": 1,
+          "type": "integer"
+        },
+        "artifactStatus": {
+          "enum": [
+            "CANDIDATE",
+            "PUBLISHED",
+            "STALE",
+            "SUPERSEDED"
+          ]
+        },
+        "lifecycleBinding": {
+          "type": "object",
+          "properties": {
+            "task": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "phase": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "iteration": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "task",
+            "phase",
+            "iteration"
+          ]
+        },
+        "sourceLocator": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ]
+          },
+          "minItems": 1
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:common-develop-opt:artifact-identity#/$defs/dependency"
+          }
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "dependencyManifestDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "digestAlgorithm": {
+          "const": "sha256-path-bytes-manifest-v1"
+        }
+      },
+      "required": [
+        "artifactId",
+        "artifactType",
+        "revision",
+        "category",
+        "schemaVersion",
+        "artifactStatus",
+        "lifecycleBinding",
+        "sourceLocator",
+        "supersedes",
+        "inputs",
+        "dependencies",
+        "contentDigest",
+        "dependencyManifestDigest",
+        "digestAlgorithm"
+      ]
+    }
+  },
+  "$ref": "#/$defs/record"
+}

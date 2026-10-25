@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Golden snapshots for deterministic AI context routing",
+  "scenarios": [
+    {
+      "id": "requirement-base",
+      "taskType": "requirement_analysis",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "requirement-analysis-core",
+        "acceptance-summary",
+        "requirement-traceability-summary"
+      ],
+      "expectedTotalTokenBudget": 2050,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "requirement-relationship",
+      "taskType": "requirement_analysis",
+      "prompt": "删除目录并分析关联需求",
+      "expectedConditionIds": [
+        "dependency-impact"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "requirement-analysis-core",
+        "acceptance-summary",
+        "requirement-traceability-summary",
+        "relationship-impact"
+      ],
+      "expectedTotalTokenBudget": 2700,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "requirement-cross-module",
+      "taskType": "requirement_analysis",
+      "prompt": "跨模块实现 CMI-ORDER-CREATE",
+      "expectedConditionIds": [
+        "dependency-impact",
+        "cross-module-impact"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "requirement-analysis-core",
+        "acceptance-summary",
+        "requirement-traceability-summary",
+        "relationship-impact",
+        "cross-module-impact"
+      ],
+      "expectedTotalTokenBudget": 3350,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "review-base",
+      "taskType": "code_review",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "review-core",
+        "review-result-contract",
+        "review-evidence"
+      ],
+      "expectedTotalTokenBudget": 2500,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "review-finding",
+      "taskType": "code_review",
+      "prompt": "Review验收 Finding 返修",
+      "expectedConditionIds": [
+        "review-contract"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "review-core",
+        "review-result-contract",
+        "review-evidence",
+        "collaboration-review"
+      ],
+      "expectedTotalTokenBudget": 4500,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "testing-base",
+      "taskType": "testing",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "testing-core",
+        "test-evidence"
+      ],
+      "expectedTotalTokenBudget": 2150,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "testing-integration",
+      "taskType": "testing",
+      "prompt": "集成测试 外部系统",
+      "expectedConditionIds": [
+        "integration-testing"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "testing-core",
+        "test-evidence",
+        "integration-testing"
+      ],
+      "expectedTotalTokenBudget": 2700,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "testing-database",
+      "taskType": "testing",
+      "prompt": "TEST_DB_URL 独立测试库",
+      "expectedConditionIds": [
+        "test-database"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "testing-core",
+        "test-evidence",
+        "test-environment",
+        "integration-testing"
+      ],
+      "expectedTotalTokenBudget": 3250,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "budget-omission",
+      "taskType": "design",
+      "prompt": "完整生命周期矩阵 工作模式矩阵 ID命名空间 范围排除清单",
+      "mode": {
+        "pageDesign": true,
+        "gitCheckpoint": true
+      },
+      "expectedConditionIds": [
+        "runtime-details",
+        "scope-details",
+        "semantic-details"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "design-core",
+        "implementation-contract-summary",
+        "enum-summary",
+        "page-design",
+        "git-checkpoint",
+        "runtime-contract"
+      ],
+      "expectedTotalTokenBudget": 5500,
+      "expectedOmittedIds": [
+        "scope",
+        "semantic-contract"
+      ]
+    },
+    {
+      "id": "project-management-base",
+      "taskType": "project_management",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "lifecycle-core",
+        "orchestration-core"
+      ],
+      "expectedTotalTokenBudget": 1800,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "completion-base",
+      "taskType": "completion_verification",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "test-completion",
+        "completion-gate-core"
+      ],
+      "expectedTotalTokenBudget": 1800,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "archive-base",
+      "taskType": "incremental_archive",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "archive-core"
+      ],
+      "expectedTotalTokenBudget": 1300,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "long-task-recovery",
+      "taskType": "development",
+      "prompt": "长任务恢复 checkpoint",
+      "expectedConditionIds": [
+        "long-task"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "development-core",
+        "implementation-contract-summary",
+        "long-task-core",
+        "orchestration-core"
+      ],
+      "expectedTotalTokenBudget": 2900,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "lifecycle-rework",
+      "taskType": "development",
+      "prompt": "阶段重开 STALE 下游失效",
+      "expectedConditionIds": [
+        "lifecycle-rework"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "development-core",
+        "implementation-contract-summary",
+        "lifecycle-core"
+      ],
+      "expectedTotalTokenBudget": 2150,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "requirement-confirmation-base",
+      "taskType": "requirement_confirmation",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "requirement-confirmation-core"
+      ],
+      "expectedTotalTokenBudget": 1300,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "test-design-base",
+      "taskType": "test_design",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "tdd-core",
+        "test-matrix-design",
+        "acceptance-summary"
+      ],
+      "expectedTotalTokenBudget": 1800,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "tdd-base",
+      "taskType": "tdd",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "tdd-core",
+        "red-green-refactor",
+        "test-seam",
+        "tdd-evidence"
+      ],
+      "expectedTotalTokenBudget": 2050,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "html-base",
+      "taskType": "html_document",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "html-core",
+        "documentation-core"
+      ],
+      "expectedTotalTokenBudget": 1700,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "work-mode-base",
+      "taskType": "work_mode",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "work-mode-core"
+      ],
+      "expectedTotalTokenBudget": 1550,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "wk-ar-base",
+      "taskType": "wk_ar",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "wk-ar-state-core",
+        "review-result-contract"
+      ],
+      "expectedTotalTokenBudget": 1650,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "request-intake-base",
+      "taskType": "request_intake",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "request-intake-core",
+        "classification-rules"
+      ],
+      "expectedTotalTokenBudget": 1400,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "project-dispatch",
+      "taskType": "project_management",
+      "prompt": "创建 Agent 分派包",
+      "expectedConditionIds": [
+        "orchestration-dispatch"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "lifecycle-core",
+        "orchestration-core"
+      ],
+      "expectedTotalTokenBudget": 1800,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "tdd-persistence",
+      "taskType": "tdd",
+      "prompt": "Repository 持久化测试与数据库事务测试",
+      "expectedConditionIds": [
+        "backend",
+        "tdd-persistence"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "tdd-core",
+        "red-green-refactor",
+        "test-seam",
+        "tdd-evidence",
+        "backend-code-reference",
+        "implementation-contract"
+      ],
+      "expectedTotalTokenBudget": 5650,
+      "expectedOmittedIds": [
+        "test-persistence",
+        "test-data-isolation"
+      ]
+    },
+    {
+      "id": "html-bug-report",
+      "taskType": "html_document",
+      "prompt": "生成 Bug报告HTML",
+      "expectedConditionIds": [
+        "debugging",
+        "html-bug-report"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "html-core",
+        "documentation-core",
+        "debugging",
+        "tdd-core",
+        "red-green-refactor"
+      ],
+      "expectedTotalTokenBudget": 3950,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "request-simple-optimization",
+      "taskType": "request_intake",
+      "prompt": "简单优化 SIMPLE_OPTIMIZATION",
+      "expectedConditionIds": [
+        "simple-optimization"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "request-intake-core",
+        "classification-rules",
+        "simple-optimization"
+      ],
+      "expectedTotalTokenBudget": 1650,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "baseline-integrity",
+      "taskType": "project_management",
+      "prompt": "检查 common-develop 基线偏差和挂载覆盖",
+      "expectedConditionIds": [
+        "baseline-integrity"
+      ],
+      "expectedResourceIds": [
+        "execution-core",
+        "lifecycle-core",
+        "orchestration-core",
+        "baseline-integrity"
+      ],
+      "expectedTotalTokenBudget": 2100,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "development-base",
+      "taskType": "development",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "development-core",
+        "implementation-contract-summary"
+      ],
+      "expectedTotalTokenBudget": 1500,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "debugging-base",
+      "taskType": "debugging",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "debugging-core",
+        "tdd-core",
+        "development-core"
+      ],
+      "expectedTotalTokenBudget": 1900,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "backend-base",
+      "taskType": "backend_development",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "backend-core",
+        "implementation-contract-summary",
+        "development-core"
+      ],
+      "expectedTotalTokenBudget": 1800,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "frontend-base",
+      "taskType": "frontend_development",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "frontend-core",
+        "implementation-contract-summary",
+        "development-core"
+      ],
+      "expectedTotalTokenBudget": 1800,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "design-base",
+      "taskType": "design",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "design-core",
+        "implementation-contract-summary",
+        "enum-summary"
+      ],
+      "expectedTotalTokenBudget": 1700,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "business-flow-base",
+      "taskType": "business_flow",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "business-flow-core",
+        "business-model-summary"
+      ],
+      "expectedTotalTokenBudget": 1500,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "business-model-base",
+      "taskType": "business_model",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "business-model-summary",
+        "requirement-analysis-core",
+        "enum-summary"
+      ],
+      "expectedTotalTokenBudget": 2050,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "implementation-plan-base",
+      "taskType": "implementation_plan",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "implementation-plan-core",
+        "orchestration-core"
+      ],
+      "expectedTotalTokenBudget": 1550,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "wk-auto-base",
+      "taskType": "wk_auto",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "auto-mode-core",
+        "orchestration-core",
+        "completion-gate-core"
+      ],
+      "expectedTotalTokenBudget": 2350,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "git-checkpoint-base",
+      "taskType": "git_checkpoint",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "git-checkpoint-core",
+        "work-mode-core"
+      ],
+      "expectedTotalTokenBudget": 1850,
+      "expectedOmittedIds": []
+    },
+    {
+      "id": "task-verification-base",
+      "taskType": "task_verify",
+      "prompt": "",
+      "expectedConditionIds": [],
+      "expectedResourceIds": [
+        "execution-core",
+        "task-verification-core",
+        "verification-integration",
+        "evidence-core"
+      ],
+      "expectedTotalTokenBudget": 2350,
+      "expectedOmittedIds": []
+    }
+  ]
+}

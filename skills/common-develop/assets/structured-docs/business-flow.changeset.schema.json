@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/business-flow.changeset.schema.json",
+  "title": "业务流程增量变更",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifact",
+    "changeSet",
+    "operations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "artifact": {
+      "const": "business_flow_changeset"
+    },
+    "changeSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "module",
+        "flowGroup",
+        "reason",
+        "baseRevision",
+        "resultRevision",
+        "affectedTraceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^FLOW-CHG-[A-Z0-9._-]+$"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "flowGroup": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "flowGroupName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resultRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affectedTraceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "operation",
+          "targetId",
+          "reason"
+        ],
+        "properties": {
+          "operation": {
+            "enum": [
+              "add",
+              "update",
+              "deprecate"
+            ]
+          },
+          "targetId": {
+            "type": "string",
+            "pattern": "^FLOW-[A-Z0-9_-]+$"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "after": {
+            "type": "object"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "operation": {
+                  "enum": [
+                    "add",
+                    "update"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "after"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

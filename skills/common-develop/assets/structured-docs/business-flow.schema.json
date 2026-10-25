@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/business-flow.schema.json",
+  "title": "分层业务流程事实",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifact", "flowGroup", "revision", "baseRevision", "flows"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "artifact": {"const": "business_flow"},
+    "flowGroup": {"$ref": "#/$defs/flowGroup"},
+    "revision": {"type": "string", "minLength": 1},
+    "baseRevision": {"type": "string"},
+    "flows": {"type": "array", "items": {"$ref": "#/$defs/flow"}}
+  },
+  "$defs": {
+    "stringArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "moduleArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}},
+    "flowGroup": {
+      "type": "object", "additionalProperties": false,
+      "required": ["code", "name"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+        "name": {"type": "string", "minLength": 1},
+        "description": {"type": "string"}
+      }
+    },
+    "requirementRef": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "documentRef"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "documentRef": {"type": "string", "pattern": "^version/[^/]+/doc/[^/]+/requirement\\.md$"}
+      }
+    },
+    "featureRef": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "module"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "module": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"}
+      }
+    },
+    "step": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "order", "name", "ownerModule", "featureRef", "preconditions", "postconditions"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^STEP-[A-Z0-9_-]+$"},
+        "order": {"type": "integer", "minimum": 1},
+        "name": {"type": "string", "minLength": 1},
+        "ownerModule": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+        "featureRef": {"type": "string", "minLength": 1},
+        "childFlowRef": {"type": "string", "pattern": "^FLOW-[A-Z0-9_-]+$"},
+        "preconditions": {"$ref": "#/$defs/stringArray"},
+        "postconditions": {"$ref": "#/$defs/stringArray"},
+        "notes": {"type": "string"}
+      }
+    },
+    "variant": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "name", "condition", "differences"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^FVAR-[A-Z0-9_-]+$"},
+        "name": {"type": "string", "minLength": 1},
+        "condition": {"type": "string", "minLength": 1},
+        "differences": {"$ref": "#/$defs/stringArray"},
+        "ruleRefs": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "failurePath": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "atStep", "condition", "result", "blocking"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^FAIL-[A-Z0-9_-]+$"},
+        "atStep": {"type": "string", "pattern": "^STEP-[A-Z0-9_-]+$"},
+        "condition": {"type": "string", "minLength": 1},
+        "result": {"type": "string", "minLength": 1},
+        "followupFlowRef": {"type": "string", "pattern": "^FLOW-[A-Z0-9_-]+$"},
+        "compensation": {"type": "string"},
+        "blocking": {"type": "boolean"},
+        "acceptanceRefs": {"$ref": "#/$defs/stringArray"}
+      }
+    },
+    "flow": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "id", "name", "level", "type", "ownerModule", "participantModules", "goal", "trigger",
+        "requirementRefs", "featureRefs", "ruleRefs", "acceptanceRefs", "traceIds", "preconditions",
+        "steps", "variants", "failurePaths", "successCriteria", "status", "createdVersion", "lastChangedVersion"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^FLOW-[A-Z0-9_-]+$"},
+        "name": {"type": "string", "minLength": 1},
+        "level": {"enum": ["L0", "L1", "L2"]},
+        "type": {"enum": ["PREPARATION", "MAIN", "FOLLOWUP", "COMPENSATION", "SUPPORTING"]},
+        "parentFlowId": {"type": "string", "pattern": "^FLOW-[A-Z0-9_-]+$"},
+        "ownerModule": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+        "participantModules": {"$ref": "#/$defs/moduleArray"},
+        "goal": {"type": "string", "minLength": 1},
+        "trigger": {"type": "string", "minLength": 1},
+        "requirementRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/requirementRef"}},
+        "featureRefs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/featureRef"}},
+        "ruleRefs": {"$ref": "#/$defs/stringArray"},
+        "acceptanceRefs": {"$ref": "#/$defs/stringArray"},
+        "traceIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "preconditions": {"$ref": "#/$defs/stringArray"},
+        "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "variants": {"type": "array", "items": {"$ref": "#/$defs/variant"}},
+        "failurePaths": {"type": "array", "items": {"$ref": "#/$defs/failurePath"}},
+        "successCriteria": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "businessModelRefs": {"$ref": "#/$defs/stringArray"},
+        "dependencyImpactRefs": {"$ref": "#/$defs/stringArray"},
+        "designRefs": {"$ref": "#/$defs/stringArray"},
+        "testCaseIds": {"$ref": "#/$defs/stringArray"},
+        "status": {"enum": ["PROPOSED", "ACTIVE", "STALE", "DEPRECATED", "SUPERSEDED"]},
+        "createdVersion": {"type": "string", "minLength": 1},
+        "lastChangedVersion": {"type": "string", "minLength": 1},
+        "supersedes": {"$ref": "#/$defs/stringArray"}
+      }
+    }
+  }
+}

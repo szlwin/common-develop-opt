@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common-develop/git-checkpoint.schema.json",
+  "title": "common-develop Git checkpoints",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "target_id",
+    "version",
+    "checkpoints"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checkpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "checkpoint_id",
+          "phase",
+          "iteration_id",
+          "iteration_no",
+          "stage_revision",
+          "stage_outcome_ref",
+          "branch",
+          "base_commit",
+          "changed_paths",
+          "content_digest",
+          "commit_title",
+          "created_by_agent",
+          "created_at",
+          "supersedes_checkpoint_id"
+        ],
+        "properties": {
+          "checkpoint_id": {
+            "type": "string",
+            "pattern": "^CP-[A-Za-z0-9_.-]+$"
+          },
+          "phase": {
+            "type": "string",
+            "minLength": 1
+          },
+          "iteration_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "iteration_no": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "stage_revision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stage_outcome_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "branch": {
+            "type": "string",
+            "minLength": 1
+          },
+          "base_commit": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40,64}$"
+          },
+          "changed_paths": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "content_digest": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "commit_title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 72
+          },
+          "created_by_agent": {
+            "const": "ProjectManagerAgent"
+          },
+          "created_at": {
+            "type": "string",
+            "minLength": 1
+          },
+          "supersedes_checkpoint_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 2,
+  "authority": "references/core/work-mode-core.md",
+  "invariants": [
+    {
+      "id": "LIGHTWEIGHT_TEST_ACTIONS_FORBIDDEN",
+      "owner": "references/core/work-mode-core.md",
+      "referenceFiles": [
+        "SKILL.md",
+        "references/recovery-archive/long-task-core.md",
+        "references/requirement-design/design-core.md",
+        "assets/package/work.template.md"
+      ],
+      "ownerPhrases": [
+        "轻量模式保持开启期间不能执行测试、TDD 或 Review",
+        "必须先执行 `wk -wc`"
+      ],
+      "forbiddenReferencePhrases": [
+        "轻量模式保持开启期间不能执行测试、TDD 或 Review",
+        "即使用户明确要求，也不得恢复这些动作"
+      ],
+      "triggerPattern": "轻量模式[^。\\n]{0,180}(?:测试|TDD|Review)",
+      "contractField": {
+        "contract": "assets/runtime/runtime-contract.json",
+        "jsonPointer": "/commandInterface/workModes/lightweight/interactionPolicy/userExplicitTestingRequestOverrides",
+        "expected": false,
+        "valueType": "boolean"
+      }
+    },
+    {
+      "id": "LIGHTWEIGHT_CLOSE_NON_RETROACTIVE",
+      "owner": "references/core/work-mode-core.md",
+      "referenceFiles": [
+        "SKILL.md",
+        "references/recovery-archive/long-task-core.md",
+        "assets/package/work.template.md"
+      ],
+      "ownerPhrases": [
+        "`wk -wc` 关闭轻量模式是非追溯动作",
+        "不自动追补 Review/Test 文件证据"
+      ],
+      "forbiddenReferencePhrases": [
+        "`wk -wc` 关闭轻量模式是非追溯动作",
+        "不会自动追补 Review/Test 文件证据"
+      ],
+      "triggerPattern": "关闭轻量模式[^。\\n]{0,140}(?:豁免|追补|SKIPPED|NOT_APPLICABLE)",
+      "contractField": null,
+      "contractFieldReason": "当前语义由 lightweight 关闭动作、历史 reducer 状态和归档门禁共同派生，暂不具备单一契约字段。"
+    },
+    {
+      "id": "LIGHTWEIGHT_ARCHIVE_AFTER_CLOSE_WITH_HISTORY",
+      "owner": "references/core/work-mode-core.md",
+      "referenceFiles": [
+        "SKILL.md",
+        "assets/package/work.template.md",
+        "references/recovery-archive/archive-documentation.md",
+        "references/recovery-archive/long-task-core.md"
+      ],
+      "ownerPhrases": [
+        "若已执行 `wk -wc`，只要当前版本任务运行时曾记录 `lightweight_waived=true`，仍可执行 `wk -wd`",
+        "归档计划会继续保留该版本历史的 `NOT_APPLICABLE` 阶段豁免"
+      ],
+      "forbiddenReferencePhrases": [
+        "若已执行 `wk -wc`，只要当前版本任务运行时曾记录 `lightweight_waived=true`，仍可执行 `wk -wd`",
+        "归档计划会继续保留该版本历史的 `NOT_APPLICABLE` 阶段豁免"
+      ],
+      "triggerPattern": "`wk -wd`[^。\\n]{0,220}(?:轻量模式|归档)",
+      "contractField": null,
+      "contractFieldReason": "当前语义由 lightweight 历史事件、任务 reducer 和 archive gate 共同派生，暂不具备单一契约字段。"
+    },
+    {
+      "id": "GIT_PUSH_REQUIRES_CHECKPOINT",
+      "owner": "references/core/work-mode-core.md",
+      "referenceFiles": [
+        "SKILL.md",
+        "assets/package/work.template.md",
+        "references/specialist/documentation-core.md",
+        "references/git-delivery/git-checkpoint-core.md",
+        "references/git-delivery/git-checkpoint.md",
+        "references/core/lifecycle-core.md",
+        "references/recovery-archive/long-task-core.md",
+        "references/core/request-intake.md",
+        "references/review-agents/roles.md",
+        "references/core/runtime-contract.md",
+        "references/core/scope-core.md",
+        "references/core/scope.md",
+        "references/recovery-archive/wk-cli.md"
+      ],
+      "ownerPhrases": [
+        "`wk -gp` 必须依赖 `wk -gc`",
+        "只增加 checkpoint 的受限远端同步与验证门禁"
+      ],
+      "forbiddenReferencePhrases": [
+        "`wk -gp` 必须依赖 `wk -gc`",
+        "必须与 `wk -gc/--git-checkpoint` 同时启用"
+      ],
+      "triggerPattern": "`wk -gp[^。\\n]{0,180}(?:`wk -gc|`-gc|checkpoint)",
+      "contractField": {
+        "contract": "assets/runtime/runtime-contract.json",
+        "jsonPointer": "/commandInterface/workModes/gitPush/dependsOn",
+        "expected": [
+          "gitCheckpoint"
+        ],
+        "valueType": "array"
+      }
+    },
+    {
+      "id": "WORK_MODE_APPLY_SYNCS_EXISTING_TASKS_BY_DEFAULT",
+      "owner": "references/core/work-mode-core.md",
+      "referenceFiles": [
+        "SKILL.md",
+        "references/recovery-archive/long-task-core.md"
+      ],
+      "ownerPhrases": [
+        "`work_mode.py apply/init` 默认同步已有任务运行时",
+        "只有明确传入 `--no-sync-existing-tasks` 才跳过同步"
+      ],
+      "forbiddenReferencePhrases": [
+        "`work_mode.py apply/init` 默认同步已有任务运行时",
+        "优先使用 `work_mode.py apply --sync-existing-tasks`"
+      ],
+      "triggerPattern": "(?:work_mode\\.py apply|work_mode\\.py init)[^。\\n]{0,180}(?:同步|sync-existing)",
+      "contractField": {
+        "contract": "assets/runtime/runtime-contract.json",
+        "jsonPointer": "/commandInterface/workModes/applicationPolicy/syncExistingTasksByDefault",
+        "expected": true,
+        "valueType": "boolean"
+      }
+    }
+  ]
+}
